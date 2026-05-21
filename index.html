@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexTech DZ | Trusted Legal Platform Algeria</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .hero {
+      position: relative;
+      background-image: url('images/hero-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+    .hero .container { position: relative; z-index: 2; }
+    .hero-content h1, .hero-content p { color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .hero-content h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; }
+    .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; }
+    .stats-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+    .stats-row .stat span:first-child { color: #D4AF37; font-size: 2rem; font-weight: 800; display: block; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 768px) { .hero-content h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-flex">
+      <div class="logo"><a href="index.html">LexTech <span>DZ</span></a></div>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+          <li><a href="forum.html" data-i18n="nav_forum">Forum</a></li>
+          <li><a href="consultations.html" data-i18n="nav_consultations">Consultations</a></li>
+          <li><a href="login.html" data-i18n="nav_login">Login</a></li>
+          <li><a href="register.html" data-i18n="nav_register">Sign Up</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="langToggleBtn" class="lang-toggle-btn"><span id="currentLangLabel">🇬🇧 EN</span></button>
+        <button id="darkModeToggle" class="dark-toggle"><i class="fas fa-moon"></i></button>
+        <div class="mobile-menu-icon" id="mobileMenuIcon"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-i18n="hero_title">Connect with Certified Lawyers in Algeria</h1>
+          <p data-i18n="hero_desc">LexTech DZ bridges justice & technology — trusted legal advice, verified experts, and transparent pricing.</p>
+          <div class="hero-buttons">
+            <a href="consultations.html" class="btn-primary" data-i18n="hero_btn1">📅 Book a Consultation</a>
+            <a href="forum.html" class="btn-outline" data-i18n="hero_btn2">💬 Ask the Community</a>
+          </div>
+          <div class="stats-row">
+            <div class="stat"><span>+250</span> <span data-i18n="stat_lawyers">Certified Lawyers</span></div>
+            <div class="stat"><span>+1.2k</span> <span data-i18n="stat_cases">Legal Questions Solved</span></div>
+            <div class="stat"><span>98%</span> <span data-i18n="stat_satisfaction">Client Satisfaction</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title" data-i18n="features_title">Why LexTech DZ?</h2>
+        <div class="features-grid">
+          <div class="feature-card"><i class="fas fa-gavel"></i><h3 data-i18n="feature1_title">Verified Lawyers</h3><p data-i18n="feature1_desc">Official bar association credentials & golden badge assurance.</p></div>
+          <div class="feature-card"><i class="fas fa-hand-holding-usd"></i><h3 data-i18n="feature2_title">Transparent Pricing</h3><p data-i18n="feature2_desc">Fixed fees, no hidden costs — 20% platform commission only.</p></div>
+          <div class="feature-card"><i class="fas fa-comments"></i><h3 data-i18n="feature3_title">Legal Forum</h3><p data-i18n="feature3_desc">Free community advice with lawyer-verified answers.</p></div>
+          <div class="feature-card"><i class="fas fa-shield-alt"></i><h3 data-i18n="feature4_title">Secure & Confidential</h3><p data-i18n="feature4_desc">End-to-end encrypted sessions and data protection.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <div class="container">
+        <h2 data-i18n="cta_title">Ready to get professional legal support?</h2>
+        <a href="register.html" class="btn-primary btn-large" data-i18n="cta_btn">Join LexTech DZ Today →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h3>LexTech DZ</h3><p data-i18n="footer_tagline">LegalTech platform · Algeria</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+        <div class="footer-col"><h4 data-i18n="footer_about">About Us</h4><ul><li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li><li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li><li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li></ul></div>
+        <div class="footer-col"><h4 data-i18n="footer_support">Support</h4><p>contact@lextechdz.dz</p><p>+213 555 123456</p></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p></div>
+    </div>
+  </footer>
+
+  <!-- ========== النافذة المنبثقة الإجبارية (ثلاث لغات) ========== -->
+  <div id="termsModal" class="terms-modal-overlay">
+    <div class="terms-modal-content">
+      <div class="terms-modal-header">
+        <i class="fas fa-gavel"></i>
+        <h2 id="modalTitle">Welcome to LexTech DZ</h2>
+        <p id="modalSubtitle">Please review our legal documents before continuing</p>
+      </div>
+      
+      <div class="terms-modal-body">
+        <p id="modalInstruction" style="text-align: center; margin-bottom: 1.5rem; color: var(--text-gray);">
+          Click on each document to read it:
+        </p>
+        
+        <div class="docs-buttons-grid">
+          <button id="btnTerms" class="doc-btn">
+            <i class="fas fa-file-contract"></i>
+            <span id="btnTermsText">Terms of Use</span>
+            <small id="btnTermsHint">Click to read</small>
+          </button>
+          
+          <button id="btnPrivacy" class="doc-btn">
+            <i class="fas fa-shield-alt"></i>
+            <span id="btnPrivacyText">Privacy Policy</span>
+            <small id="btnPrivacyHint">Click to read</small>
+          </button>
+          
+          <button id="btnDisclaimer" class="doc-btn">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="btnDisclaimerText">Disclaimer</span>
+            <small id="btnDisclaimerHint">Click to read</small>
+          </button>
+        </div>
+        
+        <div class="terms-agreement">
+          <p id="agreementText">By clicking "Accept", you confirm that you have read and agree to all the above documents.</p>
+        </div>
+      </div>
+
+      <div class="terms-modal-footer">
+        <button id="rejectTermsBtn" class="btn-outline reject-btn">
+          <i class="fas fa-times"></i> <span id="rejectBtnText">Decline & Leave</span>
+        </button>
+        <button id="acceptTermsBtn" class="btn-primary accept-btn">
+          <i class="fas fa-check"></i> <span id="acceptBtnText">Accept All</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <style>
+    /* ========== TERMS MODAL STYLES ========== */
+    .terms-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .terms-modal-content {
+      background: var(--bg-white);
+      max-width: 550px;
+      width: 90%;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.4s ease;
+    }
+
+    .terms-modal-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .terms-modal-header i {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .terms-modal-header h2 {
+      margin-bottom: 0.25rem;
+      color: white;
+    }
+
+    .terms-modal-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .terms-modal-body {
+      padding: 1.5rem;
+      background: var(--bg-white);
+    }
+
+    .docs-buttons-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .doc-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      width: 100%;
+    }
+
+    .doc-btn:hover {
+      transform: translateX(5px);
+      border-color: var(--gold);
+      background: var(--bg-white);
+    }
+
+    .doc-btn i {
+      font-size: 1.5rem;
+      color: var(--gold);
+      width: 40px;
+    }
+
+    .doc-btn span {
+      flex: 1;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .doc-btn small {
+      font-size: 0.7rem;
+      color: var(--text-light);
+    }
+
+    .terms-agreement {
+      background: rgba(212, 175, 55, 0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      border-left: 3px solid var(--gold);
+    }
+
+    .terms-agreement p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-gray);
+    }
+
+    .terms-modal-footer {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border-light);
+      background: var(--bg-white);
+    }
+
+    .terms-modal-footer button {
+      flex: 1;
+      justify-content: center;
+      padding: 12px 20px;
+      font-size: 1rem;
+    }
+
+    .reject-btn {
+      border-color: #e11d48;
+      color: #e11d48;
+    }
+
+    .reject-btn:hover {
+      background: #e11d48;
+      color: white;
+      border-color: #e11d48;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* RTL Support for modal */
+    [dir="rtl"] .doc-btn {
+      text-align: right;
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .doc-btn i {
+      margin-left: 1rem;
+      margin-right: 0;
+    }
+
+    @media (max-width: 480px) {
+      .doc-btn span { font-size: 0.85rem; }
+      .doc-btn small { display: none; }
+    }
+  </style>
+
+  <script>
+    // ========== MODAL TRANSLATIONS (ثلاث لغات) ==========
+    const modalTranslations = {
+      en: {
+        title: "Welcome to LexTech DZ",
+        subtitle: "Please review our legal documents before continuing",
+        instruction: "Click on each document to read it:",
+        termsText: "Terms of Use",
+        termsHint: "Click to read",
+        privacyText: "Privacy Policy",
+        privacyHint: "Click to read",
+        disclaimerText: "Disclaimer",
+        disclaimerHint: "Click to read",
+        agreement: "By clicking \"Accept\", you confirm that you have read and agree to all the above documents.",
+        acceptBtn: "Accept All",
+        rejectBtn: "Decline & Leave"
+      },
+      fr: {
+        title: "Bienvenue sur LexTech DZ",
+        subtitle: "Veuillez consulter nos documents légaux avant de continuer",
+        instruction: "Cliquez sur chaque document pour le lire :",
+        termsText: "Conditions d'utilisation",
+        termsHint: "Cliquez pour lire",
+        privacyText: "Politique de confidentialité",
+        privacyHint: "Cliquez pour lire",
+        disclaimerText: "Avertissement",
+        disclaimerHint: "Cliquez pour lire",
+        agreement: "En cliquant sur « Accepter », vous confirmez avoir lu et accepté tous les documents ci-dessus.",
+        acceptBtn: "Tout accepter",
+        rejectBtn: "Refuser et quitter"
+      },
+      ar: {
+        title: "مرحباً بكم في ليكس تيك ديزي",
+        subtitle: "يرجى مراجعة مستنداتنا القانونية قبل المتابعة",
+        instruction: "انقر على كل مستند لقراءته:",
+        termsText: "شروط الاستخدام",
+        termsHint: "انقر للقراءة",
+        privacyText: "سياسة الخصوصية",
+        privacyHint: "انقر للقراءة",
+        disclaimerText: "إخلاء المسؤولية",
+        disclaimerHint: "انقر للقراءة",
+        agreement: "بالنقر على «قبول»، أنت تؤكد أنك قرأت ووافقت على جميع المستندات أعلاه.",
+        acceptBtn: "قبول الكل",
+        rejectBtn: "رفض والمغادرة"
+      }
+    };
+
+    // Function to update modal text based on language
+    function updateModalLanguage(lang) {
+      const t = modalTranslations[lang] || modalTranslations.en;
+      document.getElementById('modalTitle').innerText = t.title;
+      document.getElementById('modalSubtitle').innerText = t.subtitle;
+      document.getElementById('modalInstruction').innerText = t.instruction;
+      document.getElementById('btnTermsText').innerText = t.termsText;
+      document.getElementById('btnTermsHint').innerText = t.termsHint;
+      document.getElementById('btnPrivacyText').innerText = t.privacyText;
+      document.getElementById('btnPrivacyHint').innerText = t.privacyHint;
+      document.getElementById('btnDisclaimerText').innerText = t.disclaimerText;
+      document.getElementById('btnDisclaimerHint').innerText = t.disclaimerHint;
+      document.getElementById('agreementText').innerHTML = t.agreement;
+      document.getElementById('acceptBtnText').innerText = t.acceptBtn;
+      document.getElementById('rejectBtnText').innerText = t.rejectBtn;
+    }
+
+    // ========== MODAL BUTTONS LOGIC ==========
+    const modal = document.getElementById('termsModal');
+    const acceptBtn = document.getElementById('acceptTermsBtn');
+    const rejectBtn = document.getElementById('rejectTermsBtn');
+    
+    // أزرار فتح المستندات القانونية
+    const btnTerms = document.getElementById('btnTerms');
+    const btnPrivacy = document.getElementById('btnPrivacy');
+    const btnDisclaimer = document.getElementById('btnDisclaimer');
+    
+    // منع التمرير خلف المودال
+    document.body.style.overflow = 'hidden';
+    
+    // فتح صفحات المستندات في نافذة جديدة
+    btnTerms.addEventListener('click', () => {
+      window.open('terms.html', '_blank');
+    });
+    
+    btnPrivacy.addEventListener('click', () => {
+      window.open('privacy.html', '_blank');
+    });
+    
+    btnDisclaimer.addEventListener('click', () => {
+      window.open('disclaimer.html', '_blank');
+    });
+    
+    // قبول الشروط - إغلاق المودال وإظهار المحتوى
+    acceptBtn.addEventListener('click', () => {
+      modal.style.animation = 'fadeOut 0.3s ease';
+      setTimeout(() => {
+        modal.remove();
+        document.body.style.overflow = '';
+      }, 300);
+    });
+    
+    // رفض الشروط - التوجيه إلى Google
+    rejectBtn.addEventListener('click', () => {
+      window.location.href = 'https://www.google.com';
+    });
+    
+    // منع إغلاق المودال بالنقر على الخلفية
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        // لا يمكن الإغلاق إلا بالقبول أو الرفض
+      }
+    });
+    
+    // ========== مراقبة تغيير اللغة من زر اللغة الرئيسي ==========
+    // الاستماع لتغيير اللغة وتحديث المودال
+    const originalLangToggle = document.getElementById('langToggleBtn');
+    if (originalLangToggle) {
+      const observer = new MutationObserver(() => {
+        const currentLang = localStorage.getItem('preferredLang') || 'en';
+        updateModalLanguage(currentLang);
+      });
+      observer.observe(originalLangToggle, { attributes: true, childList: true, subtree: true });
+    }
+    
+    // تعيين اللغة الحالية للمودال
+    const currentModalLang = localStorage.getItem('preferredLang') || 'en';
+    updateModalLanguage(currentModalLang);
+  </script>
+</body>
+</html>

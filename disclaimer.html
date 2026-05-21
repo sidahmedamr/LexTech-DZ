@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexTech DZ - Disclaimer | إخلاء المسؤولية القانونية</title>
+    <style>
+        /* إعدادات الألوان المتناسقة مع هوية الموقع */
+        :root {
+            --primary-blue: #0A2540;     /* الأزرق الداكن الرسمي */
+            --accent-blue: #639FAB;      /* الأزرق التقني */
+            --legal-gold: #D4AF37;       /* الذهبي القانوني */
+            --bg-light: #F8F9FA;         /* الخلفية المريحة */
+            --text-dark: #2D3748;        /* نصوص واضحة */
+            --white: #FFFFFF;
+            --warning-red: #D32F2F;      /* لون مخصص للتنبيهات الصارمة */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding-bottom: 60px;
+        }
+
+        /* شريط التنقل العلوي وتحديد اللغة */
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-area {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .logo-area span {
+            color: var(--legal-gold);
+        }
+
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background-color: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--white);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background-color: var(--legal-gold);
+            border-color: var(--legal-gold);
+            color: var(--primary-blue);
+        }
+
+        /* حاوية المحتوى الرئيسي */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--warning-red); /* تمييز الصفحة باللون الأحمر للتنبيه */
+        }
+
+        /* التحكم في إظهار وإخفاء اللغات */
+        .lang-section {
+            display: none;
+        }
+
+        .lang-section.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-size: 28px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            margin: 25px 0 15px 0;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* لمسة رمزية قبل كل عنوان فرعي */
+        h2::before {
+            content: "⚠️";
+            color: var(--warning-red);
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .disclaimer-box {
+            background-color: #fff5f5;
+            border-right: 4px solid var(--warning-red);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: var(--warning-red);
+            font-weight: bold;
+        }
+
+        /* تنسيقات خاصة باللغات الغربية لتغيير الاتجاه تلقائياً */
+        .ltr-dir {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        .ltr-dir h2::before {
+            content: "⚠️ ";
+        }
+
+        .ltr-dir .disclaimer-box {
+            border-right: none;
+            border-left: 4px solid var(--warning-red);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #718096;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">LexTech <span>DZ</span></div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('ar')">العربية</button>
+            <button class="lang-btn" onclick="switchLanguage('fr')">Français</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- ================= النسخة العربية ================= -->
+        <div id="lang-ar" class="lang-section active">
+            <h1>إخلاء المسؤولية القانونية - LexTech DZ</h1>
+            
+            <div class="disclaimer-box">
+                يرجى قراءة صفحة إخلاء المسؤولية هذه بعناية قبل استخدام المنصة. إن استخدامك للموقع يعني موافقتك الكاملة غير المشروطة على كافة البنود الواردة أدناه.
+            </div>
+
+            <h2>1. طبيعة المحتوى في المنتدى العام</h2>
+            <p>جميع المعلومات، المناقشات، والردود المنشورة في المنتدى العام المفتوح لمنصة LexTech DZ هي لغرض <strong>التثقيف والتوجيه العام فقط</strong>، ولا يمكن بأي حال من الأحوال اعتبارها استشارة قانونية رسمية أو ممارسة لمهنة المحاماة المنظمة بموجب القانون.</p>
+
+            <h2>2. انتفاء المسؤولية عن الاستشارات التوجيهية</h2>
+            <p>لا تتحمل إدارة المنصة، المطورون، أو المؤطرون أي مسؤولية مدنية أو جزائية مباشرة أو غير مباشرة عن أي أضرار، خسائر، أو قرارات خاطئة يتخذها المستخدم بناءً على الآراء والمشاركات المنشورة في المنتدى من طرف مستخدمين آخرين أو حتى محامين، دون اللجوء إلى استشارة خاصة مدفوعة ومعمقة تتناول تفاصيل ملف القضية.</p>
+
+            <h2>3. مسؤولية الاستشارات الخاصة المدفوعة</h2>
+            <p>تنحصر مسؤولية الاستشارات القانونية المدفوعة في غرف المحادثة المغلقة <strong>على المحامي المعتمد وحده</strong> الذي يقدم الخدمة، وتخضع العلاقة بينهما لأحكام وميثاق أخلاقيات مهنة المحاماة وقوانين الجمهورية الجزائرية، دون أي مسؤولية تقصيرية على المنصة باعتبارها مجرد وسيط تقني يوفر البنية البرمجية والربط الرقمي.</p>
+
+            <h2>4. الروابط الخارجية ومحتوى الغير</h2>
+            <p>قد تحتوي المنصة على روابط لمواقع خارجية أو نصوص قانونية مقتبسة من الجريدة الرسمية. تبذل المنصة كل جهودها لضمان دقة وتحديث هذه المعطيات، لكنها لا تضمن خلوها من الأخطاء المطبعية أو التغييرات التشريعية الطارئة.</p>
+        </div>
+
+        <!-- ================= النسخة الفرنسية ================= -->
+        <div id="lang-fr" class="lang-section ltr-dir">
+            <h1>Avis de Non-Responsabilité - LexTech DZ</h1>
+            
+            <div class="disclaimer-box">
+                Veuillez lire attentivement cet avis de non-responsabilité avant d'utiliser la plateforme. Votre utilisation du site implique votre acceptation totale de ces conditions.
+            </div>
+
+            <h2>1. Nature du Contenu du Forum Public</h2>
+            <p>Toutes les informations, discussions et réponses publiées sur le forum public de LexTech DZ sont fournies <strong>exclusivement à titre informatif et indicatif</strong>. Elles ne constituent en aucun cas un conseil juridique officiel ou une prise en charge formelle d'un dossier.</p>
+
+            <h2>2. Exclusion de Responsabilité pour le Forum</h2>
+            <p>L'administration, les développeurs et les encadrants de la plateforme déclinent toute responsabilité civile ou pénale pour tout dommage ou décision prise par un utilisateur sur la base des opinions partagées dans le forum public sans avoir recours à une consultation privée approfondie.</p>
+
+            <h2>3. Responsabilité des Consultations Privées</h2>
+            <p>La responsabilité des avis juridiques émis lors des consultations payantes privées incombe <strong>uniquement à l'avocat agréé</strong> qui fournit la prestation. LexTech DZ agit en tant qu'intermédiaire technologique et ne peut être tenue responsable des avis de l'avocat.</p>
+
+            <h2>4. Liens Externes et Textes Légaux</h2>
+            <p>Bien que nous nous efforcions de vérifier l'exactitude des textes juridiques publiés, la plateforme ne garantit pas l'absence d'erreurs ou de modifications législatives récentes non mises à jour.</p>
+        </div>
+
+        <!-- ================= النسخة الإنجليزية ================= -->
+        <div id="lang-en" class="lang-section ltr-dir">
+            <h1>Legal Disclaimer - LexTech DZ</h1>
+            
+            <div class="disclaimer-box">
+                Please read this legal disclaimer carefully before using the platform. By accessing this website, you unconditionally agree to all terms stated below.
+            </div>
+
+            <h2>1. Nature of Public Forum Content</h2>
+            <p>All information, discussions, and answers published on the open public forum of LexTech DZ are meant <strong>for general educational and informational purposes only</strong>. They do not constitute official legal advice or an attorney-client relationship.</p>
+
+            <h2>2. Exclusion of Liability for Public Advice</h2>
+            <p>The platform administration, developers, and academic supervisors shall not be held liable, directly or indirectly, for any damages, losses, or legal complications resulting from decisions made by users based on forum discussions.</p>
+
+            <h2>3. Premium Paid Consultation Liability</h2>
+            <p>The liability of premium paid private consultations rests <strong>solely on the certified lawyer</strong> delivering the service. LexTech DZ operates strictly as a software service provider and intermediary, assuming no professional liability for the legal outcomes.</p>
+
+            <h2>4. External References & Legislative Updates</h2>
+            <p>LexTech DZ strives to keep external links and copied Algerian legal provisions accurate; however, we do not guarantee immediate updates following sudden regulatory or legislative changes.</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 LexTech DZ. All Rights Reserved. Master's Graduation Startup Project.</p>
+        </footer>
+
+    </div>
+
+    <!-- المنطق البرمجي للتبديل الفوري بين اللغات وتغيير اتجاه الصفحة -->
+    <script>
+        function switchLanguage(lang) {
+            // إخفاء جميع الأقسام
+            const sections = document.querySelectorAll('.lang-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // إزالة نشاط الأزرار
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // تفعيل القسم والزر المختار
+            document.getElementById('lang-' + lang).classList.add('active');
+            event.target.classList.add('active');
+
+            // تغيير اتجاه الصفحة حسب اللغة
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+        }
+    </script>
+</body>
+</html>

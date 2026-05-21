@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexTech DZ - Premium Consultations</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-flex">
+      <div class="logo"><a href="index.html">LexTech <span>DZ</span></a></div>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+          <li><a href="forum.html" data-i18n="nav_forum">Forum</a></li>
+          <li><a href="consultations.html" class="active" data-i18n="nav_consultations">Consultations</a></li>
+          <li><a href="login.html" data-i18n="nav_login">Login</a></li>
+          <li><a href="register.html" data-i18n="nav_register">Sign Up</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="langToggleBtn" class="lang-toggle-btn"><span id="currentLangLabel">🇬🇧 EN</span></button>
+        <button id="darkModeToggle" class="dark-toggle"><i class="fas fa-moon"></i></button>
+        <div class="mobile-menu-icon" id="mobileMenuIcon"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="forum-header" style="text-align:center;">
+        <h1 data-i18n="consult_title">Premium Legal Consultations</h1>
+        <p data-i18n="consult_sub">Choose a certified lawyer and book a private session. Secure payment & guaranteed follow-up.</p>
+      </div>
+
+      <div class="consultations-grid" id="lawyersGrid">
+        <div class="lawyer-card">
+          <div class="lawyer-img"><i class="fas fa-user-tie fa-4x"></i></div>
+          <div class="lawyer-info">
+            <h3>Me. Lina Benali <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>Specialty: Family & Personal Status Law</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.8 (124 reviews)</div>
+            <div class="fee">3,500 DZD / session</div>
+            <button class="btn-book book-consult-btn" data-name="Me. Lina Benali" data-fee="3500" data-i18n="book_btn">Book Consultation</button>
+          </div>
+        </div>
+        <div class="lawyer-card">
+          <div class="lawyer-img"><i class="fas fa-user-astronaut fa-4x"></i></div>
+          <div class="lawyer-info">
+            <h3>Me. Samir Khelifa <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>Specialty: Commercial & Corporate Law</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0 (89 reviews)</div>
+            <div class="fee">4,500 DZD / session</div>
+            <button class="btn-book book-consult-btn" data-name="Me. Samir Khelifa" data-fee="4500" data-i18n="book_btn">Book Consultation</button>
+          </div>
+        </div>
+        <div class="lawyer-card">
+          <div class="lawyer-img"><i class="fas fa-user-graduate fa-4x"></i></div>
+          <div class="lawyer-info">
+            <h3>Me. Nora Adjimi <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>Specialty: Administrative & Labor Law</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.5 (67 reviews)</div>
+            <div class="fee">3,000 DZD / session</div>
+            <button class="btn-book book-consult-btn" data-name="Me. Nora Adjimi" data-fee="3000" data-i18n="book_btn">Book Consultation</button>
+          </div>
+        </div>
+        <div class="lawyer-card">
+          <div class="lawyer-img"><i class="fas fa-user-shield fa-4x"></i></div>
+          <div class="lawyer-info">
+            <h3>Me. Rachid Boudiaf <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>Specialty: Criminal Law & Litigation</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.9 (203 reviews)</div>
+            <div class="fee">5,000 DZD / session</div>
+            <button class="btn-book book-consult-btn" data-name="Me. Rachid Boudiaf" data-fee="5000" data-i18n="book_btn">Book Consultation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="paymentModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Simulate Payment</h3>
+        <p>Booking with <strong id="modalLawyerName"></strong></p>
+        <p>Amount: <strong id="modalAmount"></strong> DZD</p>
+        <button id="simulatePayBtn" class="btn-primary">Confirm Payment</button>
+        <div id="paymentResult" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h3>LexTech DZ</h3><p data-i18n="footer_tagline">LegalTech platform · Algeria</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+        <div class="footer-col"><h4 data-i18n="footer_about">About Us</h4><ul><li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li><li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li><li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li></ul></div>
+        <div class="footer-col"><h4 data-i18n="footer_support">Support</h4><p>contact@lextechdz.dz</p><p>+213 555 123456</p></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/payment-mock.js"></script>
+  <script>
+    const modal = document.getElementById('paymentModal');
+    const btns = document.querySelectorAll('.book-consult-btn');
+    const closeSpan = document.querySelector('.close-modal');
+    const modalLawyer = document.getElementById('modalLawyerName');
+    const modalAmountSpan = document.getElementById('modalAmount');
+    let currentLawyerName = '', currentFee = 0;
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentLawyerName = btn.getAttribute('data-name');
+        currentFee = parseInt(btn.getAttribute('data-fee'));
+        modalLawyer.innerText = currentLawyerName;
+        modalAmountSpan.innerText = currentFee;
+        modal.style.display = 'flex';
+      });
+    });
+    closeSpan.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
+    document.getElementById('simulatePayBtn').addEventListener('click', () => {
+      if(window.LexTechPayment) {
+        window.LexTechPayment.simulatePayment(currentLawyerName, currentFee);
+      } else {
+        const platformShare = currentFee * 0.2;
+        const lawyerShare = currentFee * 0.8;
+        document.getElementById('paymentResult').innerHTML = `<div style="background:#e6f7e6; padding:1rem; border-radius:8px;">✅ Payment successful! Platform (20%): ${platformShare} DZD | Lawyer receives: ${lawyerShare} DZD.</div>`;
+      }
+    });
+  </script>
+</body>
+</html>

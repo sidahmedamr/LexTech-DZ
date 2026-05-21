@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexTech DZ - Register</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-flex">
+      <div class="logo"><a href="index.html">LexTech <span>DZ</span></a></div>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+          <li><a href="forum.html" data-i18n="nav_forum">Forum</a></li>
+          <li><a href="consultations.html" data-i18n="nav_consultations">Consultations</a></li>
+          <li><a href="login.html" data-i18n="nav_login">Login</a></li>
+          <li><a href="register.html" class="active" data-i18n="nav_register">Sign Up</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="langToggleBtn" class="lang-toggle-btn"><span id="currentLangLabel">🇬🇧 EN</span></button>
+        <button id="darkModeToggle" class="dark-toggle"><i class="fas fa-moon"></i></button>
+        <div class="mobile-menu-icon" id="mobileMenuIcon"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <h2 data-i18n="register_title">Create Account</h2>
+      <div class="role-tabs">
+        <button class="role-tab active" data-role="citizen" data-i18n="login_citizen">Citizen</button>
+        <button class="role-tab" data-role="lawyer" data-i18n="login_lawyer">Lawyer (with verification)</button>
+      </div>
+      <form id="registerForm">
+        <input type="text" id="fullname" placeholder="Full Name" data-i18n="register_fullname" required>
+        <input type="email" id="emailReg" placeholder="Email" data-i18n="register_email" required>
+        <input type="password" id="passwordReg" placeholder="Password" data-i18n="register_password" required>
+        <div id="lawyerFields" style="display:none;">
+          <input type="text" id="lawyerCard" placeholder="Bar Association ID / Professional Card Number">
+          <input type="file" id="idUpload" accept="image/*">
+          <small class="form-note">Document will be reviewed by admin for verification</small>
+        </div>
+        <button type="submit" class="btn-primary btn-block" data-i18n="register_btn">Register</button>
+      </form>
+      <p style="text-align: center; margin-top: 1rem;"><a href="login.html" data-i18n="register_login_link">Already registered? Login</a></p>
+      <div id="regMessage" class="error-message"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h3>LexTech DZ</h3><p data-i18n="footer_tagline">LegalTech platform · Algeria</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+        <div class="footer-col"><h4 data-i18n="footer_about">About Us</h4><ul><li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li><li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li><li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li></ul></div>
+        <div class="footer-col"><h4 data-i18n="footer_support">Support</h4><p>contact@lextechdz.dz</p><p>+213 555 123456</p></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.querySelectorAll('.role-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const lawyerFields = document.getElementById('lawyerFields');
+        if(lawyerFields) lawyerFields.style.display = tab.dataset.role === 'lawyer' ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

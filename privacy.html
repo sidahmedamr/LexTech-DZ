@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexTech DZ - Privacy Policy | سياسة الخصوصية</title>
+    <style>
+        /* إعدادات الألوان المتناسقة مع هوية الموقع */
+        :root {
+            --primary-blue: #0A2540;     /* الأزرق الداكن الرسمي */
+            --accent-blue: #639FAB;      /* الأزرق التقني */
+            --legal-gold: #D4AF37;       /* الذهبي القانوني */
+            --bg-light: #F8F9FA;         /* الخلفية المريحة */
+            --text-dark: #2D3748;        /* نصوص واضحة */
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding-bottom: 60px;
+        }
+
+        /* شريط التنقل العلوي وتحديد اللغة */
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-area {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .logo-area span {
+            color: var(--legal-gold);
+        }
+
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background-color: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--white);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background-color: var(--legal-gold);
+            border-color: var(--legal-gold);
+            color: var(--primary-blue);
+        }
+
+        /* حاوية المحتوى الرئيسي */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        /* التحكم في إظهار وإخفاء اللغات */
+        .lang-section {
+            display: none;
+        }
+
+        .lang-section.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-size: 28px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            margin: 25px 0 15px 0;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* لمسة رمزية قبل كل عنوان فرعي */
+        h2::before {
+            content: "🔒";
+            color: var(--legal-gold);
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .law-box {
+            background-color: #f3f7f9;
+            border-right: 4px solid var(--accent-blue);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        /* تنسيقات خاصة باللغات الغربية لتغيير الاتجاه تلقائياً */
+        .ltr-dir {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        .ltr-dir h2::before {
+            content: "🔒 ";
+        }
+
+        .ltr-dir .law-box {
+            border-right: none;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #718096;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">LexTech <span>DZ</span></div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('ar')">العربية</button>
+            <button class="lang-btn" onclick="switchLanguage('fr')">Français</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- ================= النسخة العربية ================= -->
+        <div id="lang-ar" class="lang-section active">
+            <h1>سياسة الخصوصية وحماية البيانات - LexTech DZ</h1>
+            <p>تلتزم منصة <strong>LexTech DZ</strong> بحماية خصوصية مستخدميها وسرية معطياتهم الشخصية والقانونية بأقصى درجات الجدية والأمان الرقمي.</p>
+            
+            <div class="law-box">
+                <strong>الامتثال التشريعي:</strong> تم إعداد هذه السياسة وتطبيقها توافقاً مع أحكام القانون رقم 18-07 المتعلق بحماية الأشخاص الطبيعيين في مجال معالجة المعطيات ذات الطابع الشخصي في الجزائر.
+            </div>
+
+            <h2>1. البيانات التي نجمعها</h2>
+            <p>نقوم بجمع البيانات الضرورية لتقديم الخدمة والتحقق من الهويات وتشمل:</p>
+            <ul>
+                <li><strong>للمواطنين:</strong> الاسم، البريد الإلكتروني، رقم الهاتف، وتفاصيل الاستشارات المقدمة.</li>
+                <li><strong>للمحامين:</strong> الاسم الكامل، التخصص، الولاية، ورقم بطاقة المهنة أو وثيقة الاعتماد المهني لغرض التوثيق.</li>
+            </ul>
+
+            <h2>2. سرية الاستشارات والسر المهني</h2>
+            <p>تخضع جميع المحادثات والاستشارات المدفوعة داخل الغرف المغلقة لبروتوكولات تشفير متقدمة. لا يحق لإدارة المنصة أو أي طرف ثالث الاطلاع على تفاصيل الاستشارة الطبية أو القانونية الخاصة بين المحامي وموكله، تعزيزاً لمبدأ "السر المهني" المكفول قانوناً للمحامي.</p>
+
+            <h2>3. أمن البيانات والمعاملات المالية</h2>
+            <p>يتم معالجة جميع بيانات الدفع الإلكتروني (الذهبية / CIB) عبر بوابات دفع آمنة ومشفرة بالكامل، ولا تقوم المنصة بتخزين أرقام البطاقات النقدية أو الأرقام السرية الخاصة بالمستخدمين في خوادمها.</p>
+
+            <h2>4. حقوق المستخدمين</h2>
+            <p>بموجب التشريع الجزائري الساري المفعول، يحق للمستخدم في أي وقت طلب الوصول إلى بياناته الشخصية، تعديلها، أو طلب حذف حسابة نهائياً من قاعدة بيانات المنصة.</p>
+        </div>
+
+        <!-- ================= النسخة الفرنسية ================= -->
+        <div id="lang-fr" class="lang-section ltr-dir">
+            <h1>Politique de Confidentialité - LexTech DZ</h1>
+            <p>La plateforme <strong>LexTech DZ</strong> s'engage à protéger la vie privée de ses utilisateurs et la confidentialité de leurs données personnelles et juridiques avec les normes de sécurité les plus strictes.</p>
+            
+            <div class="law-box">
+                <strong>Conformité Légale :</strong> Cette politique est rédigée et appliquée conformément aux dispositions de la loi n° 18-07 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel en Algérie.
+            </div>
+
+            <h2>1. Données Collectées</h2>
+            <p>Nous collectons les informations nécessaires au bon fonctionnement du service et à la vérification des profils :</p>
+            <ul>
+                <li><strong>Pour les Citoyens :</strong> Nom, adresse e-mail, numéro de téléphone et détails de la requête juridique.</li>
+                <li><strong>Pour les Avocats :</strong> Nom complet, spécialité, wilaya de résidence et copie de la carte professionnelle pour validation.</li>
+            </ul>
+
+            <h2>2. Secret Professionnel et Chiffrement</h2>
+            <p>Toutes les consultations privées payantes au sein de la plateforme sont strictement confidentielles et protégées par un cryptage de bout en bout. Elles restent soumises au secret professionnel liant l'avocat à son client.</p>
+
+            <h2>3. Sécurité des Paiements</h2>
+            <p>Les transactions financières via les cartes Edahabia ou CIB sont traitées par une passerelle bancaire sécurisée. LexTech DZ ne stocke jamais les coordonnées bancaires ou les codes secrets sur ses serveurs.</p>
+
+            <h2>4. Droits des Utilisateurs</h2>
+            <p>Conformément à la loi algérienne, vous disposez d'un droit d'accès, de rectification et de suppression définitive de vos données personnelles sur simple demande.</p>
+        </div>
+
+        <!-- ================= النسخة الإنجليزية ================= -->
+        <div id="lang-en" class="lang-section ltr-dir">
+            <h1>Privacy Policy - LexTech DZ</h1>
+            <p>The <strong>LexTech DZ</strong> platform takes your privacy and the confidentiality of your legal data with the utmost seriousness through robust digital security protocols.</p>
+            
+            <div class="law-box">
+                <strong>Legal Compliance:</strong> This policy is strictly aligned with the provisions of Algerian Law No. 18-07 concerning the protection of individuals regarding the processing of personal data.
+            </div>
+
+            <h2>1. Information We Collect</h2>
+            <p>We process data essential for service fulfillment and professional authentication:</p>
+            <ul>
+                <li><strong>For Citizens:</strong> Name, email, phone number, and history of queries.</li>
+                <li><strong>For Lawyers:</strong> Full name, law specialization, location, and professional bar card for identity verification.</li>
+            </ul>
+
+            <h2>2. Data Confidentiality & Attorney-Client Privilege</h2>
+            <p>Private consultations are fully encrypted. LexTech DZ administration and third parties have no access to private consultation chat logs, honoring the legal framework of attorney-client privilege.</p>
+
+            <h2>3. Transactional Security</h2>
+            <p>All electronic payments (Edahabia / CIB) are processed via secured payment gateways. LexTech DZ does not store any credit card numbers or credentials on its servers.</p>
+
+            <h2>4. Your Rights</h2>
+            <p>Under Algerian personal data protection laws, users maintain the right to access, update, or request the permanent deletion of their accounts and personal data at any time.</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 LexTech DZ. All Rights Reserved. Master's Graduation Startup Project.</p>
+        </footer>
+
+    </div>
+
+    <!-- المنطق البرمجي للتبديل الفوري بين اللغات وتغيير اتجاه الصفحة -->
+    <script>
+        function switchLanguage(lang) {
+            // إخفاء جميع الأقسام
+            const sections = document.querySelectorAll('.lang-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // إزالة نشاط الأزرار
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // تفعيل القسم والزر المختار
+            document.getElementById('lang-' + lang).classList.add('active');
+            event.target.classList.add('active');
+
+            // تغيير اتجاه الصفحة حسب اللغة
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexTech DZ - Legal Forum | Community Q&A</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-flex">
+      <div class="logo"><a href="index.html">LexTech <span>DZ</span></a></div>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+          <li><a href="forum.html" class="active" data-i18n="nav_forum">Forum</a></li>
+          <li><a href="consultations.html" data-i18n="nav_consultations">Consultations</a></li>
+          <li><a href="login.html" data-i18n="nav_login">Login</a></li>
+          <li><a href="register.html" data-i18n="nav_register">Sign Up</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="langToggleBtn" class="lang-toggle-btn"><span id="currentLangLabel">🇬🇧 EN</span></button>
+        <button id="darkModeToggle" class="dark-toggle"><i class="fas fa-moon"></i></button>
+        <div class="mobile-menu-icon" id="mobileMenuIcon"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="forum-header">
+        <h1 data-i18n="forum_title">Legal Forum</h1>
+        <p data-i18n="forum_subtitle">Ask questions, get verified answers from certified lawyers</p>
+      </div>
+
+      <!-- Categories -->
+      <div class="forum-categories">
+        <button class="cat-btn active" data-cat="all" data-i18n="forum_cat_all">All Topics</button>
+        <button class="cat-btn" data-cat="admin" data-i18n="forum_cat_admin">Administrative Law</button>
+        <button class="cat-btn" data-cat="family" data-i18n="forum_cat_family">Family Law</button>
+        <button class="cat-btn" data-cat="commercial" data-i18n="forum_cat_commercial">Commercial Law</button>
+      </div>
+
+      <!-- Questions Feed -->
+      <div class="questions-feed" id="questionsFeed">
+        <div class="question-card" data-category="admin">
+          <div class="question-header">
+            <div class="user-info"><i class="fas fa-user-circle"></i> <span>Ahmed K.</span></div>
+            <div class="badge-category">Administrative Law</div>
+          </div>
+          <h3>How to challenge a government permit decision?</h3>
+          <p>I need to file an appeal against a construction permit. What is the deadline and procedure in Algiers?</p>
+          <div class="answer-section">
+            <div class="answer verified-answer">
+              <div class="lawyer-badge"><i class="fas fa-check-circle gold-badge"></i> <strong>Me. Fatima Z.</strong> <span class="verified-tag">Certified Lawyer</span></div>
+              <p>Under Algerian administrative law, you have 30 days from notification to file an objection before the Wilaya. Then administrative appeal within 60 days.</p>
+            </div>
+          </div>
+          <div class="question-stats"><i class="far fa-comment"></i> 3 answers • <i class="far fa-heart"></i> 12</div>
+        </div>
+
+        <div class="question-card" data-category="family">
+          <div class="question-header">
+            <div class="user-info"><i class="fas fa-user-circle"></i> <span>Samira B.</span></div>
+            <div class="badge-category">Family Law</div>
+          </div>
+          <h3>Child custody after divorce - father's rights?</h3>
+          <p>My ex-wife wants to move abroad. Can I prevent that?</p>
+          <div class="answer-section">
+            <div class="answer verified-answer">
+              <div class="lawyer-badge"><i class="fas fa-check-circle gold-badge"></i> <strong>Me. Reda Mansouri</strong> <span class="verified-tag">Certified Lawyer</span></div>
+              <p>Under Algerian Family Code, custody priority is given to mother until age of discernment. Moving abroad requires court permission.</p>
+            </div>
+          </div>
+          <div class="question-stats"><i class="far fa-comment"></i> 5 answers • <i class="far fa-heart"></i> 24</div>
+        </div>
+
+        <div class="question-card" data-category="commercial">
+          <div class="question-header">
+            <div class="user-info"><i class="fas fa-user-circle"></i> <span>Karim L.</span></div>
+            <div class="badge-category">Commercial Law</div>
+          </div>
+          <h3>Registering a startup (SARL) in Algeria - steps?</h3>
+          <p>What are the required documents and timeline?</p>
+          <div class="answer-section">
+            <div class="answer verified-answer">
+              <div class="lawyer-badge"><i class="fas fa-check-circle gold-badge"></i> <strong>Me. Nabila H.</strong> <span class="verified-tag">Certified Lawyer</span></div>
+              <p>Steps: Draft statutes, block capital, publish notice, register at CNRC. Takes approx 2 weeks. Minimum capital 100,000 DZD.</p>
+            </div>
+          </div>
+          <div class="question-stats"><i class="far fa-comment"></i> 2 answers • <i class="far fa-heart"></i> 8</div>
+        </div>
+      </div>
+
+      <div class="ask-question-btn-wrap" style="text-align: center; margin: 2rem 0;">
+        <button id="askQuestionBtn" class="btn-primary"><i class="fas fa-plus"></i> <span data-i18n="ask_question">Ask a Legal Question</span></button>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>LexTech DZ</h3>
+          <p data-i18n="footer_tagline">LegalTech platform · Algeria</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_about">About Us</h4>
+          <ul>
+            <li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li>
+            <li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li>
+            <li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_support">Support</h4>
+          <p>contact@lextechdz.dz</p>
+          <p>+213 555 123456</p>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Forum category filter
+    const catBtns = document.querySelectorAll('.cat-btn');
+    const questions = document.querySelectorAll('.question-card');
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-cat');
+        questions.forEach(q => {
+          if(cat === 'all') q.style.display = 'block';
+          else if(q.getAttribute('data-category') === cat) q.style.display = 'block';
+          else q.style.display = 'none';
+        });
+      });
+    });
+    document.getElementById('askQuestionBtn')?.addEventListener('click', () => {
+      alert('Please login to ask a legal question.');
+    });
+  </script>
+</body>
+</html>

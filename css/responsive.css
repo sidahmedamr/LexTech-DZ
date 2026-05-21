@@ -1,0 +1,8 @@
+@media (max-width: 768px) {
+  .header-flex { flex-wrap:wrap; }
+  .main-nav ul { flex-direction:column; gap:0.5rem; background:var(--primary); padding:1rem; display:none; }
+  .main-nav.active ul { display:flex; }
+  .hero-grid { flex-direction:column; }
+  .stats-row { flex-wrap:wrap; justify-content:center; }
+  .consultations-grid { grid-template-columns:1fr; }
+}

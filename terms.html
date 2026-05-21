@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexTech DZ - Terms of Use | شروط الاستخدام</title>
+    <style>
+        /* إعدادات الألوان المتناسقة مع هوية الموقع */
+        :root {
+            --primary-blue: #0A2540;     /* الأزرق الداكن الرسمي */
+            --accent-blue: #639FAB;      /* الأزرق التقني */
+            --legal-gold: #D4AF37;       /* الذهبي القانوني */
+            --bg-light: #F8F9FA;         /* الخلفية المريحة */
+            --text-dark: #2D3748;        /* نصوص واضحة */
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding-bottom: 60px;
+        }
+
+        /* شريط التنقل العلوي وتحديد اللغة */
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-area {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .logo-area span {
+            color: var(--legal-gold);
+        }
+
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background-color: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--white);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background-color: var(--legal-gold);
+            border-color: var(--legal-gold);
+            color: var(--primary-blue);
+        }
+
+        /* حاوية المحتوى الرئيسي */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        /* التحكم في إظهار وإخفاء اللغات */
+        .lang-section {
+            display: none;
+        }
+
+        .lang-section.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-size: 28px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            margin: 25px 0 15px 0;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* لمسة ذهبية قبل كل عنوان فرعي */
+        h2::before {
+            content: "⚖️";
+            color: var(--legal-gold);
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .important-note {
+            background-color: #fffdf3;
+            border-right: 4px solid var(--legal-gold);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        /* تنسيقات خاصة باللغات الغربية لتغيير الاتجاه تلقائياً */
+        .ltr-dir {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        .ltr-dir h2::before {
+            content: "⚖️ ";
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #718096;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">LexTech <span>DZ</span></div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('ar')">العربية</button>
+            <button class="lang-btn" onclick="switchLanguage('fr')">Français</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- ================= النسخة العربية ================= -->
+        <div id="lang-ar" class="lang-section active">
+            <h1>شروط وأحكام استخدام منصة LexTech DZ</h1>
+            <p>مرحباً بكم في منصة <strong>LexTech DZ</strong>. يسري استخدامك لهذه المنصة وفقاً للشروط والأحكام التالية، والمسجلة في إطار التشريع الجزائري الساري المفعول.</p>
+            
+            <div class="important-note">
+                <strong>تنبيه قانوني هام:</strong> الاستشارات المتبادلة في المنتدى العام هي نصائح توجيهية فقط. المنصة لا تتحمل أي مسؤولية عن القرارات الشخصية؛ بينما تخضع الاستشارات المدفوعة في الغرف المغلقة لعقد الخدمة الرسمي بين المحامي والزبون.
+            </div>
+
+            <h2>1. طبيعة الخدمة والوساطة الرقمية</h2>
+            <p>تعتبر منصة LexTech DZ وسيطاً تقنياً يربط بين المواطنين (المستشارين) والمحامين المعتمدين لدى منظمات المحامين في الجزائر. لا تقدم المنصة خدمات قانونية مباشرة ولا تتدخل في طبيعة الاتفاق المالي خارج النسبة التقنية المقررة.</p>
+
+            <h2>2. التحقق من الهوية المهنية</h2>
+            <p>يلتزم كل محامٍ يسجل في المنصة بتقديم وثائق إثبات الهوية والاعتماد المهني الصحيحة (بطاقة المهنة). تحتفظ إدارة المنصة بالحق الكامل في رفض أو تجميد أي حساب يتبين عدم دقة بياناته.</p>
+
+            <h2>3. المعاملات المالية وتقاسم الأرباح</h2>
+            <ul>
+                <li>تخضع الاستشارات الخاصة لنظام دفع إلكتروني مسبق عبر البطاقات النقدية المعتمدة (الذهبية / CIB).</li>
+                <li>يتم اقتطاع نسبة خدمات تقنية للمنصة (20%)، بينما يتم تحويل باقي الأتعاب (80%) مباشرة للمحامي.</li>
+            </ul>
+
+            <h2>4. حماية البيانات والسر المهني</h2>
+            <p>تلتزم المنصة بحماية البيانات الشخصية للمستخدمين وفقاً لأحكام القانون رقم 18-07 المتعلق بحماية الأشخاص الطبيعيين في مجال معالجة المعطيات ذات الطابع الشخصي في الجزائر.</p>
+        </div>
+
+        <!-- ================= النسخة الفرنسية ================= -->
+        <div id="lang-fr" class="lang-section ltr-dir">
+            <h1>Conditions d'Utilisation de LexTech DZ</h1>
+            <p>Bienvenue sur la plateforme <strong>LexTech DZ</strong>. L'utilisation de cette plateforme est régie par les termes et conditions suivants, établis conformément à la législation algérienne en vigueur.</p>
+            
+            <div class="important-note" style="border-right: none; border-left: 4px solid var(--legal-gold);">
+                <strong>Avis Juridique Important :</strong> Les réponses partagées sur le forum public sont fournies à titre indicatif. Les consultations privées payantes sont soumises au secret professionnel et à la responsabilité de l'avocat choisi.
+            </div>
+
+            <h2>1. Nature du Service et Médiation Numérique</h2>
+            <p>LexTech DZ agit en tant qu'intermédiaire technologique reliant les citoyens aux avocats agréés en Algérie. La plateforme ne fournit pas de conseils juridiques directs et ne participe pas à la fixation des honoraires au-delà des frais techniques.</p>
+
+            <h2>2. Vérification de l'Identité Professionnelle</h2>
+            <p>Tout avocat s'inscrivant sur la plateforme s'engage à fournir des documents professionnels valides (Carte professionnelle). L'administration se réserve le droit de suspendre tout compte contenant des informations inexactes.</p>
+
+            <h2>3. Transactions Financières</h2>
+            <ul>
+                <li>Les consultations privées sont payables à l'avance via les cartes électroniques algériennes (Edahabia / CIB).</li>
+                <li>Des frais de service technologique (20%) sont retenus par la plateforme, tandis que (80%) des honoraires sont transférés à l'avocat.</li>
+            </ul>
+
+            <h2>4. Protection des Données Personnelles</h2>
+            <p>La plateforme s'engage à sécuriser les données conformément aux dispositions de la loi n° 18-07 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel en Algérie.</p>
+        </div>
+
+        <!-- ================= النسخة الإنجليزية ================= -->
+        <div id="lang-en" class="lang-section ltr-dir">
+            <h1>Terms of Service - LexTech DZ</h1>
+            <p>Welcome to <strong>LexTech DZ</strong>. Your access to and use of this platform is conditioned on your acceptance of and compliance with the following terms, in accordance with Algerian laws.</p>
+            
+            <div class="important-note" style="border-right: none; border-left: 4px solid var(--legal-gold);">
+                <strong>Important Disclaimer:</strong> General advice on the public forum is for informational purposes only. Private paid consultations are secure and subject to the professional attorney-client privilege.
+            </div>
+
+            <h2>1. Nature of Service & Digital Intermediation</h2>
+            <p>LexTech DZ acts solely as a technological intermediary connecting citizens with certified lawyers registered in Algeria. The platform does not directly provide legal services.</p>
+
+            <h2>2. Professional Verification</h2>
+            <p>Lawyers registering on the platform must provide valid professional credentials. The administration reserves the right to suspend any profile found to contain fraudulent data.</p>
+
+            <h2>3. Financial Transactions & Revenue Split</h2>
+            <ul>
+                <li>Premium private consultations require advanced electronic payment using local bank cards (Edahabia / CIB).</li>
+                <li>The platform charges a 20% technical service fee, and 80% of the funds are routed immediately to the lawyer’s digital wallet.</li>
+            </ul>
+
+            <h2>4. Data Privacy Compliance</h2>
+            <p>All data processes comply strictly with Algerian Law No. 18-07 concerning the protection of individuals regarding the processing of personal data.</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 LexTech DZ. All Rights Reserved. Master's Graduation Startup Project.</p>
+        </footer>
+
+    </div>
+
+    <!-- المنطق البرمجي للتبديل الفوري بين اللغات وتغيير اتجاه الصفحة -->
+    <script>
+        function switchLanguage(lang) {
+            // إخفاء جميع الأقسام
+            const sections = document.querySelectorAll('.lang-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // إزالة نشاط الأزرار
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // تفعيل القسم والزر المختار
+            document.getElementById('lang-' + lang).classList.add('active');
+            event.target.classList.add('active');
+
+            // تغيير اتجاه الصفحة حسب اللغة
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+        }
+    </script>
+</body>
+</html>

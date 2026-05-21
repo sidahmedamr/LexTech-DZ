@@ -1,0 +1,8 @@
+.forum-header { text-align:center; margin:2rem 0; }
+.forum-categories { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-bottom:2rem; }
+.cat-btn { background:var(--card-white); border:1px solid var(--border-light); padding:0.5rem 1.2rem; border-radius:40px; cursor:pointer; transition:0.2s; }
+.cat-btn.active { background:var(--accent); color:white; border-color:var(--accent); }
+.question-card { background:var(--card-white); border-radius:1rem; padding:1.5rem; margin-bottom:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+.verified-answer { background:#fef9e6; border-left:4px solid var(--gold); padding:1rem; margin-top:1rem; border-radius:8px; }
+.gold-badge { color:var(--gold); margin-right:6px; }
+.verified-tag { background:var(--gold); color:#0A2540; font-size:0.7rem; padding:2px 8px; border-radius:20px; margin-left:8px; }
