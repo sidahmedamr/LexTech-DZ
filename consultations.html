@@ -9,18 +9,126 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
   <style>
-    /* تنسيق خاص لصور الخبراء لتظهر بشكل احترافي ومتناسق (4x4) */
+    /* تنسيق صور الخبراء */
     .lawyer-img {
-      height: 250px; /* زيادة الطول قليلاً لتناسب الصور الشخصية */
-      padding: 0; /* إزالة الحواف الداخلية */
+      height: 250px;
+      padding: 0;
       overflow: hidden;
     }
     .lawyer-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* يضمن ملء الصورة للمربع دون تشويه أبعادها */
-      object-position: top; /* يركز على وجه الشخص */
+      object-fit: cover;
+      object-position: top;
     }
+
+    /* ========== Multi-Step Modal Styles ========== */
+    .modal-step { display: none; }
+    .modal-step.active { display: block; animation: fadeIn 0.3s ease; }
+
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .step-indicator::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border-light);
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-light);
+      border: 2px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      z-index: 2;
+      color: var(--text-gray);
+      transition: all 0.3s ease;
+    }
+    .step-dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--primary-dark);
+    }
+
+    /* خيارات الدفع */
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .pay-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pay-option:hover, .pay-option.selected {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .pay-option i { font-size: 1.5rem; color: var(--gold); width: 30px; text-align: center; }
+
+    /* محاكاة الشات */
+    .chat-box {
+      background: var(--bg-light);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      height: 220px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      border: 1px solid var(--border-light);
+      margin-bottom: 1rem;
+    }
+    .chat-msg {
+      max-width: 80%;
+      padding: 0.6rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .chat-msg.expert {
+      background: var(--primary);
+      color: white;
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+    }
+    .chat-msg.user {
+      background: var(--gold);
+      color: var(--primary-dark);
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+      font-weight: 600;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .chat-input-row input {
+      margin-bottom: 0;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
 </head>
 <body>
@@ -52,7 +160,6 @@
       </div>
 
       <div class="consultations-grid" id="lawyersGrid">
-        
         <div class="lawyer-card">
           <div class="lawyer-img">
             <img src="images/consultations-providers/hadjmohamed-aymen.png" alt="البروفيسور حاج محمد أيمن">
@@ -104,18 +211,91 @@
             <button class="btn-book book-consult-btn" data-name="القاضي عكرمي أحمد" data-fee="7000" data-i18n="book_btn">Book Consultation</button>
           </div>
         </div>
-
       </div>
     </div>
 
-    <div id="paymentModal" class="modal" style="display:none;">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h3>Simulate Payment</h3>
-        <p>Booking with <strong id="modalLawyerName"></strong></p>
-        <p>Amount: <strong id="modalAmount"></strong> DZD</p>
-        <button id="simulatePayBtn" class="btn-primary">Confirm Payment</button>
-        <div id="paymentResult" style="margin-top:1rem;"></div>
+    <div id="bookingModal" class="modal" style="display:none;">
+      <div class="modal-content" style="max-width: 500px;">
+        <span class="close-modal" id="closeBookingModal">&times;</span>
+        
+        <div class="step-indicator">
+          <div class="step-dot active" id="dot1">1</div>
+          <div class="step-dot" id="dot2">2</div>
+          <div class="step-dot" id="dot3">3</div>
+        </div>
+
+        <div class="modal-step active" id="step1">
+          <h3><i class="fas fa-file-signature" style="color:var(--gold);"></i> شروط الاستشارة القانونية</h3>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem;">أنت بصدد طلب استشارة خاصة مع: <br><strong id="step1ExpertName" style="color:var(--primary);"></strong></p>
+          
+          <div style="background:var(--bg-light); padding:0.9rem; border-radius:12px; margin: 1rem 0; font-size: 0.82rem; border-left: 3px solid var(--gold);">
+            <p>• تُقدم الاستشارة في غضون 24 ساعة عبر محادثة كتابية/صوتية مشفرة.</p>
+            <p>• تلتزم المنصة بحماية بياناتك الشخصية وفقاً للقانون 18-07.</p>
+            <p>• اقتطاع عمولة المنصة (20%) يضمن متابعة الملف وحق الاسترجاع.</p>
+          </div>
+
+          <label style="display:flex; align-items:center; gap:8px; font-size: 0.85rem; cursor:pointer;">
+            <input type="checkbox" id="acceptConsultTerms"> أوافق على شروط الخدمة والسرية المهنية
+          </label>
+          
+          <button id="goToStep2Btn" class="btn-primary btn-block" style="margin-top:1.2rem;" disabled>المتابعة لخطوة الدفع ←</button>
+        </div>
+
+        <div class="modal-step" id="step2">
+          <h3><i class="fas fa-credit-card" style="color:var(--gold);"></i> اختر طريقة الدفع</h3>
+          <p style="font-size:0.85rem;">المبلغ الإجمالي: <strong id="step2Amount" style="color:var(--gold); font-size:1.1rem;"></strong> دج</p>
+          
+          <div class="payment-options">
+            <label class="pay-option selected">
+              <input type="radio" name="payMethod" value="edahabia" checked>
+              <i class="fas fa-credit-card"></i>
+              <div>
+                <strong>البطاقة الذهبية (Edahabia)</strong>
+                <div style="font-size:0.75rem; color:var(--text-gray);">دفع فوري عبر بريد الجزائر</div>
+              </div>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="payMethod" value="cib">
+              <i class="fas fa-money-check-alt"></i>
+              <div>
+                <strong>بطاقة CIB البنكية</strong>
+                <div style="font-size:0.75rem; color:var(--text-gray);">متاحة لجميع البنوك الجزائرية</div>
+              </div>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="payMethod" value="baridimob">
+              <i class="fas fa-mobile-alt"></i>
+              <div>
+                <strong>تطبيق بريدي موب (BaridiMob)</strong>
+                <div style="font-size:0.75rem; color:var(--text-gray);">تحويل سريع عبر RIP</div>
+              </div>
+            </label>
+          </div>
+
+          <button id="processPayBtn" class="btn-primary btn-block">تأكيد الدفع وفتح الاستشارة (محاكاة) ✔</button>
+        </div>
+
+        <div class="modal-step" id="step3">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom: 0.8rem;">
+            <i class="fas fa-shield-alt" style="color:#16a34a; font-size: 1.3rem;"></i>
+            <div>
+              <h4 style="margin:0;" id="chatExpertTitle">محادثة الاستشارة</h4>
+              <small style="color:#16a34a;"><i class="fas fa-circle" style="font-size:0.5rem;"></i> محادثة مشفرة ومباشرة</small>
+            </div>
+          </div>
+
+          <div class="chat-box" id="chatMessages">
+            <div class="chat-msg expert" id="welcomeMsg">
+              مرحباً بك! أنا جاهز لمعاينة ملفك القانوني والإجابة على تساؤلاتك بدقة. تفضل بطرح سؤالك.
+            </div>
+          </div>
+
+          <div class="chat-input-row">
+            <input type="text" id="userChatInput" placeholder="اكتب استفسارك هنا..." style="font-size:0.85rem;">
+            <button id="sendChatBtn" class="btn-primary-sm"><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+
       </div>
     </div>
   </main>
@@ -153,44 +333,108 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="js/payment-mock.js"></script>
   <script>
-    // التحكم في نافذة الدفع والتأكيد
-    const modal = document.getElementById('paymentModal');
-    const btns = document.querySelectorAll('.book-consult-btn');
-    const closeSpan = document.querySelector('.close-modal');
-    const modalLawyer = document.getElementById('modalLawyerName');
-    const modalAmountSpan = document.getElementById('modalAmount');
+    // ========== منطق المودال متعدد الخطوات (Multi-Step Logic) ==========
+    const bookingModal = document.getElementById('bookingModal');
+    const closeBookingModal = document.getElementById('closeBookingModal');
+    const bookBtns = document.querySelectorAll('.book-consult-btn');
     
-    let currentLawyerName = '', currentFee = 0;
-    
-    btns.forEach(btn => {
+    // عناصر الخطوات
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const dot1 = document.getElementById('dot1');
+    const dot2 = document.getElementById('dot2');
+    const dot3 = document.getElementById('dot3');
+
+    const acceptTermsCheck = document.getElementById('acceptConsultTerms');
+    const goToStep2Btn = document.getElementById('goToStep2Btn');
+    const processPayBtn = document.getElementById('processPayBtn');
+
+    let selectedExpert = '';
+    let selectedFee = 0;
+
+    // فتح المودال عند النقر على حجز
+    bookBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        currentLawyerName = btn.getAttribute('data-name');
-        currentFee = parseInt(btn.getAttribute('data-fee'));
-        modalLawyer.innerText = currentLawyerName;
-        modalAmountSpan.innerText = currentFee;
-        modal.style.display = 'flex';
+        selectedExpert = btn.getAttribute('data-name');
+        selectedFee = btn.getAttribute('data-fee');
+
+        document.getElementById('step1ExpertName').innerText = selectedExpert;
+        document.getElementById('step2Amount').innerText = selectedFee;
+        document.getElementById('chatExpertTitle').innerText = selectedExpert;
+        document.getElementById('welcomeMsg').innerText = `مرحباً بك! أنا ${selectedExpert}، يسعدني تقديم الاستشارة لك. تفضل بتوضيح سؤالك القانوني.`;
+
+        // إعادة ضبط المودال إلى الخطوة 1
+        resetModal();
+        bookingModal.style.display = 'flex';
       });
     });
-    
-    closeSpan.onclick = () => modal.style.display = 'none';
-    window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
-    
-    document.getElementById('simulatePayBtn').addEventListener('click', () => {
-      if(window.LexTechPayment) {
-        window.LexTechPayment.simulatePayment(currentLawyerName, currentFee);
-      } else {
-        const platformShare = currentFee * 0.2;
-        const lawyerShare = currentFee * 0.8;
-        document.getElementById('paymentResult').innerHTML = `
-          <div style="background:#e6f7e6; color: #166534; padding:1rem; border-radius:8px; border: 1px solid #bbf7d0;">
-            <i class="fas fa-check-circle"></i> Payment successful!<br>
-            <small>Platform (20%): ${platformShare} DZD | Expert receives (80%): ${lawyerShare} DZD.</small>
-          </div>
-        `;
-      }
+
+    closeBookingModal.onclick = () => bookingModal.style.display = 'none';
+    window.onclick = (e) => { if (e.target === bookingModal) bookingModal.style.display = 'none'; };
+
+    // تفعيل زر الانتقال عند القبول بالشروط
+    acceptTermsCheck.addEventListener('change', () => {
+      goToStep2Btn.disabled = !acceptTermsCheck.checked;
     });
+
+    // الانتقال للخطوة 2 (الدفع)
+    goToStep2Btn.addEventListener('click', () => {
+      step1.classList.remove('active');
+      step2.classList.add('active');
+      dot2.classList.add('active');
+    });
+
+    // الانتقال للخطوة 3 (محاكاة الشات بعد الدفع الناجح)
+    processPayBtn.addEventListener('click', () => {
+      step2.classList.remove('active');
+      step3.classList.add('active');
+      dot3.classList.add('active');
+    });
+
+    // محاكاة إرسال رسائل في الشات
+    const sendChatBtn = document.getElementById('sendChatBtn');
+    const userChatInput = document.getElementById('userChatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function sendMessage() {
+      const text = userChatInput.value.trim();
+      if (!text) return;
+
+      // إضافة رسالة المستخدم
+      const userMsg = document.createElement('div');
+      userMsg.className = 'chat-msg user';
+      userMsg.innerText = text;
+      chatMessages.appendChild(userMsg);
+      userChatInput.value = '';
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // رد آلي تلقائي محاكي للذكاء الاصطناعي / الخبير بعد 1.5 ثانية
+      setTimeout(() => {
+        const replyMsg = document.createElement('div');
+        replyMsg.className = 'chat-msg expert';
+        replyMsg.innerText = `شكراً لتوضيحك. بناءً على النصوص القانونية الجزائرية المعمول بها، فإن موقفك السليم يتطلب إعداد ملف يتضمن المستندات الرسمية. سأقوم بتزويدك بالتفاصيل الكاملة.`;
+        chatMessages.appendChild(replyMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 1500);
+    }
+
+    sendChatBtn.addEventListener('click', sendMessage);
+    userChatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    function resetModal() {
+      step1.classList.add('active');
+      step2.classList.remove('active');
+      step3.classList.remove('active');
+      dot1.classList.add('active');
+      dot2.classList.remove('active');
+      dot3.classList.remove('active');
+      acceptTermsCheck.checked = false;
+      goToStep2Btn.disabled = true;
+    }
   </script>
 </body>
 </html>
