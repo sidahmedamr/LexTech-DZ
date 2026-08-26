@@ -680,6 +680,11 @@ body.dark .fee { color: var(--accent); }
 [dir="rtl"] .social-links { flex-direction: row-reverse; }
 [dir="rtl"] .footer-col ul li a:hover { padding-inline-start: 0; padding-inline-end: 8px; }
 
+/* منع انقلاب أزرار تغيير اللغة والوضع الليلي والقائمة عند التحويل للعربية */
+.header-actions {
+  direction: ltr !important;
+}
+
 /* ========== RESPONSIVE DESIGN (Mobile & Tablet) ========== */
 @media (max-width: 992px) {
   .hero-content h1 { font-size: 3.2rem; }
