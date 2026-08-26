@@ -458,6 +458,55 @@ body.dark .hero-overlay {
   color: var(--primary);
 }
 
+/* ========== FIXED MODAL OVERLAY STYLES ========== */
+.modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(10, 37, 64, 0.85) !important; /* خلفية داكنة شفافة */
+  backdrop-filter: blur(8px) !important; /* تأثير ضبابي عصري */
+  -webkit-backdrop-filter: blur(8px) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999 !important; /* يضمن ظهور النافذة فوق كل عناصر الموقع بدون استثناء */
+}
+
+.modal-content {
+  background: var(--bg-white);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 520px;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-light);
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-gray);
+  transition: color 0.2s ease;
+  z-index: 10;
+}
+
+[dir="rtl"] .close-modal {
+  right: auto;
+  left: 1.5rem;
+}
+
+.close-modal:hover {
+  color: #e11d48;
+}
+
 /* ========== STATS SECTION ========== */
 .stats-row {
   display: flex;
