@@ -1,159 +1,388 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LexTech DZ - Legal Forum | Community Q&A</title>
+  <title>LexTech DZ - المنتدى القانوني</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  
+  <style>
+    /* ========== تنسيقات المنتدى الخاصة ========== */
+    body { background-color: var(--bg-light, #f4f7f9); }
+    
+    .forum-header {
+      background: linear-gradient(135deg, var(--primary, #0A2540) 0%, var(--primary-dark, #051a2c) 100%);
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+      border-radius: 0 0 24px 24px;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .forum-categories {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .forum-categories button {
+      background: white;
+      border: 1px solid var(--border-light);
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-gray);
+      transition: all 0.3s ease;
+    }
+    .forum-categories button.active, .forum-categories button:hover {
+      background: var(--gold, #D4AF37);
+      color: var(--primary-dark);
+      border-color: var(--gold);
+    }
+
+    /* منشورات المنتدى */
+    .post-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-light);
+    }
+    
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+    
+    .user-avatar {
+      width: 45px;
+      height: 45px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .user-avatar:hover { transform: scale(1.1); }
+    
+    .user-info { cursor: pointer; }
+    .user-name { font-weight: 700; color: var(--text-dark); display: block; }
+    .user-name:hover { color: var(--gold); }
+    .post-time { font-size: 0.8rem; color: var(--text-light); }
+    
+    .post-title { font-size: 1.25rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .post-body { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+    
+    .post-tags span {
+      background: var(--bg-light);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      color: var(--accent-dark);
+      margin-left: 8px;
+    }
+
+    /* قسم التعليقات (الردود) */
+    .comments-section {
+      border-top: 1px solid var(--border-light);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .comment {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1rem;
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+    
+    /* رد خبير معتمد */
+    .comment.expert-reply {
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-right: 4px solid var(--gold);
+    }
+    
+    .comment-content { flex: 1; }
+    .comment-text { font-size: 0.9rem; color: var(--text-dark); margin-top: 5px; }
+    
+    .cta-consult-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--primary-dark);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .cta-consult-btn:hover { background: var(--primary); color: white; }
+
+    /* ========== Profile Modal Styles ========== */
+    .profile-modal {
+      position: fixed !important;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 37, 64, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .profile-content {
+      background: white;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      animation: slideUp 0.3s ease;
+      position: relative;
+    }
+    .profile-cover { height: 100px; background: linear-gradient(135deg, var(--primary), var(--accent)); }
+    .profile-avatar {
+      width: 80px; height: 80px;
+      background: white; border: 4px solid white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: var(--primary);
+      margin: -40px auto 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .profile-info { padding: 0 20px 20px; text-align: center; }
+    .profile-info h3 { margin-bottom: 5px; color: var(--primary-dark); }
+    .profile-role { display: inline-block; background: #e2e8f0; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; margin-bottom: 15px; }
+    .profile-role.expert { background: var(--gold); color: var(--primary-dark); font-weight: bold; }
+    .profile-stats { display: flex; justify-content: center; gap: 20px; border-top: 1px solid var(--border-light); padding-top: 15px; margin-top: 15px; }
+    .stat-box { text-align: center; }
+    .stat-val { font-weight: bold; color: var(--primary); display: block; font-size: 1.1rem; }
+    .stat-lbl { font-size: 0.75rem; color: var(--text-gray); }
+    .close-profile {
+      position: absolute; top: 10px; left: 15px; color: white;
+      font-size: 1.5rem; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  </style>
 </head>
 <body>
-  <!-- HEADER -->
+
   <header class="site-header">
     <div class="container header-flex">
-      <div class="logo"><a href="index.html">LexTech <span>DZ</span></a></div>
+      <div class="logo"><a href="index.html" style="direction: ltr;">LexTech <span>DZ</span></a></div>
       <nav class="main-nav" id="mainNav">
         <ul>
-          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
-          <li><a href="forum.html" class="active" data-i18n="nav_forum">Forum</a></li>
-          <li><a href="consultations.html" data-i18n="nav_consultations">Consultations</a></li>
-          <li><a href="login.html" data-i18n="nav_login">Login</a></li>
-          <li><a href="register.html" data-i18n="nav_register">Sign Up</a></li>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="forum.html" class="active">المنتدى</a></li>
+          <li><a href="consultations.html">الاستشارات</a></li>
+          <li><a href="login.html">تسجيل الدخول</a></li>
+          <li><a href="register.html">إنشاء حساب</a></li>
         </ul>
       </nav>
-      <div class="header-actions">
-        <button id="langToggleBtn" class="lang-toggle-btn"><span id="currentLangLabel">🇬🇧 EN</span></button>
+      <div class="header-actions" style="direction: ltr;">
+        <button class="lang-toggle-btn"><i class="fas fa-globe"></i> AR</button>
         <button id="darkModeToggle" class="dark-toggle"><i class="fas fa-moon"></i></button>
-        <div class="mobile-menu-icon" id="mobileMenuIcon"><i class="fas fa-bars"></i></div>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="container">
-      <div class="forum-header">
-        <h1 data-i18n="forum_title">Legal Forum</h1>
-        <p data-i18n="forum_subtitle">Ask questions, get verified answers from certified lawyers</p>
+    <div class="forum-header">
+      <div class="container">
+        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">المنتدى القانوني التفاعلي</h1>
+        <p style="color: rgba(255,255,255,0.8);">اطرح انشغالاتك، شارك في النقاشات، واحصل على توجيهات أولية من الخبراء.</p>
       </div>
+    </div>
 
-      <!-- Categories -->
+    <div class="container" style="max-width: 900px;">
+      
       <div class="forum-categories">
-        <button class="cat-btn active" data-cat="all" data-i18n="forum_cat_all">All Topics</button>
-        <button class="cat-btn" data-cat="admin" data-i18n="forum_cat_admin">Administrative Law</button>
-        <button class="cat-btn" data-cat="family" data-i18n="forum_cat_family">Family Law</button>
-        <button class="cat-btn" data-cat="commercial" data-i18n="forum_cat_commercial">Commercial Law</button>
+        <button class="active">الكل</button>
+        <button>قانون الأسرة</button>
+        <button>القانون التجاري</button>
+        <button>القانون الإداري</button>
+        <button>العقارات</button>
       </div>
 
-      <!-- Questions Feed -->
-      <div class="questions-feed" id="questionsFeed">
-        <div class="question-card" data-category="admin">
-          <div class="question-header">
-            <div class="user-info"><i class="fas fa-user-circle"></i> <span>Ahmed K.</span></div>
-            <div class="badge-category">Administrative Law</div>
-          </div>
-          <h3>How to challenge a government permit decision?</h3>
-          <p>I need to file an appeal against a construction permit. What is the deadline and procedure in Algiers?</p>
-          <div class="answer-section">
-            <div class="answer verified-answer">
-              <div class="lawyer-badge"><i class="fas fa-check-circle gold-badge"></i> <strong>Me. Fatima Z.</strong> <span class="verified-tag">Certified Lawyer</span></div>
-              <p>Under Algerian administrative law, you have 30 days from notification to file an objection before the Wilaya. Then administrative appeal within 60 days.</p>
-            </div>
-          </div>
-          <div class="question-stats"><i class="far fa-comment"></i> 3 answers • <i class="far fa-heart"></i> 12</div>
-        </div>
+      <div style="text-align: left; margin-bottom: 1rem;">
+        <button class="btn-primary" style="border-radius: 12px; padding: 10px 20px;"><i class="fas fa-pen"></i> اكتب سؤالاً جديداً</button>
+      </div>
 
-        <div class="question-card" data-category="family">
-          <div class="question-header">
-            <div class="user-info"><i class="fas fa-user-circle"></i> <span>Samira B.</span></div>
-            <div class="badge-category">Family Law</div>
+      <div class="post-card">
+        <div class="post-header user-trigger" data-name="أمينة ب." data-role="مواطن" data-posts="4" data-date="أكتوبر 2024" data-bio="أبحث عن استشارات في قانون الأسرة وحقوق الطفل.">
+          <div class="user-avatar">أ</div>
+          <div class="user-info">
+            <span class="user-name">أمينة ب.</span>
+            <span class="post-time">نُشر منذ 3 ساعات</span>
           </div>
-          <h3>Child custody after divorce - father's rights?</h3>
-          <p>My ex-wife wants to move abroad. Can I prevent that?</p>
-          <div class="answer-section">
-            <div class="answer verified-answer">
-              <div class="lawyer-badge"><i class="fas fa-check-circle gold-badge"></i> <strong>Me. Reda Mansouri</strong> <span class="verified-tag">Certified Lawyer</span></div>
-              <p>Under Algerian Family Code, custody priority is given to mother until age of discernment. Moving abroad requires court permission.</p>
-            </div>
-          </div>
-          <div class="question-stats"><i class="far fa-comment"></i> 5 answers • <i class="far fa-heart"></i> 24</div>
         </div>
-
-        <div class="question-card" data-category="commercial">
-          <div class="question-header">
-            <div class="user-info"><i class="fas fa-user-circle"></i> <span>Karim L.</span></div>
-            <div class="badge-category">Commercial Law</div>
-          </div>
-          <h3>Registering a startup (SARL) in Algeria - steps?</h3>
-          <p>What are the required documents and timeline?</p>
-          <div class="answer-section">
-            <div class="answer verified-answer">
-              <div class="lawyer-badge"><i class="fas fa-check-circle gold-badge"></i> <strong>Me. Nabila H.</strong> <span class="verified-tag">Certified Lawyer</span></div>
-              <p>Steps: Draft statutes, block capital, publish notice, register at CNRC. Takes approx 2 weeks. Minimum capital 100,000 DZD.</p>
+        
+        <h2 class="post-title">استفسار حول إجراءات الخلع وحضانة الأطفال بعد الطلاق</h2>
+        <p class="post-body">السلام عليكم، أريد الاستفسار عن الإجراءات القانونية المتبعة لرفع دعوى خلع، وهل تسقط حضانة الأطفال تلقائياً عن الأم في حال زواجها مرة ثانية حسب القانون الجزائري؟ شكراً مسبقاً.</p>
+        <div class="post-tags"><span>قانون الأسرة</span><span>حضانة</span></div>
+        
+        <div class="comments-section">
+          <div class="comment user-trigger" data-name="كريم ج." data-role="مواطن" data-posts="12" data-date="جانفي 2025" data-bio="مهتم بالثقافة القانونية العامة.">
+            <div class="user-avatar" style="background:#64748b; width: 35px; height: 35px; font-size:12px;">ك</div>
+            <div class="comment-content">
+              <span class="user-name" style="font-size:0.9rem;">كريم ج.</span>
+              <p class="comment-text">حسب علمي الحضانة تسقط إذا تزوجت الأم بغير قريب محرم، لكن يفضل استشارة محامي لتفاصيل أكثر.</p>
             </div>
           </div>
-          <div class="question-stats"><i class="far fa-comment"></i> 2 answers • <i class="far fa-heart"></i> 8</div>
+          
+          <div class="comment expert-reply user-trigger" data-name="القاضية عزيزي ملاك" data-role="خبير قانوني معتمد" data-posts="89" data-date="سبتمبر 2024" data-bio="قاضية سابقة ومستشارة في قضايا الأسرة والمجتمع.">
+            <div class="user-avatar" style="background:var(--gold); width: 35px; height: 35px; font-size:12px;"><i class="fas fa-balance-scale"></i></div>
+            <div class="comment-content">
+              <span class="user-name" style="font-size:0.9rem; color:var(--primary);">القاضية عزيزي ملاك <i class="fas fa-check-circle gold-badge" title="موثق"></i></span>
+              <p class="comment-text">أهلاً بك أمينة. دعوى الخلع لها شروط إجرائية محددة وتتطلب عرض صلح ومقابل مادي. بخصوص الحضانة (المادة 66 من قانون الأسرة)، تزوج الأم بغير قريب محرم يسقطها، ولكن يراعي القاضي مصلحة المحضون أولاً. الإجراءات تختلف حسب كل حالة.</p>
+              <a href="consultations.html" class="cta-consult-btn">احجزي استشارة معي لدراسة ملفك بدقة 📅</a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="ask-question-btn-wrap" style="text-align: center; margin: 2rem 0;">
-        <button id="askQuestionBtn" class="btn-primary"><i class="fas fa-plus"></i> <span data-i18n="ask_question">Ask a Legal Question</span></button>
+      <div class="post-card">
+        <div class="post-header user-trigger" data-name="سمير مقاول" data-role="رائد أعمال" data-posts="21" data-date="مارس 2024" data-bio="صاحب شركة ناشئة مهتم بالقانون التجاري والضرائب.">
+          <div class="user-avatar" style="background:#0284c7;">س</div>
+          <div class="user-info">
+            <span class="user-name">سمير مقاول</span>
+            <span class="post-time">نُشر منذ 5 ساعات</span>
+          </div>
+        </div>
+        
+        <h2 class="post-title">تأسيس شركة ذات مسؤولية محدودة (SARL) وشروط المقر</h2>
+        <p class="post-body">إخواني، نحن ثلاثة شركاء نريد تأسيس SARL. هل يمكن استخدام عقد كراء باسم أحد الشركاء فقط كإثبات لمقر الشركة في المركز الوطني للسجل التجاري (CNRC)؟ أم يجب أن يكون العقد باسم الشركة قيد التأسيس؟</p>
+        <div class="post-tags"><span>القانون التجاري</span><span>سجل تجاري</span><span>شركات</span></div>
+        
+        <div class="comments-section">
+          <div class="comment expert-reply user-trigger" data-name="الدكتور بوسعدي أيمن" data-role="خبير قانوني معتمد" data-posts="142" data-date="أوت 2024" data-bio="دكتور دولة ومستشار قانوني للشركات والمؤسسات.">
+            <div class="user-avatar" style="background:var(--gold); width: 35px; height: 35px; font-size:12px;"><i class="fas fa-briefcase"></i></div>
+            <div class="comment-content">
+              <span class="user-name" style="font-size:0.9rem; color:var(--primary);">الدكتور بوسعدي أيمن <i class="fas fa-check-circle gold-badge"></i></span>
+              <p class="comment-text">مرحباً سمير. قانوناً، يجب إثبات الاستغلال القانوني للمحل. يمكن استعمال عقد كراء باسم أحد الشركاء مؤقتاً مع تصريح شرفي بالتنازل لصالح الشركة قيد التأسيس، ولكن الإجراء الأصح هو تحرير عقد الإيجار لـ "الشركة في طور التأسيس". أنصحك بتنظيم القانون الأساسي بعناية لتجنب النزاعات المستقبلية بين الشركاء.</p>
+              <a href="consultations.html" class="cta-consult-btn">احجز استشارة لضبط القوانين الأساسية لشركتك 📅</a>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="post-card">
+        <div class="post-header user-trigger" data-name="طارق م." data-role="مواطن" data-posts="2" data-date="فيفري 2025" data-bio="مستخدم جديد في المنصة.">
+          <div class="user-avatar" style="background:#16a34a;">ط</div>
+          <div class="user-info">
+            <span class="user-name">طارق م.</span>
+            <span class="post-time">نُشر منذ 1 يوم</span>
+          </div>
+        </div>
+        
+        <h2 class="post-title">رفض البلدية منح رخصة بناء رغم استيفاء الشروط</h2>
+        <p class="post-body">قدمت ملفاً كاملاً للحصول على رخصة بناء قطعة أرض صالحة للبناء، لكن رئيس البلدية رفض الطلب بدون تقديم مبرر قانوني واضح في قرار الرفض. ما هي الإجراءات الإدارية المتاحة للطعن؟</p>
+        <div class="post-tags"><span>القانون الإداري</span><span>رخصة بناء</span></div>
+        
+        <div class="comments-section">
+          <div class="comment expert-reply user-trigger" data-name="القاضي عكرمي أحمد" data-role="خبير قانوني معتمد" data-posts="310" data-date="جويلية 2024" data-bio="مستشار قضائي متخصص في النزاعات الإدارية والمدنية.">
+            <div class="user-avatar" style="background:var(--gold); width: 35px; height: 35px; font-size:12px;"><i class="fas fa-balance-scale-right"></i></div>
+            <div class="comment-content">
+              <span class="user-name" style="font-size:0.9rem; color:var(--primary);">القاضي عكرمي أحمد <i class="fas fa-check-circle gold-badge"></i></span>
+              <p class="comment-text">أهلاً طارق. عدم تسبيب القرار الإداري يعتبر عيباً في الشكل يعرضه للإلغاء. الخطوة الأولى هي التظلم الولائي أمام الوالي خلال شهرين. وإذا تم الرفض أو السكوت، يحق لك رفع "دعوى الإلغاء لتجاوز السلطة" أمام المحكمة الإدارية.</p>
+              <a href="consultations.html" class="cta-consult-btn">لحجز استشارة لإعداد عريضة الطعن الإداري اضغط هنا 📅</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3>LexTech DZ</h3>
-          <p data-i18n="footer_tagline">LegalTech platform · Algeria</p>
-          <div class="social-links">
-            <a href="https://www.facebook.com/20031219k"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/amraoui_sidahmed"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:s-amraoui@univ-dbkm.dz"><i class="fas fa-envelope"></i></a>
+  <div id="profileModal" class="profile-modal">
+    <div class="profile-content">
+      <span class="close-profile" id="closeProfileBtn">&times;</span>
+      <div class="profile-cover"></div>
+      <div class="profile-avatar" id="modalAvatar">أ</div>
+      <div class="profile-info">
+        <h3 id="modalName">اسم المستخدم</h3>
+        <span class="profile-role" id="modalRole">الدور</span>
+        <p style="font-size:0.85rem; color:var(--text-gray);" id="modalBio">النبذة التعريفية للمستخدم تظهر هنا...</p>
+        
+        <div class="profile-stats">
+          <div class="stat-box">
+            <span class="stat-val" id="modalPosts">0</span>
+            <span class="stat-lbl">مشاركة</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="modalDate">---</span>
+            <span class="stat-lbl">تاريخ الانضمام</span>
           </div>
         </div>
-        <div class="footer-col">
-          <h4 data-i18n="footer_about">About Us</h4>
-          <ul>
-            <li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li>
-            <li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li>
-            <li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4 data-i18n="footer_support">Support</h4>
-          <p>s-amraoui@univ-dbkm.dz</p>
-          <p>+213774221882</p>
-        </div>
       </div>
-      <div class="footer-bottom"><p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p></div>
     </div>
-  </footer>
+  </div>
 
-  <script src="js/main.js"></script>
   <script>
-    // Forum category filter
-    const catBtns = document.querySelectorAll('.cat-btn');
-    const questions = document.querySelectorAll('.question-card');
-    catBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        catBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const cat = btn.getAttribute('data-cat');
-        questions.forEach(q => {
-          if(cat === 'all') q.style.display = 'block';
-          else if(q.getAttribute('data-category') === cat) q.style.display = 'block';
-          else q.style.display = 'none';
-        });
+    // ========== سكربت النافذة المنبثقة للبروفايلات ==========
+    const profileModal = document.getElementById('profileModal');
+    const closeProfileBtn = document.getElementById('closeProfileBtn');
+    
+    // جلب كل العناصر التي تفتح البروفايل عند الضغط عليها
+    const userTriggers = document.querySelectorAll('.user-trigger');
+    
+    userTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        // نمنع فتح البروفايل إذا كان المستخدم قد ضغط على زر حجز الاستشارة
+        if(e.target.classList.contains('cta-consult-btn')) return;
+
+        // قراءة البيانات المخبأة في الأكواد
+        const name = trigger.getAttribute('data-name');
+        const role = trigger.getAttribute('data-role');
+        const posts = trigger.getAttribute('data-posts');
+        const date = trigger.getAttribute('data-date');
+        const bio = trigger.getAttribute('data-bio');
+        const isExpert = role.includes('خبير');
+        
+        // تعبئة النافذة المنبثقة بالبيانات
+        document.getElementById('modalName').innerText = name + (isExpert ? ' ✔' : '');
+        document.getElementById('modalAvatar').innerText = isExpert ? '⚖' : name.charAt(0);
+        
+        const roleSpan = document.getElementById('modalRole');
+        roleSpan.innerText = role;
+        if(isExpert) {
+          roleSpan.className = 'profile-role expert';
+          document.getElementById('modalAvatar').style.color = '#D4AF37';
+        } else {
+          roleSpan.className = 'profile-role';
+          document.getElementById('modalAvatar').style.color = '#0A2540';
+        }
+        
+        document.getElementById('modalPosts').innerText = posts;
+        document.getElementById('modalDate').innerText = date;
+        document.getElementById('modalBio').innerText = bio;
+        
+        // إظهار النافذة
+        profileModal.style.display = 'flex';
       });
     });
-    document.getElementById('askQuestionBtn')?.addEventListener('click', () => {
-      alert('Please login to ask a legal question.');
-    });
+    
+    // إغلاق النافذة
+    closeProfileBtn.onclick = () => profileModal.style.display = 'none';
+    window.onclick = (e) => {
+      if (e.target === profileModal) profileModal.style.display = 'none';
+    };
   </script>
 </body>
 </html>
