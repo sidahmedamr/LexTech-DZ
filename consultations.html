@@ -8,6 +8,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* تنسيق خاص لصور الخبراء لتظهر بشكل احترافي ومتناسق (4x4) */
+    .lawyer-img {
+      height: 250px; /* زيادة الطول قليلاً لتناسب الصور الشخصية */
+      padding: 0; /* إزالة الحواف الداخلية */
+      overflow: hidden;
+    }
+    .lawyer-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* يضمن ملء الصورة للمربع دون تشويه أبعادها */
+      object-position: top; /* يركز على وجه الشخص */
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -34,50 +48,63 @@
     <div class="container">
       <div class="forum-header" style="text-align:center;">
         <h1 data-i18n="consult_title">Premium Legal Consultations</h1>
-        <p data-i18n="consult_sub">Choose a certified lawyer and book a private session. Secure payment & guaranteed follow-up.</p>
+        <p data-i18n="consult_sub">Choose a certified expert and book a private session. Secure payment & guaranteed follow-up.</p>
       </div>
 
       <div class="consultations-grid" id="lawyersGrid">
+        
         <div class="lawyer-card">
-          <div class="lawyer-img"><i class="fas fa-user-tie fa-4x"></i></div>
-          <div class="lawyer-info">
-            <h3>الأستاذة ملاك بن يوسف <i class="fas fa-check-circle gold-badge"></i></h3>
-            <p>التخصص: قانون الأسرة</p>
-            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.8 (124 مراجعة)</div>
-            <div class="fee">3,500 لحصة الإستشارة / دينار</div>
-            <button class="btn-book book-consult-btn" data-name="الأستاذة ملاك بن يوسف" data-fee="3500" data-i18n="book_btn">Book Consultation</button>
+          <div class="lawyer-img">
+            <img src="images/consultations-providers/hadjmohamed-aymen.png" alt="البروفيسور حاج محمد أيمن">
           </div>
-        </div>
-        <div class="lawyer-card">
-          <div class="lawyer-img"><i class="fas fa-user-astronaut fa-4x"></i></div>
           <div class="lawyer-info">
-            <h3>الأستاذ سمير بن خليفة <i class="fas fa-check-circle gold-badge"></i></h3>
-            <p>التخصص: القانون التجاري و الوظيفي</p>
-            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0 (89 مراجعة)</div>
-            <div class="fee">6,500 لحصة الإستشارة / دينار</div>
-            <button class="btn-book book-consult-btn" data-name="الأستاذ سمير بن خليفة" data-fee="6500" data-i18n="book_btn">Book Consultation</button>
-          </div>
-        </div>
-        <div class="lawyer-card">
-          <div class="lawyer-img"><i class="fas fa-user-graduate fa-4x"></i></div>
-          <div class="lawyer-info">
-            <h3>الأستاذ ياكر طاهر <i class="fas fa-check-circle gold-badge"></i></h3>
-            <p>التخصص: الفانون الإداري والإنساني</p>
-            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.5 (67 مراجعة)</div>
+            <h3>البروفيسور حاج محمد أيمن <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>التخصص: باحث وأكاديمي في القانون</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.9 (150 مراجعة)</div>
             <div class="fee">4,500 لحصة الإستشارة / دينار</div>
-            <button class="btn-book book-consult-btn" data-name="الأستاذ ياكر طاهر" data-fee="4500" data-i18n="book_btn">Book Consultation</button>
+            <button class="btn-book book-consult-btn" data-name="البروفيسور حاج محمد أيمن" data-fee="4500" data-i18n="book_btn">Book Consultation</button>
           </div>
         </div>
+
         <div class="lawyer-card">
-          <div class="lawyer-img"><i class="fas fa-user-shield fa-4x"></i></div>
+          <div class="lawyer-img">
+            <img src="images/consultations-providers/azizi-malak.png" alt="القاضية عزيزي ملاك">
+          </div>
           <div class="lawyer-info">
-            <h3>الأستاذ طحطاح علال <i class="fas fa-check-circle gold-badge"></i></h3>
-            <p>التخصص: القانون المدني و الجنائي</p>
-            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.9 (203 مراجعة)</div>
-            <div class="fee">2,000 لحصة الإستشارة / دينار</div>
-            <button class="btn-book book-consult-btn" data-name="Me. Rachid Boudiaf" data-fee="2000" data-i18n="book_btn">Book Consultation</button>
+            <h3>القاضية عزيزي ملاك <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>التخصص: خبيرة في شؤون وقانون الأسرة</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0 (210 مراجعة)</div>
+            <div class="fee">6,000 لحصة الإستشارة / دينار</div>
+            <button class="btn-book book-consult-btn" data-name="القاضية عزيزي ملاك" data-fee="6000" data-i18n="book_btn">Book Consultation</button>
           </div>
         </div>
+
+        <div class="lawyer-card">
+          <div class="lawyer-img">
+            <img src="images/consultations-providers/bousadi-aymen.png" alt="الدكتور بوسعدي أيمن">
+          </div>
+          <div class="lawyer-info">
+            <h3>الدكتور بوسعدي أيمن <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>التخصص: مستشار في القانون التجاري</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> 4.7 (95 مراجعة)</div>
+            <div class="fee">5,500 لحصة الإستشارة / دينار</div>
+            <button class="btn-book book-consult-btn" data-name="الدكتور بوسعدي أيمن" data-fee="5500" data-i18n="book_btn">Book Consultation</button>
+          </div>
+        </div>
+
+        <div class="lawyer-card">
+          <div class="lawyer-img">
+            <img src="images/consultations-providers/akermi-ahmed.png" alt="القاضي عكرمي أحمد">
+          </div>
+          <div class="lawyer-info">
+            <h3>القاضي عكرمي أحمد <i class="fas fa-check-circle gold-badge"></i></h3>
+            <p>التخصص: مستشار قضائي أول (المدني والجنائي)</p>
+            <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.8 (175 مراجعة)</div>
+            <div class="fee">7,000 لحصة الإستشارة / دينار</div>
+            <button class="btn-book book-consult-btn" data-name="القاضي عكرمي أحمد" data-fee="7000" data-i18n="book_btn">Book Consultation</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -96,23 +123,47 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-col"><h3>LexTech DZ</h3><p data-i18n="footer_tagline">LegalTech platform · Algeria</p><div class="social-links"><a href="https://www.facebook.com/20031219k"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="https://www.instagram.com/amraoui_sidahmed"><i class="fas fa-envelope"></i></a></div></div>
-        <div class="footer-col"><h4 data-i18n="footer_about">About Us</h4><ul><li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li><li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li><li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li></ul></div>
-        <div class="footer-col"><h4 data-i18n="footer_support">Support</h4><p>s-amraoui@univ-dbkm.dz</p><p>+213774221882</p></div>
+        <div class="footer-col">
+          <h3>LexTech DZ</h3>
+          <p data-i18n="footer_tagline">LegalTech platform · Algeria</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/20031219k"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/amraoui_sidahmed"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:s-amraoui@univ-dbkm.dz"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_about">About Us</h4>
+          <ul>
+            <li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li>
+            <li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li>
+            <li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_support">Support</h4>
+          <p>s-amraoui@univ-dbkm.dz</p>
+          <p>+213 774 22 18 82</p>
+        </div>
       </div>
-      <div class="footer-bottom"><p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p></div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p>
+      </div>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
   <script src="js/payment-mock.js"></script>
   <script>
+    // التحكم في نافذة الدفع والتأكيد
     const modal = document.getElementById('paymentModal');
     const btns = document.querySelectorAll('.book-consult-btn');
     const closeSpan = document.querySelector('.close-modal');
     const modalLawyer = document.getElementById('modalLawyerName');
     const modalAmountSpan = document.getElementById('modalAmount');
+    
     let currentLawyerName = '', currentFee = 0;
+    
     btns.forEach(btn => {
       btn.addEventListener('click', () => {
         currentLawyerName = btn.getAttribute('data-name');
@@ -122,15 +173,22 @@
         modal.style.display = 'flex';
       });
     });
+    
     closeSpan.onclick = () => modal.style.display = 'none';
     window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
+    
     document.getElementById('simulatePayBtn').addEventListener('click', () => {
       if(window.LexTechPayment) {
         window.LexTechPayment.simulatePayment(currentLawyerName, currentFee);
       } else {
         const platformShare = currentFee * 0.2;
         const lawyerShare = currentFee * 0.8;
-        document.getElementById('paymentResult').innerHTML = `<div style="background:#e6f7e6; padding:1rem; border-radius:8px;">✅ Payment successful! Platform (20%): ${platformShare} DZD | Lawyer receives: ${lawyerShare} DZD.</div>`;
+        document.getElementById('paymentResult').innerHTML = `
+          <div style="background:#e6f7e6; color: #166534; padding:1rem; border-radius:8px; border: 1px solid #bbf7d0;">
+            <i class="fas fa-check-circle"></i> Payment successful!<br>
+            <small>Platform (20%): ${platformShare} DZD | Expert receives (80%): ${lawyerShare} DZD.</small>
+          </div>
+        `;
       }
     });
   </script>
