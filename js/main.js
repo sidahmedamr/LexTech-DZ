@@ -80,6 +80,72 @@ const animateOnScroll = () => {
 // تشغيل الأنيميشن عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', animateOnScroll);
 
+// ========== 3,5. register ==========
+
+const translationsDB = {
+  en: {
+    // General
+    page_title: "LexTech DZ - Create Account", //[cite: 1]
+    create_account: "Create Account", //[cite: 1]
+    role_citizen: "Client", //[cite: 1]
+    role_professional: "Consultant", //[cite: 1]
+    
+    // Basic Information
+    basic_info: "Basic Information", //[cite: 1]
+    full_name: "Full Name", //[cite: 1]
+    email: "Email Address", //[cite: 1]
+    phone: "Phone Number (05/06/07...)", //[cite: 1]
+    password: "Password (at least 8 characters)", //[cite: 1]
+    
+    // Citizen Fields
+    citizen_extra_info: "Additional Information (Client)", //[cite: 1]
+    profession_field: "Profession / Field", //[cite: 1]
+    profession_placeholder: "Example: Student, Engineer, Businessman...", //[cite: 1]
+    wilaya: "Wilaya (Province)", //[cite: 1]
+    select_wilaya: "Select Wilaya...", //[cite: 1]
+    baladiya: "Municipality", //[cite: 1]
+    select_baladiya: "Select Municipality...", //[cite: 1]
+    brief_bio: "Brief Profile", //[cite: 1]
+    bio_placeholder: "Tell us about yourself, your legal interests, or any information you wish to share...", //[cite: 1]
+    
+    // Professional Fields
+    professional_info: "Professional Information", //[cite: 1]
+    nin_label: "National Identity Number (NIN)", //[cite: 1]
+    nin_placeholder: "18 digits", //[cite: 1]
+    dob: "Date of Birth", //[cite: 1]
+    prof_capacity: "Professional Capacity", //[cite: 1]
+    lawyer: "Lawyer", //[cite: 1]
+    judge: "Judge", //[cite: 1]
+    notary: "Notary", //[cite: 1]
+    legal_advisor: "Legal Advisor", //[cite: 1]
+    law_professor: "Law Professor", //[cite: 1]
+    legal_researcher: "Legal Researcher", //[cite: 1]
+    prof_id_card: "Accreditation Number / Professional Card", //[cite: 1]
+    prof_id_placeholder: "Bar Association Registration Number", //[cite: 1]
+    cv_upload: "Curriculum Vitae (CV) - Optional", //[cite: 1]
+    
+    // File Uploads
+    supporting_docs: "Supporting Documents", //[cite: 1]
+    file_size_note: "Max size per file: 2MB (Supported formats: PDF, JPG, PNG)", //[cite: 1]
+    proof_of_profession: "Proof of Profession Document", //[cite: 1]
+    nin_card_upload: "National Identity Card (NIN)", //[cite: 1]
+    no_file_chosen: "No file chosen", //[cite: 1]
+    review_note: "Documents will be reviewed by administration before activating the professional account", //[cite: 1]
+    
+    // Actions & Footer
+    confirm_registration: "Confirm Registration", //[cite: 1]
+    already_have_account: "Already have an account? Log in", //[cite: 1]
+    
+    // Alerts and JS Messages
+    fill_basic_fields: "Please fill in all basic fields (Name, Email, Phone)", //[cite: 1]
+    reg_success: "Registered successfully! Your request will be reviewed by the administration.", //[cite: 1]
+    reg_error: "An error occurred during submission. Please try again.", //[cite: 1]
+    sending: "Sending...", //[cite: 1]
+    size_exceeded: "Size exceeds 2MB", //[cite: 1]
+    unsupported_format: "Unsupported format (PDF, JPG, PNG only)" //[cite: 1]
+  }
+};
+
 // ========== 4. TRANSLATIONS DATABASE ==========
 const translationsDB = {
   en: {
