@@ -722,6 +722,70 @@ body.dark .lawyer-img { background: linear-gradient(135deg, var(--bg-light) 0%, 
 body.dark .fee { color: var(--accent); }
 .btn-book { margin-top: auto; }
 
+/* ========== إضافات لصفحة التسجيل ========== */
+
+/* تحسين حقول الإدخال في الوضع الليلي */
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-dark);
+}
+body.dark input:focus,
+body.dark select:focus,
+body.dark textarea:focus {
+  background: var(--bg-white);
+  border-color: var(--accent);
+}
+
+/* تحسين الأزرار في الوضع الليلي */
+body.dark .btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: var(--primary-dark);
+}
+body.dark .btn-primary:hover {
+  box-shadow: 0 12px 25px rgba(56, 189, 248, 0.3);
+}
+
+/* تحسين الروابط */
+body.dark a:not(.btn-primary):not(.btn-outline) {
+  color: var(--accent-light);
+}
+body.dark a:not(.btn-primary):not(.btn-outline):hover {
+  color: var(--gold-light);
+}
+
+/* تحسين الرسائل التنبيهية */
+.alert-success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid #22c55e;
+  color: #22c55e;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+}
+.alert-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+}
+
+/* تحسين حقول رفع الملفات */
+.file-upload-wrapper input[type="file"] {
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 12px;
+}
+.file-upload-wrapper input[type="file"]:hover {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.05);
+}
+.file-status {
+  transition: var(--transition);
+}
+
 /* ========== RTL (Arabic layout adjustments) ========== */
 [dir="rtl"] { text-align: right; }
 [dir="rtl"] .header-flex, [dir="rtl"] .hero-buttons { flex-direction: row-reverse; }
