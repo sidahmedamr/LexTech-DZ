@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexTech DZ - لوحة الإدارة</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2980b9;
+      --secondary: #2c3e50;
+      --bg: #f4f7f6;
+      --white: #ffffff;
+      --success: #27ae60;
+      --danger: #e74c3c;
+      --text: #333;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* القائمة الجانبية */
+    .sidebar {
+      width: 250px;
+      background-color: var(--secondary);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      transition: 0.3s;
+    }
+    .sidebar-header {
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sidebar-header span { color: var(--primary); }
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+    .nav-links li {
+      padding: 15px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: 0.3s;
+    }
+    .nav-links li:hover, .nav-links li.active {
+      background-color: var(--primary);
+    }
+    .nav-links li i { margin-left: 10px; width: 20px; }
+    
+    /* المحتوى الرئيسي */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .header {
+      background-color: var(--white);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .user-info { font-weight: 600; color: var(--secondary); }
+    
+    .dashboard-content { padding: 30px; }
+    
+    /* الإحصائيات */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-right: 4px solid var(--primary);
+    }
+    .stat-card.warning { border-right-color: #f39c12; }
+    .stat-card.success { border-right-color: var(--success); }
+    .stat-info h3 { margin: 0 0 5px 0; font-size: 24px; color: var(--secondary); }
+    .stat-info p { margin: 0; color: #7f8c8d; font-size: 14px; }
+    .stat-icon { font-size: 30px; color: #bdc3c7; }
+
+    /* جدول المستخدمين */
+    .table-container {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .table-container h3 { margin-top: 0; color: var(--secondary); margin-bottom: 15px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 15px; text-align: right; border-bottom: 1px solid #eee; }
+    th { background-color: #f8f9fa; color: var(--secondary); font-weight: 600; }
+    .badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge.lawyer { background: #e8f4f8; color: var(--primary); }
+    .badge.citizen { background: #f4f6f6; color: #7f8c8d; }
+    
+    /* أزرار الإجراءات */
+    .action-btn {
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      transition: 0.3s;
+      margin-left: 5px;
+    }
+    .btn-accept { background-color: var(--success); }
+    .btn-reject { background-color: var(--danger); }
+    .btn-accept:hover { background-color: #219653; }
+    .btn-reject:hover { background-color: #c0392b; }
+  </style>
+</head>
+<body>
+
+  <!-- القائمة الجانبية -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      LexTech <span>DZ</span>
+    </div>
+    <ul class="nav-links">
+      <li class="active"><i class="fas fa-chart-pie"></i> لوحة القيادة</li>
+      <li><i class="fas fa-users"></i> إدارة المستخدمين</li>
+      <li><i class="fas fa-gavel"></i> الاستشارات</li>
+      <li><i class="fas fa-cog"></i> الإعدادات</li>
+      <li style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
+        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+      </li>
+    </ul>
+  </aside>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="main-content">
+    <header class="header">
+      <div class="search-bar">
+        <!-- مساحة للبحث مستقبلاً -->
+      </div>
+      <div class="user-info">
+        <i class="fas fa-user-shield"></i> المدير (Admin)
+      </div>
+    </header>
+
+    <div class="dashboard-content">
+      <!-- البطاقات الإحصائية -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <h3>142</h3>
+            <p>إجمالي المستخدمين</p>
+          </div>
+          <i class="fas fa-users stat-icon"></i>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-info">
+            <h3 id="pendingCount">3</h3>
+            <p>طلبات بانتظار المراجعة</p>
+          </div>
+          <i class="fas fa-clock stat-icon"></i>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-info">
+            <h3>45</h3>
+            <p>مستشار (نشط)</p>
+          </div>
+          <i class="fas fa-user-tie stat-icon"></i>
+        </div>
+      </div>
+
+      <!-- جدول الطلبات المعلقة -->
+      <div class="table-container">
+        <h3>طلبات التسجيل المعلقة (المهنيين)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>الاسم الكامل</th>
+              <th>النوع</th>
+              <th>الولاية</th>
+              <th>رقم الاعتماد</th>
+              <th>الملف المرفق</th>
+              <th>الإجراء</th>
+            </tr>
+          </thead>
+          <tbody id="requestsTable">
+            <!-- مستخدم تجريبي 1 -->
+            <tr>
+              <td>أحمد بن علي</td>
+              <td><span class="badge lawyer">محامي</span></td>
+              <td>16 - الجزائر العاصمة</td>
+              <td>154823</td>
+              <td><a href="#" style="color: #2980b9;"><i class="fas fa-file-pdf"></i> عرض</a></td>
+              <td>
+                <button class="action-btn btn-accept" onclick="handleAction(this, 'قبول')"><i class="fas fa-check"></i> قبول</button>
+                <button class="action-btn btn-reject" onclick="handleAction(this, 'رفض')"><i class="fas fa-times"></i> رفض</button>
+              </td>
+            </tr>
+            <!-- مستخدم تجريبي 2 -->
+            <tr>
+              <td>خالد بومدين</td>
+              <td><span class="badge lawyer">موثق</span></td>
+              <td>44 - عين الدفلى</td>
+              <td>885412</td>
+              <td><a href="#" style="color: #2980b9;"><i class="fas fa-image"></i> عرض</a></td>
+              <td>
+                <button class="action-btn btn-accept" onclick="handleAction(this, 'قبول')"><i class="fas fa-check"></i> قبول</button>
+                <button class="action-btn btn-reject" onclick="handleAction(this, 'رفض')"><i class="fas fa-times"></i> رفض</button>
+              </td>
+            </tr>
+            <!-- مستخدم تجريبي 3 -->
+            <tr>
+              <td>سارة منصوري</td>
+              <td><span class="badge lawyer">مستشار قانوني</span></td>
+              <td>09 - البليدة</td>
+              <td>445120</td>
+              <td><a href="#" style="color: #2980b9;"><i class="fas fa-file-pdf"></i> عرض</a></td>
+              <td>
+                <button class="action-btn btn-accept" onclick="handleAction(this, 'قبول')"><i class="fas fa-check"></i> قبول</button>
+                <button class="action-btn btn-reject" onclick="handleAction(this, 'رفض')"><i class="fas fa-times"></i> رفض</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function handleAction(buttonElement, actionType) {
+      // إظهار رسالة تأكيد
+      if(confirm(`هل أنت متأكد أنك تريد ${actionType} هذا الملف؟`)) {
+        // حذف الصف من الجدول بمجرد اتخاذ القرار
+        const row = buttonElement.closest('tr');
+        row.style.transition = "opacity 0.5s";
+        row.style.opacity = "0";
+        
+        setTimeout(() => {
+          row.remove();
+          updatePendingCount();
+        }, 500);
+      }
+    }
+
+    function updatePendingCount() {
+      // تحديث رقم الطلبات المعلقة في البطاقة الإحصائية
+      const tableRows = document.querySelectorAll('#requestsTable tr');
+      const countElement = document.getElementById('pendingCount');
+      countElement.innerText = tableRows.length;
+      
+      if(tableRows.length === 0) {
+        document.getElementById('requestsTable').innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 20px;">لا توجد طلبات معلقة حالياً.</td></tr>';
+      }
+    }
+  </script>
+</body>
+</html>
