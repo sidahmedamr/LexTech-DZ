@@ -3,28 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LexTech DZ - إنشاء حساب متقدم</title>
+  <title>LexTech DZ - إنشاء حساب</title>
+  
+  <!-- استدعاء الأيقونات والخطوط -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- استدعاء ملف الستايل الخاص بك -->
+  <link rel="stylesheet" href="css/style.css">
+  
   <style>
-    body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; direction: rtl; margin: 0; padding: 20px; }
-    .auth-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-    .auth-card { background: #fff; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 650px; }
-    .auth-card h2 { text-align: center; color: #2c3e50; margin-bottom: 1.5rem; }
-    .role-tabs { display: flex; margin-bottom: 1.5rem; border-bottom: 2px solid #e0e0e0; }
-    .role-tab { flex: 1; padding: 12px; border: none; background: none; font-size: 16px; font-weight: 600; color: #7f8c8d; cursor: pointer; transition: 0.3s; }
-    .role-tab.active { color: #2980b9; border-bottom: 2px solid #2980b9; }
+    /* تنسيقات خاصة بصفحة التسجيل تتكامل مع الستايل الأصلي */
     
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-    .form-group.full-width { grid-column: span 2; }
-    
-    .form-group label { display: block; font-size: 14px; margin-bottom: 5px; color: #34495e; font-weight: 500; }
-    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; box-sizing: border-box; }
-    .btn-primary { width: 100%; padding: 14px; background: #2980b9; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-    .btn-primary:hover { background: #21618c; }
-    .form-note { font-size: 12px; color: #e74c3c; margin-top: 5px; display: block; }
+    /* خلفية الفيديو لصفحة التسجيل */
+    .register-bg-wrapper {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .register-bg-wrapper video {
+      min-width: 100%; min-height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .register-bg-wrapper .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10, 37, 64, 0.9) 0%, rgba(10, 37, 64, 0.7) 100%);
+    }
 
-    @media (max-width: 600px) {
+    /* تأثير الزجاج (Glassmorphism) للاستمارة */
+    .auth-container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+    .auth-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px; /* الحجم الافتراضي للمستشير */
+      transition: max-width 0.4s ease, padding 0.4s ease;
+    }
+    .auth-card.expanded {
+      max-width: 800px; /* يتوسع عند اختيار المستشار */
+    }
+
+    .auth-card h2 {
+      text-align: center; color: var(--primary); margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    /* شبكة الحقول (Grid) للمستشار */
+    .form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+    }
+    .form-group.full-width { grid-column: span 2; }
+    .form-group label {
+      display: block; font-size: 14px; margin-bottom: 6px;
+      color: var(--text-dark); font-weight: 600;
+    }
+    .form-note { font-size: 12px; color: var(--accent-dark); margin-top: 5px; display: block; }
+    
+    @media (max-width: 768px) {
       .form-grid { grid-template-columns: 1fr; }
       .form-group.full-width { grid-column: span 1; }
     }
@@ -32,71 +82,61 @@
 </head>
 <body>
 
+  <!-- خلفية الفيديو -->
+  <div class="register-bg-wrapper">
+    <video autoplay muted loop playsinline>
+      <!-- تأكد من صحة مسار الفيديو الخاص بك -->
+      <source src="images/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+
   <main class="auth-container">
-    <div class="auth-card">
-      <h2>التسجيل في المنصة</h2>
+    <div class="auth-card" id="authCard">
+      <h2>إنشاء حساب</h2>
       
+      <!-- أزرار التبديل -->
       <div class="role-tabs">
-        <button class="role-tab active" data-role="citizen">مستشير (مواطن)</button>
-        <button class="role-tab" data-role="professional">مستشار (مهني)</button>
+        <button type="button" class="role-tab active" data-role="citizen">مستشير (مواطن)</button>
+        <button type="button" class="role-tab" data-role="professional">مستشار (مهني)</button>
       </div>
 
       <form id="registerForm">
         <input type="hidden" id="userRole" value="مستشير">
         
-        <div class="form-grid">
-          <div class="form-group full-width">
-            <label>الاسم الكامل</label>
-            <input type="text" id="fullname" placeholder="الاسم واللقب" required>
-          </div>
-          
-          <div class="form-group">
-            <label>تاريخ الميلاد</label>
-            <input type="date" id="dob" required>
-          </div>
-
-          <div class="form-group">
-            <label>رقم بطاقة التعريف الوطنية</label>
-            <input type="text" id="nin" placeholder="18 رقم" maxlength="18" required>
-          </div>
-
-          <div class="form-group">
-            <label>رقم الهاتف</label>
-            <input type="tel" id="phone" placeholder="05/06/07..." required>
-          </div>
-
-          <div class="form-group">
-            <label>ولاية الإقامة</label>
-            <select id="wilaya" required>
-              <option value="" disabled selected>اختر الولاية...</option>
-              <option value="عين الدفلى">44 - عين الدفلى</option>
-              <option value="الجزائر">16 - الجزائر العاصمة</option>
-              <option value="البليدة">09 - البليدة</option>
-              <option value="وهران">31 - وهران</option>
-              <!-- يمكنك إضافة باقي الولايات هنا -->
-            </select>
-          </div>
-
-          <div class="form-group full-width">
-            <label>العنوان الكامل</label>
-            <input type="text" id="address" placeholder="البلدية، الحي..." required>
-          </div>
-
-          <div class="form-group">
-            <label>البريد الإلكتروني</label>
-            <input type="email" id="emailReg" placeholder="example@email.com" required>
-          </div>
-
-          <div class="form-group">
-            <label>كلمة المرور</label>
-            <input type="password" id="passwordReg" required>
-          </div>
+        <!-- الحقول المشتركة والأساسية -->
+        <div class="form-group full-width">
+          <input type="text" id="fullname" placeholder="الاسم الكامل" required>
+        </div>
+        <div class="form-group full-width">
+          <input type="email" id="emailReg" placeholder="البريد الإلكتروني" required>
+        </div>
+        <div class="form-group full-width">
+          <input type="password" id="passwordReg" placeholder="كلمة المرور" required>
         </div>
 
-        <!-- حقول المستشار -->
-        <div id="professionalFields" style="display:none; padding-top: 10px; border-top: 1px solid #eee;">
-          <h3 style="font-size: 16px; color: #2c3e50; margin-bottom: 15px;">المعلومات المهنية</h3>
+        <!-- حقول المستشار (مخفية افتراضياً) -->
+        <div id="professionalFields" style="display:none; margin-top: 15px;">
+          <h3 style="font-size: 1.2rem; color: var(--gold-dark); margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+            المعلومات المهنية والشخصية
+          </h3>
+          
           <div class="form-grid">
+            <div class="form-group">
+              <label>رقم بطاقة التعريف الوطنية (NIN)</label>
+              <input type="text" id="nin" placeholder="18 رقم" maxlength="18">
+            </div>
+            
+            <div class="form-group">
+              <label>تاريخ الميلاد</label>
+              <input type="date" id="dob">
+            </div>
+
+            <div class="form-group">
+              <label>رقم الهاتف</label>
+              <input type="tel" id="phone" placeholder="05/06/07...">
+            </div>
+
             <div class="form-group">
               <label>الصفة المهنية</label>
               <select id="profType">
@@ -106,29 +146,60 @@
                 <option value="مستشار قانوني">مستشار قانوني</option>
               </select>
             </div>
-            
+
+            <!-- قائمة الولايات (تُملأ برمجياً) -->
             <div class="form-group">
+              <label>الولاية</label>
+              <select id="wilayaSelect">
+                <option value="" disabled selected>اختر الولاية...</option>
+              </select>
+            </div>
+
+            <!-- قائمة البلديات (تُملأ بناءً على الولاية) -->
+            <div class="form-group">
+              <label>البلدية</label>
+              <select id="baladiyaSelect" disabled>
+                <option value="" disabled selected>اختر البلدية...</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
               <label>رقم الاعتماد / البطاقة المهنية</label>
               <input type="text" id="profIdCard" placeholder="رقم التسجيل في النقابة">
             </div>
 
             <div class="form-group full-width">
               <label>ملف إثبات المهنة (صورة/PDF)</label>
-              <input type="file" id="idUpload" accept="image/*, .pdf">
-              <small class="form-note">يُرجى إرفاق ما يثبت صفتك المهنية. سيتم المراجعة لتفعيل الحساب.</small>
+              <input type="file" id="idUpload" accept="image/*, .pdf" style="padding: 10px; background: #fff;">
+              <small class="form-note"><i class="fas fa-info-circle"></i> سيتم المراجعة من الإدارة قبل تفعيل الحساب المهني.</small>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn-primary" id="submitBtn">تأكيد التسجيل</button>
+        <button type="submit" class="btn-primary btn-block" id="submitBtn" style="margin-top: 20px;">
+          <i class="fas fa-user-plus"></i> تأكيد التسجيل
+        </button>
       </form>
+      
+      <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem;">
+        <a href="login.html" style="color: var(--primary); font-weight: 600;">لديك حساب بالفعل؟ تسجيل الدخول</a>
+      </p>
     </div>
   </main>
 
+  <!-- استدعاء ملف بيانات الجزائر -->
+  <!-- تأكد من أن مسار الملف صحيح (مثلاً: js/algeria-data.js) -->
+  <script src="js/algeria-data.js"></script>
+
   <script>
+    // 1. منطق التبديل بين المستشير والمستشار (توسيع وتضييق الاستمارة)
     const roleTabs = document.querySelectorAll('.role-tab');
     const professionalFields = document.getElementById('professionalFields');
     const userRoleInput = document.getElementById('userRole');
+    const authCard = document.getElementById('authCard');
+    
+    // الحقول الإجبارية للمستشار
+    const profRequiredFields = ['nin', 'dob', 'phone', 'wilayaSelect', 'baladiyaSelect', 'profIdCard'];
 
     roleTabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -138,70 +209,101 @@
         if (tab.dataset.role === 'professional') {
           professionalFields.style.display = 'block';
           userRoleInput.value = 'مستشار';
-          document.getElementById('profIdCard').required = true;
+          authCard.classList.add('expanded'); // توسيع البطاقة لتعرض الـ Grid براحة
+          profRequiredFields.forEach(id => document.getElementById(id).required = true);
         } else {
           professionalFields.style.display = 'none';
           userRoleInput.value = 'مستشير';
-          document.getElementById('profIdCard').required = false;
+          authCard.classList.remove('expanded'); // تضييق البطاقة
+          profRequiredFields.forEach(id => document.getElementById(id).required = false);
         }
       });
     });
 
-    // حساب العمر من تاريخ الميلاد
-    function calculateAge(birthday) {
-      const ageDifMs = Date.now() - new Date(birthday).getTime();
-      const ageDate = new Date(ageDifMs);
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
+    // 2. منطق ربط الولايات والبلديات (بناءً على ملف algeria-data.js)
+    /* 
+       ملاحظة: هذا الكود يفترض أن ملف algeria-data.js يحتوي على مصفوفة (Array) 
+       باسم `algeriaCities` أو أنك قمت بضبطه مسبقاً.
+       الشكل الافتراضي المتوقع: 
+       [ { wilaya_name: "Adrar", wilaya_code: "01", daira_name: "...", commune_name: "..." }, ... ] 
+       أو كائنات جاهزة. الكود أدناه هو الهيكل الذي يجب مواءمته مع بنية ملفك.
+    */
+    const wilayaSelect = document.getElementById('wilayaSelect');
+    const baladiyaSelect = document.getElementById('baladiyaSelect');
 
+    // الدالة أدناه تعمل في حال كان لديك متغير عام يسمى algeriaData (من ملفك js)
+    document.addEventListener("DOMContentLoaded", function() {
+      // قم بتفعيل هذا الكود وتعديله حسب هيكل المتغير الموجود في ملف algeria-data.js
+      /*
+      if (typeof algeriaData !== 'undefined') {
+        // تعبئة الولايات الفريدة
+        const wilayas = [...new Set(algeriaData.map(item => item.wilaya_name))];
+        wilayas.forEach(wilaya => {
+          let option = document.createElement('option');
+          option.value = wilaya; option.text = wilaya;
+          wilayaSelect.add(option);
+        });
+
+        // عند تغيير الولاية، نعبئ البلديات التابعة لها
+        wilayaSelect.addEventListener('change', function() {
+          baladiyaSelect.innerHTML = '<option value="" disabled selected>اختر البلدية...</option>';
+          baladiyaSelect.disabled = false;
+          const selectedWilaya = this.value;
+          
+          const baladiyas = algeriaData.filter(item => item.wilaya_name === selectedWilaya);
+          baladiyas.forEach(b => {
+            let option = document.createElement('option');
+            option.value = b.commune_name; option.text = b.commune_name;
+            baladiyaSelect.add(option);
+          });
+        });
+      }
+      */
+    });
+
+    // 3. إرسال البيانات لبوت التلغرام (نفس الكود الخاص بك مع تحديث البيانات)
     document.getElementById('registerForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
       const submitBtn = document.getElementById('submitBtn');
-      submitBtn.innerText = "جاري الإرسال...";
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
       submitBtn.disabled = true;
 
       const role = userRoleInput.value;
       const name = document.getElementById('fullname').value;
-      const dob = document.getElementById('dob').value;
-      const age = calculateAge(dob);
-      const nin = document.getElementById('nin').value;
-      const phone = document.getElementById('phone').value;
-      const wilaya = document.getElementById('wilaya').options[document.getElementById('wilaya').selectedIndex].text;
-      const address = document.getElementById('address').value;
       const email = document.getElementById('emailReg').value;
       
       let message = `🆕 *طلب تسجيل جديد | LexTech DZ*\n\n`;
       message += `👤 *حساب:* ${role}\n`;
       message += `📝 *الاسم:* ${name}\n`;
-      message += `📅 *الميلاد:* ${dob} (العمر: ${age} سنة)\n`;
-      message += `🪪 *رقم التعريف:* \`${nin}\`\n`;
-      message += `📱 *الهاتف:* ${phone}\n`;
-      message += `📍 *الإقامة:* ${wilaya} - ${address}\n`;
       message += `📧 *البريد:* ${email}\n\n`;
 
       if (role === 'مستشار') {
+        const nin = document.getElementById('nin').value;
+        const phone = document.getElementById('phone').value;
+        const wilaya = wilayaSelect.value;
+        const baladiya = baladiyaSelect.value;
         const profType = document.getElementById('profType').value;
         const profIdCard = document.getElementById('profIdCard').value;
+
+        message += `🪪 *رقم التعريف:* \`${nin}\`\n`;
+        message += `📱 *الهاتف:* ${phone}\n`;
+        message += `📍 *الموقع:* ${wilaya} - ${baladiya}\n`;
         message += `💼 *المهنة:* ${profType}\n`;
         message += `🔢 *رقم الاعتماد:* \`${profIdCard}\`\n`;
-        message += `⚠️ *ملاحظة:* المرفق المهني جاهز في قاعدة البيانات.\n`;
       }
 
-      // التوكن و Chat ID اللذان استخرجناهما
       const botToken = '8256459512:AAHsjLjpcv2IlkpovydTIkoImyOkirtDWh0'; 
       const chatId = '-5482645875';
-
-      const replyMarkup = {
-        inline_keyboard: [
-          [
-            { text: "✅ قبول", callback_data: `accept_${nin}` },
-            { text: "❌ رفض", callback_data: `reject_${nin}` }
-          ]
-        ]
-      };
-
       const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      const replyMarkup = role === 'مستشار' ? {
+        inline_keyboard: [[
+          { text: "✅ قبول المهني", callback_data: `accept_${email}` },
+          { text: "❌ رفض", callback_data: `reject_${email}` }
+        ]]
+      } : {}; // المستشير (المواطن) لا يحتاج أزرار قبول بالضرورة لأنه يسجل مباشرة
 
       fetch(url, {
         method: 'POST',
@@ -216,15 +318,15 @@
       .then(response => response.json())
       .then(data => {
         if(data.ok) {
-          alert('تم إرسال طلبك بنجاح! سيتم التدقيق في بياناتك من قبل الإدارة.');
+          alert('تم التسجيل بنجاح!');
           document.getElementById('registerForm').reset();
         } else {
-          alert('حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت.');
+          alert('حدث خطأ أثناء الإرسال.');
         }
       })
       .catch(error => console.error('Error:', error))
       .finally(() => {
-        submitBtn.innerText = "تأكيد التسجيل";
+        submitBtn.innerHTML = originalBtnHtml;
         submitBtn.disabled = false;
       });
     });
