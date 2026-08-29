@@ -1,78 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LexTech DZ - Register</title>
+  <title>LexTech DZ - إنشاء حساب</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* تنسيقات إضافية للتبويبات والاستمارات */
+    body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; direction: rtl; }
+    .auth-container { display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 2rem; }
+    .auth-card { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+    .auth-card h2 { text-align: center; color: #2c3e50; margin-bottom: 1.5rem; }
+    .role-tabs { display: flex; margin-bottom: 1.5rem; border-bottom: 2px solid #e0e0e0; }
+    .role-tab { flex: 1; padding: 10px; border: none; background: none; font-size: 16px; font-weight: 600; color: #7f8c8d; cursor: pointer; transition: 0.3s; }
+    .role-tab.active { color: #2980b9; border-bottom: 2px solid #2980b9; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; }
+    .btn-primary { width: 100%; padding: 12px; background: #2980b9; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; transition: 0.3s; }
+    .btn-primary:hover { background: #21618c; }
+    .form-note { font-size: 12px; color: #e74c3c; margin-top: 5px; display: block; }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-flex">
-      <div class="logo"><a href="index.html">LexTech <span>DZ</span></a></div>
-      <nav class="main-nav" id="mainNav">
-        <ul>
-          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
-          <li><a href="forum.html" data-i18n="nav_forum">Forum</a></li>
-          <li><a href="consultations.html" data-i18n="nav_consultations">Consultations</a></li>
-          <li><a href="login.html" data-i18n="nav_login">Login</a></li>
-          <li><a href="register.html" class="active" data-i18n="nav_register">Sign Up</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <button id="langToggleBtn" class="lang-toggle-btn"><span id="currentLangLabel">🇬🇧 EN</span></button>
-        <button id="darkModeToggle" class="dark-toggle"><i class="fas fa-moon"></i></button>
-        <div class="mobile-menu-icon" id="mobileMenuIcon"><i class="fas fa-bars"></i></div>
-      </div>
-    </div>
-  </header>
 
   <main class="auth-container">
     <div class="auth-card">
-      <h2 data-i18n="register_title">Create Account</h2>
+      <h2>إنشاء حساب جديد</h2>
+      
       <div class="role-tabs">
-        <button class="role-tab active" data-role="citizen" data-i18n="login_citizen">Citizen</button>
-        <button class="role-tab" data-role="lawyer" data-i18n="login_lawyer">Lawyer (with verification)</button>
+        <button class="role-tab active" data-role="citizen">مستشير (مواطن)</button>
+        <button class="role-tab" data-role="professional">مستشار (مهني)</button>
       </div>
+
       <form id="registerForm">
-        <input type="text" id="fullname" placeholder="Full Name" data-i18n="register_fullname" required>
-        <input type="email" id="emailReg" placeholder="Email" data-i18n="register_email" required>
-        <input type="password" id="passwordReg" placeholder="Password" data-i18n="register_password" required>
-        <div id="lawyerFields" style="display:none;">
-          <input type="text" id="lawyerCard" placeholder="Bar Association ID / Professional Card Number">
-          <input type="file" id="idUpload" accept="image/*">
-          <small class="form-note">Document will be reviewed by admin for verification</small>
+        <input type="hidden" id="userRole" value="مستشير">
+        
+        <div class="form-group">
+          <input type="text" id="fullname" placeholder="الاسم الكامل" required>
         </div>
-        <button type="submit" class="btn-primary btn-block" data-i18n="register_btn">Register</button>
+        <div class="form-group">
+          <input type="email" id="emailReg" placeholder="البريد الإلكتروني" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="passwordReg" placeholder="كلمة المرور" required>
+        </div>
+
+        <div id="professionalFields" style="display:none;">
+          <div class="form-group">
+            <select id="profType">
+              <option value="محامي">محامي</option>
+              <option value="قاضي">قاضي</option>
+              <option value="موثق">موثق</option>
+              <option value="مستشار قانوني">مستشار قانوني</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" id="profIdCard" placeholder="رقم البطاقة المهنية / الاعتماد">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 14px; color: #555;">رفع صورة البطاقة المهنية:</label>
+            <input type="file" id="idUpload" accept="image/*, .pdf">
+            <small class="form-note">سيتم مراجعة الملف من قبل الإدارة قبل تفعيل الحساب.</small>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">تسجيل الحساب</button>
       </form>
-      <p style="text-align: center; margin-top: 1rem;"><a href="login.html" data-i18n="register_login_link">Already registered? Login</a></p>
-      <div id="regMessage" class="error-message"></div>
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col"><h3>LexTech DZ</h3><p data-i18n="footer_tagline">LegalTech platform · Algeria</p><div class="social-links"><a href="https://www.facebook.com/20031219k"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/amraoui_sidahmed"><i class="fab fa-instagram"></i></a><a href="s-amraoui@univ-dbkm.dz"><i class="fas fa-envelope"></i></a></div></div>
-        <div class="footer-col"><h4 data-i18n="footer_about">About Us</h4><ul><li><a href="terms.html" data-i18n="footer_terms">Terms of Use</a></li><li><a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a></li><li><a href="disclaimer.html" data-i18n="footer_disclaimer">Disclaimer</a></li></ul></div>
-        <div class="footer-col"><h4 data-i18n="footer_support">Support</h4><p>s-amraoui@univ-dbkm.dz</p><p>+213774221882</p></div>
-      </div>
-      <div class="footer-bottom"><p>&copy; 2025 LexTech DZ - <span data-i18n="footer_copyright">Legal Innovation</span></p></div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-  <script src="js/auth.js"></script>
   <script>
-    document.querySelectorAll('.role-tab').forEach(tab => {
+    // منطق التبديل بين التبويبات
+    const roleTabs = document.querySelectorAll('.role-tab');
+    const professionalFields = document.getElementById('professionalFields');
+    const userRoleInput = document.getElementById('userRole');
+
+    roleTabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+        // إزالة التفعيل من كل الأزرار
+        roleTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        const lawyerFields = document.getElementById('lawyerFields');
-        if(lawyerFields) lawyerFields.style.display = tab.dataset.role === 'lawyer' ? 'block' : 'none';
+        
+        // إظهار أو إخفاء حقول المهني
+        if (tab.dataset.role === 'professional') {
+          professionalFields.style.display = 'block';
+          userRoleInput.value = 'مستشار';
+          document.getElementById('profIdCard').required = true;
+        } else {
+          professionalFields.style.display = 'none';
+          userRoleInput.value = 'مستشير';
+          document.getElementById('profIdCard').required = false;
+        }
+      });
+    });
+
+    // إرسال البيانات إلى بوت التلغرام
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.innerText = "جاري الإرسال...";
+      submitBtn.disabled = true;
+
+      const role = userRoleInput.value;
+      const name = document.getElementById('fullname').value;
+      const email = document.getElementById('emailReg').value;
+      
+      let message = `🆕 *طلب تسجيل جديد في LexTech DZ*\n\n`;
+      message += `👤 *النوع:* ${role}\n`;
+      message += `📝 *الاسم:* ${name}\n`;
+      message += `📧 *البريد:* ${email}\n`;
+
+      if (role === 'مستشار') {
+        const profType = document.getElementById('profType').value;
+        const profIdCard = document.getElementById('profIdCard').value;
+        message += `💼 *المهنة:* ${profType}\n`;
+        message += `🔢 *رقم الاعتماد:* ${profIdCard}\n`;
+        message += `⚠️ *ملاحظة:* يوجد ملف مرفق (إن وجد).\n`;
+      }
+
+      // إعدادات البوت (قم بتغييرها بمعلومات البوت الخاص بك)
+      const botToken = 'YOUR_BOT_TOKEN_HERE'; 
+      const chatId = 'YOUR_CHAT_ID_HERE';
+
+      // إعداد الأزرار التفاعلية (Inline Keyboard) للقبول والرفض
+      const replyMarkup = {
+        inline_keyboard: [
+          [
+            { text: "✅ قبول الملف", callback_data: `accept_${email}` },
+            { text: "❌ رفض الملف", callback_data: `reject_${email}` }
+          ]
+        ]
+      };
+
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown',
+          reply_markup: replyMarkup
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.ok) {
+          alert('تم إرسال طلبك بنجاح! سيتم مراجعته من قبل الإدارة.');
+          document.getElementById('registerForm').reset();
+        } else {
+          alert('حدث خطأ أثناء الإرسال.');
+        }
+      })
+      .catch(error => console.error('Error:', error))
+      .finally(() => {
+        submitBtn.innerText = "تسجيل الحساب";
+        submitBtn.disabled = false;
       });
     });
   </script>
