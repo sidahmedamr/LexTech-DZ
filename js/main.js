@@ -1,362 +1,881 @@
-/* ========================================
-   LEXTECH DZ - MODERN MAIN JAVASCRIPT
-   Enhanced with Scroll Effects, Animations & Glassmorphism
-   ======================================== */
-
-// ========== 1. HEADER SCROLL EFFECT ==========
-window.addEventListener('scroll', () => {
-  const header = document.querySelector('.site-header');
-  if (header) {
-    if (window.scrollY > 50) {
-      header.style.padding = '0.5rem 0';
-      header.style.background = document.body.classList.contains('dark') 
-        ? 'rgba(15, 23, 42, 0.98)' 
-        : 'rgba(10, 37, 64, 0.98)';
-      header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
-    } else {
-      header.style.padding = '1rem 0';
-      header.style.background = document.body.classList.contains('dark') 
-        ? 'rgba(15, 23, 42, 0.95)' 
-        : 'rgba(10, 37, 64, 0.95)';
-      header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexTech DZ - إنشاء حساب</title>
+  
+  <!-- استدعاء الأيقونات والخطوط -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- استدعاء ملف الستايل الخاص بك -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* ========== تنسيقات خاصة بصفحة التسجيل ========== */
+    
+    /* تثبيت الهيدر مثل الرئيسية */
+    .register-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 37, 64, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
-  }
-});
-
-// ========== 2. DARK MODE TOGGLE ==========
-const darkToggle = document.getElementById('darkModeToggle');
-if (darkToggle) {
-  if (localStorage.getItem('darkMode') === 'enabled') {
-    document.body.classList.add('dark');
-    darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
-  }
-  
-  darkToggle.addEventListener('click', () => {
-    // إضافة تأثير انتقال ناعم
-    document.body.style.transition = 'background-color 0.5s ease, color 0.5s ease';
-    document.body.classList.toggle('dark');
-    
-    // تدوير الأيقونة عند النقر
-    darkToggle.style.transform = 'rotate(180deg)';
-    setTimeout(() => darkToggle.style.transform = 'none', 300);
-
-    if (document.body.classList.contains('dark')) {
-      localStorage.setItem('darkMode', 'enabled');
-      darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-      localStorage.setItem('darkMode', 'disabled');
-      darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    body.dark .register-header {
+      background: rgba(15, 23, 42, 0.95);
     }
-  });
-}
+    .register-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .register-header .logo a {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      direction: ltr !important;
+    }
+    .register-header .logo span {
+      color: var(--gold);
+    }
+    .register-header .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      direction: ltr !important;
+    }
+    .register-header .lang-toggle-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 8px 20px;
+      border-radius: var(--radius-xl);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .register-header .lang-toggle-btn:hover {
+      background: var(--gold);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .register-header .dark-toggle {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+    .register-header .dark-toggle:hover {
+      background: var(--gold);
+      color: var(--primary);
+      transform: rotate(30deg);
+    }
 
-// ========== 3. SCROLL ANIMATIONS (Intersection Observer) ==========
-const animateOnScroll = () => {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-  };
+    /* الهيرو مثل الرئيسية */
+    .register-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-top: -80px;
+      padding-top: 80px;
+    }
+    .register-hero .hero-video-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .register-hero .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 37, 64, 0.85) 0%, rgba(10, 37, 64, 0.4) 100%);
+      z-index: 2;
+    }
+    body.dark .register-hero .hero-overlay {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.5) 100%);
+    }
+    .register-hero .container {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 24px;
+    }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
+    /* تأثير الزجاج للاستمارة */
+    .auth-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 520px;
+      transition: max-width 0.4s ease, padding 0.4s ease;
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius-lg);
+      margin: 2rem 0;
+    }
+    body.dark .auth-card {
+      background: rgba(30, 41, 59, 0.95);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+    .auth-card.expanded {
+      max-width: 820px;
+    }
 
-  // تطبيق الأنيميشن على البطاقات والأقسام
-  const animatedElements = document.querySelectorAll('.feature-card, .lawyer-card, .question-card, .stats-row .stat');
-  animatedElements.forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`;
-    observer.observe(el);
-  });
-};
+    .auth-card h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    body.dark .auth-card h2 {
+      color: var(--text-dark);
+    }
+    .auth-card h2 i {
+      color: var(--gold);
+      margin-left: 10px;
+    }
 
-// تشغيل الأنيميشن عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', animateOnScroll);
+    /* شبكة الحقول */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    body.dark .form-group label {
+      color: var(--text-gray);
+    }
+    .form-group .form-note {
+      font-size: 12px;
+      color: var(--accent-dark);
+      margin-top: 5px;
+      display: block;
+    }
+    body.dark .form-group .form-note {
+      color: var(--accent-light);
+    }
 
-// ========== 3,5. register ==========
+    /* حقول رفع الملفات */
+    .file-upload-wrapper input[type="file"] {
+      padding: 10px;
+      background: var(--bg-light);
+      border-radius: var(--radius-md);
+      border: 2px dashed var(--border-light);
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+    }
+    body.dark .file-upload-wrapper input[type="file"] {
+      background: var(--bg-light);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text-dark);
+    }
+    .file-upload-wrapper input[type="file"]:hover {
+      border-color: var(--gold);
+    }
+    .file-status {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 4px;
+      display: block;
+    }
+    body.dark .file-status {
+      color: var(--text-light);
+    }
+    .file-status .fa-check-circle {
+      color: #22c55e;
+    }
+    .file-status .fa-exclamation-circle {
+      color: #ef4444;
+    }
 
-const translationsDB = {
-  en: {
-    // General
-    page_title: "LexTech DZ - Create Account", //[cite: 1]
-    create_account: "Create Account", //[cite: 1]
-    role_citizen: "Client", //[cite: 1]
-    role_professional: "Consultant", //[cite: 1]
-    
-    // Basic Information
-    basic_info: "Basic Information", //[cite: 1]
-    full_name: "Full Name", //[cite: 1]
-    email: "Email Address", //[cite: 1]
-    phone: "Phone Number (05/06/07...)", //[cite: 1]
-    password: "Password (at least 8 characters)", //[cite: 1]
-    
-    // Citizen Fields
-    citizen_extra_info: "Additional Information (Client)", //[cite: 1]
-    profession_field: "Profession / Field", //[cite: 1]
-    profession_placeholder: "Example: Student, Engineer, Businessman...", //[cite: 1]
-    wilaya: "Wilaya (Province)", //[cite: 1]
-    select_wilaya: "Select Wilaya...", //[cite: 1]
-    baladiya: "Municipality", //[cite: 1]
-    select_baladiya: "Select Municipality...", //[cite: 1]
-    brief_bio: "Brief Profile", //[cite: 1]
-    bio_placeholder: "Tell us about yourself, your legal interests, or any information you wish to share...", //[cite: 1]
-    
-    // Professional Fields
-    professional_info: "Professional Information", //[cite: 1]
-    nin_label: "National Identity Number (NIN)", //[cite: 1]
-    nin_placeholder: "18 digits", //[cite: 1]
-    dob: "Date of Birth", //[cite: 1]
-    prof_capacity: "Professional Capacity", //[cite: 1]
-    lawyer: "Lawyer", //[cite: 1]
-    judge: "Judge", //[cite: 1]
-    notary: "Notary", //[cite: 1]
-    legal_advisor: "Legal Advisor", //[cite: 1]
-    law_professor: "Law Professor", //[cite: 1]
-    legal_researcher: "Legal Researcher", //[cite: 1]
-    prof_id_card: "Accreditation Number / Professional Card", //[cite: 1]
-    prof_id_placeholder: "Bar Association Registration Number", //[cite: 1]
-    cv_upload: "Curriculum Vitae (CV) - Optional", //[cite: 1]
-    
-    // File Uploads
-    supporting_docs: "Supporting Documents", //[cite: 1]
-    file_size_note: "Max size per file: 2MB (Supported formats: PDF, JPG, PNG)", //[cite: 1]
-    proof_of_profession: "Proof of Profession Document", //[cite: 1]
-    nin_card_upload: "National Identity Card (NIN)", //[cite: 1]
-    no_file_chosen: "No file chosen", //[cite: 1]
-    review_note: "Documents will be reviewed by administration before activating the professional account", //[cite: 1]
-    
-    // Actions & Footer
-    confirm_registration: "Confirm Registration", //[cite: 1]
-    already_have_account: "Already have an account? Log in", //[cite: 1]
-    
-    // Alerts and JS Messages
-    fill_basic_fields: "Please fill in all basic fields (Name, Email, Phone)", //[cite: 1]
-    reg_success: "Registered successfully! Your request will be reviewed by the administration.", //[cite: 1]
-    reg_error: "An error occurred during submission. Please try again.", //[cite: 1]
-    sending: "Sending...", //[cite: 1]
-    size_exceeded: "Size exceeds 2MB", //[cite: 1]
-    unsupported_format: "Unsupported format (PDF, JPG, PNG only)" //[cite: 1]
-  }
-};
+    /* أزرار التبديل */
+    .role-tabs {
+      display: flex;
+      background: var(--bg-light);
+      border-radius: var(--radius-xl);
+      padding: 4px;
+      margin-bottom: 2rem;
+    }
+    body.dark .role-tabs {
+      background: rgba(255,255,255,0.05);
+    }
+    .role-tab {
+      flex: 1;
+      padding: 12px 10px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-xl);
+      font-weight: 600;
+      color: var(--text-gray);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+    .role-tab.active {
+      background: var(--bg-white);
+      color: var(--primary);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    body.dark .role-tab.active {
+      background: var(--primary);
+      color: var(--text-dark);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .role-tab:hover:not(.active) {
+      color: var(--primary);
+    }
+    body.dark .role-tab:hover:not(.active) {
+      color: var(--text-dark);
+    }
 
-// ========== 4. TRANSLATIONS DATABASE ==========
-const translationsDB = {
-  en: {
-    nav_home: "Home", nav_forum: "Forum", nav_consultations: "Consultations", nav_login: "Login", nav_register: "Sign Up",
-    footer_tagline: "LegalTech platform · Algeria", footer_about: "About Us", footer_terms: "Terms of Use", footer_privacy: "Privacy Policy", footer_disclaimer: "Disclaimer", footer_support: "Support", footer_copyright: "Legal Innovation",
-    hero_title: "Connect with Certified Lawyers in Algeria", hero_desc: "LexTech DZ bridges justice & technology — trusted legal advice, verified experts, and transparent pricing.", hero_btn1: "📅 Book a Consultation", hero_btn2: "💬 Ask the Community",
-    stat_lawyers: "Certified Lawyers", stat_cases: "Legal Questions Solved", stat_satisfaction: "Client Satisfaction",
-    features_title: "Why LexTech DZ?", feature1_title: "Verified Lawyers", feature1_desc: "Official bar association credentials & golden badge assurance.", feature2_title: "Transparent Pricing", feature2_desc: "Fixed fees, no hidden costs — 20% platform commission only.", feature3_title: "Legal Forum", feature3_desc: "Free community advice with lawyer-verified answers.", feature4_title: "Secure & Confidential", feature4_desc: "End-to-end encrypted sessions and data protection.",
-    cta_title: "Ready to get professional legal support?", cta_btn: "Join LexTech DZ Today →",
-    forum_title: "Legal Forum", forum_subtitle: "Ask questions, get verified answers from certified lawyers", forum_cat_all: "All Topics", forum_cat_admin: "Administrative Law", forum_cat_family: "Family Law", forum_cat_commercial: "Commercial Law", ask_question: "Ask a Legal Question",
-    consult_title: "Premium Legal Consultations", consult_sub: "Choose a certified lawyer and book a private session. Secure payment & guaranteed follow-up.", book_btn: "Book Consultation",
-    login_title: "Sign In to LexTech DZ", login_citizen: "Citizen", login_lawyer: "Lawyer", login_admin: "Admin", login_email: "Email address", login_password: "Password", login_btn: "Login", login_register_link: "Don't have an account? Register here",
-    register_title: "Create Account", register_fullname: "Full Name", register_email: "Email", register_password: "Password", register_btn: "Register", register_login_link: "Already registered? Login"
-  },
-  fr: {
-    nav_home: "Accueil", nav_forum: "Forum", nav_consultations: "Consultations", nav_login: "Connexion", nav_register: "Inscription",
-    footer_tagline: "Plateforme LegalTech · Algérie", footer_about: "À propos", footer_terms: "Conditions d'utilisation", footer_privacy: "Politique de confidentialité", footer_disclaimer: "Avertissement", footer_support: "Support", footer_copyright: "Innovation juridique",
-    hero_title: "Connectez-vous avec des avocats certifiés", hero_desc: "LexTech DZ relie la justice et la technologie — conseils de confiance, experts vérifiés et prix transparents.", hero_btn1: "📅 Réserver une consultation", hero_btn2: "💬 Demander à la communauté",
-    stat_lawyers: "Avocats certifiés", stat_cases: "Questions résolues", stat_satisfaction: "Satisfaction client",
-    features_title: "Pourquoi LexTech DZ ?", feature1_title: "Avocats vérifiés", feature1_desc: "Identifiants officiels du barreau et garantie du badge d'or.", feature2_title: "Prix transparents", feature2_desc: "Frais fixes, sans coûts cachés — seulement 20% de commission.", feature3_title: "Forum juridique", feature3_desc: "Conseils communautaires gratuits avec réponses vérifiées.", feature4_title: "Sécurisé et confidentiel", feature4_desc: "Sessions cryptées de bout en bout et protection des données.",
-    cta_title: "Prêt à obtenir un soutien professionnel ?", cta_btn: "Rejoindre LexTech DZ aujourd'hui →",
-    forum_title: "Forum juridique", forum_subtitle: "Posez des questions, obtenez des réponses vérifiées", forum_cat_all: "Tous les sujets", forum_cat_admin: "Droit administratif", forum_cat_family: "Droit de la famille", forum_cat_commercial: "Droit commercial", ask_question: "Poser une question",
-    consult_title: "Consultations premium", consult_sub: "Choisissez un avocat certifié et réservez une session privée.", book_btn: "Réserver une consultation",
-    login_title: "Connectez-vous à LexTech DZ", login_citizen: "Citoyen", login_lawyer: "Avocat", login_admin: "Admin", login_email: "Adresse e-mail", login_password: "Mot de passe", login_btn: "Connexion", login_register_link: "Vous n'avez pas de compte ? Inscrivez-vous",
-    register_title: "Créer un compte", register_fullname: "Nom complet", register_email: "E-mail", register_password: "Mot de passe", register_btn: "S'inscrire", register_login_link: "Déjà inscrit ? Connexion"
-  },
-  ar: {
-    nav_home: "الرئيسية", nav_forum: "المنتدى", nav_consultations: "الاستشارات", nav_login: "تسجيل الدخول", nav_register: "إنشاء حساب",
-    footer_tagline: "منصة التكنولوجيا القانونية · الجزائر", footer_about: "من نحن", footer_terms: "شروط الاستخدام", footer_privacy: "سياسة الخصوصية", footer_disclaimer: "إخلاء المسؤولية", footer_support: "الدعم", footer_copyright: "الابتكار القانوني",
-    hero_title: "تواصل مع نخبة المحامين المعتمدين في الجزائر", hero_desc: "ليكس تيك ديزي تربط العدالة بالتكنولوجيا — استشارات موثوقة، خبراء معتمدون، وأسعار شفافة.", hero_btn1: "📅 احجز استشارة", hero_btn2: "💬 اسأل المجتمع",
-    stat_lawyers: "محامون معتمدون", stat_cases: "قضايا تم حلها", stat_satisfaction: "رضا العملاء",
-    features_title: "لماذا منصة ليكس تيك ديزي؟", feature1_title: "محامون موثقون", feature1_desc: "اعتمادات رسمية من نقابة المحامين مع توثيق الشارة الذهبية.", feature2_title: "شفافية في الأسعار", feature2_desc: "رسوم واضحة مسبقاً — عمولة المنصة 20% فقط.", feature3_title: "منتدى قانوني تفاعلي", feature3_desc: "استفسارات مجانية مع إجابات دقيقة من المحامين.", feature4_title: "سرية وأمان تام", feature4_desc: "تشفير شامل للمحادثات وحماية مطلقة للبيانات.",
-    cta_title: "هل أنت مستعد للحصول على استشارة احترافية؟", cta_btn: "انضم إلى المنصة الآن ←",
-    forum_title: "المنتدى القانوني", forum_subtitle: "اطرح أسئلتك واحصل على توجيهات موثقة من أهل الاختصاص", forum_cat_all: "جميع المواضيع", forum_cat_admin: "القانون الإداري", forum_cat_family: "قانون الأسرة", forum_cat_commercial: "القانون التجاري", ask_question: "اطرح سؤالاً قانونياً",
-    consult_title: "الاستشارات القانونية الخاصة", consult_sub: "اختر محاميك المفضل واحجز جلستك بكل سرية وأمان.", book_btn: "احجز الآن",
-    login_title: "تسجيل الدخول", login_citizen: "مواطن", login_lawyer: "محامٍ", login_admin: "مدير", login_email: "البريد الإلكتروني", login_password: "كلمة المرور", login_btn: "دخول", login_register_link: "ليس لديك حساب؟ سجل من هنا",
-    register_title: "إنشاء حساب جديد", register_fullname: "الاسم واللقب", register_email: "البريد الإلكتروني", register_password: "كلمة المرور", register_btn: "إنشاء حساب", register_login_link: "لديك حساب بالفعل؟ سجل دخولك"
-  }
-};
+    /* عنوان القسم */
+    .section-divider {
+      font-size: 1.1rem;
+      color: var(--gold-dark);
+      margin: 20px 0 15px;
+      border-bottom: 2px solid var(--border-light);
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    body.dark .section-divider {
+      color: var(--gold-light);
+      border-color: rgba(255,255,255,0.05);
+    }
+    .section-divider i {
+      color: var(--gold);
+    }
 
-let currentLang = localStorage.getItem('preferredLang') || 'en';
-
-function applyTranslations(lang) {
-  // إضافة تأثير تلاشي خفيف عند تغيير اللغة
-  document.body.style.opacity = '0.8';
-  
-  setTimeout(() => {
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translationsDB[lang] && translationsDB[lang][key]) {
-        if (el.tagName === 'INPUT' && el.placeholder) {
-          el.placeholder = translationsDB[lang][key];
-        } else if (el.tagName === 'BUTTON' && el.value) {
-          el.value = translationsDB[lang][key];
-        } else {
-          el.innerHTML = translationsDB[lang][key];
-        }
-      }
-    });
-    
-    // ضبط اتجاه الصفحة (RTL / LTR)
-    if (lang === 'ar') {
-      document.body.setAttribute('dir', 'rtl');
-    } else {
-      document.body.removeAttribute('dir');
+    /* ===== MEDIA QUERIES ===== */
+    @media (max-width: 768px) {
+      .auth-card { padding: 1.5rem 1rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      .auth-card h2 { font-size: 1.6rem; }
+      .register-header .logo a { font-size: 1.4rem; }
+      .register-header .lang-toggle-btn { padding: 6px 14px; font-size: 0.8rem; }
+      .register-header .dark-toggle { width: 38px; height: 38px; font-size: 1rem; }
     }
     
-    // تحديث الأيقونة والنص في زر اللغة (باستخدام أيقونة FontAwesome لضمان ظهورها في كل الأجهزة)
-const currentLangLabel = document.getElementById('currentLangLabel');
-if (currentLangLabel) {
-  const langIcons = { 
-    en: '<i class="fas fa-globe"></i> EN', 
-    fr: '<i class="fas fa-globe"></i> FR', 
-    ar: '<i class="fas fa-globe"></i> AR' 
-  };
-  currentLangLabel.innerHTML = langIcons[lang] || '<i class="fas fa-globe"></i> EN';
-}
-
-document.body.style.opacity = '1';
-}, 150);
-}
-// ========== 5. LANGUAGE TOGGLE BUTTON ==========
-const langToggleBtn = document.getElementById('langToggleBtn');
-if (langToggleBtn) {
-  langToggleBtn.addEventListener('click', () => {
-    if (currentLang === 'en') {
-      currentLang = 'fr';
-    } else if (currentLang === 'fr') {
-      currentLang = 'ar';
-    } else {
-      currentLang = 'en';
+    @media (max-width: 480px) {
+      .auth-card { padding: 1rem; }
+      .role-tab { font-size: 0.8rem; padding: 8px 6px; }
+      .register-header .header-actions { gap: 0.5rem; }
+      /* تم حذف السطر الذي كان يخفي الإيموجي */
     }
-    applyTranslations(currentLang);
-    localStorage.setItem('preferredLang', currentLang);
-  });
-}
+  </style>
+</head>
+<body>
 
-// التطبيق الأولي للغة عند تحميل الصفحة
-applyTranslations(currentLang);
-
-function toggleDarkMode() {
-  document.body.classList.toggle('dark');
-  const icon = document.querySelector('.dark-toggle i');
-  if (document.body.classList.contains('dark')) {
-    icon.className = 'fas fa-sun';
-  } else {
-    icon.className = 'fas fa-moon';
-  }
-}
-
-function toggleLanguage() {
-  const langLabel = document.getElementById('langLabel');
-  if (langLabel.textContent === '🇫🇷 FR') {
-    langLabel.textContent = '🇬🇧 EN';
-    document.documentElement.lang = 'en';
-    document.documentElement.dir = 'ltr';
-  } else if (langLabel.textContent === '🇬🇧 EN') {
-    langLabel.textContent = '🇩🇿 AR';
-    document.documentElement.lang = 'ar';
-    document.documentElement.dir = 'rtl';
-  } else {
-    langLabel.textContent = '🇫🇷 FR';
-    document.documentElement.lang = 'fr';
-    document.documentElement.dir = 'ltr';
-  }
-}
-
-// ========== 6. PREMIUM TERMS MODAL (Fallback) ==========
-// هذه الدالة تعمل إذا لم يكن المودال المخصص موجوداً في الصفحة (مثلاً في صفحات التسجيل)
-function showTermsModal() {
-  if (window.location.pathname.includes('terms.html') || 
-      window.location.pathname.includes('privacy.html') || 
-      window.location.pathname.includes('disclaimer.html')) {
-    return;
-  }
-  
-  // التحقق مما إذا كان مودال الهيرو موجوداً (لتجنب التكرار)
-  if(document.getElementById('termsModal')) return;
-  
-  const modal = document.createElement('div');
-  modal.id = 'dynamicTermsModal';
-  modal.style.cssText = `
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 37, 64, 0.85); backdrop-filter: blur(10px);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 10000; opacity: 0; transition: opacity 0.4s ease;
-  `;
-  
-  modal.innerHTML = `
-    <div style="background: var(--bg-white); max-width: 550px; width: 90%; border-radius: 24px; padding: 2.5rem; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-      <div style="width: 80px; height: 80px; background: rgba(212, 175, 55, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-        <i class="fas fa-balance-scale" style="font-size: 2.5rem; color: var(--gold);"></i>
+  <!-- ===== الهيدر مثل صفحة الرئيسية ===== -->
+  <header class="register-header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          Lex<span>Tech</span> <i class="fas fa-gavel" style="color: var(--gold);"></i>
+        </a>
       </div>
-      <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-dark);">Welcome to LexTech DZ</h2>
-      <p style="color: var(--text-gray); margin-bottom: 2rem;">By accessing this platform, you agree to our Terms of Use, Privacy Policy, and Legal Disclaimer.</p>
-      
-      <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 16px; text-align: left; border: 1px solid var(--border-light); margin-bottom: 2rem;">
-        <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-dark); font-size: 0.95rem;">
-          <li style="margin-bottom: 0.8rem;"><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 8px;"></i> We ensure strict Data Privacy (Law 18-07).</li>
-          <li style="margin-bottom: 0.8rem;"><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 8px;"></i> Transparent 20% platform commission.</li>
-          <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 8px;"></i> Certified and verified legal experts only.</li>
-        </ul>
-      </div>
-      
-      <div style="display: flex; gap: 1rem; justify-content: center;">
-        <button id="declineTermsBtn" class="btn-outline" style="flex: 1;">Decline</button>
-        <button id="acceptTermsBtn" class="btn-primary" style="flex: 1; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);">I Accept All</button>
+      <div class="header-actions">
+        <!-- زر تغيير اللغة مع إضافة dir="ltr" لمنع انقلاب الإيموجي -->
+        <button class="lang-toggle-btn" onclick="toggleLanguage()" dir="ltr">
+          <i class="fas fa-globe"></i> <span id="langLabel">🇫🇷 FR</span>
+        </button>
+        <!-- زر الوضع الليلي -->
+        <button class="dark-toggle" onclick="toggleDarkMode()">
+          <i class="fas fa-moon"></i>
+        </button>
       </div>
     </div>
-  `;
-  document.body.appendChild(modal);
-  
-  // أنيميشن الدخول
-  setTimeout(() => {
-    modal.style.opacity = '1';
-    modal.querySelector('div').style.transform = 'translateY(0)';
-  }, 50);
-  
-  document.getElementById('acceptTermsBtn').addEventListener('click', () => {
-    localStorage.setItem('termsAccepted', 'true');
-    modal.style.opacity = '0';
-    setTimeout(() => modal.remove(), 400);
-  });
-  
-  document.getElementById('declineTermsBtn').addEventListener('click', () => {
-    window.location.href = 'https://www.google.com';
-  });
-}
+  </header>
 
-// التحقق من قبول الشروط عند تحميل أي صفحة
-if (!localStorage.getItem('termsAccepted')) {
-  showTermsModal();
-}
+  <!-- ===== الهيرو مع الفيديو مثل صفحة الرئيسية ===== -->
+  <section class="register-hero">
+    <video autoplay muted loop playsinline class="hero-video-bg">
+      <source src="images/hero-video.mp4" type="video/mp4">
+      <source src="images/hero-video.webm" type="video/webm">
+      متصفحك لا يدعم عرض الفيديو.
+    </video>
+    <div class="hero-overlay"></div>
 
-// ========== 7. MOBILE MENU TOGGLE ==========
-const mobileIcon = document.getElementById('mobileMenuIcon');
-if (mobileIcon) {
-  mobileIcon.addEventListener('click', () => {
-    const nav = document.querySelector('.main-nav');
-    if (nav) {
-      nav.classList.toggle('active');
-      // تغيير شكل الأيقونة عند الفتح/الإغلاق
-      const icon = mobileIcon.querySelector('i');
-      if (nav.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
+    <div class="container">
+      <!-- ===== استمارة التسجيل ===== -->
+      <div class="auth-card" id="authCard">
+        <h2><i class="fas fa-user-plus"></i> إنشاء حساب</h2>
+        
+        <!-- أزرار التبديل بين المستشير والمستشار -->
+        <div class="role-tabs">
+          <button type="button" class="role-tab active" data-role="citizen">
+            <i class="fas fa-user"></i> مستشير
+          </button>
+          <button type="button" class="role-tab" data-role="professional">
+            <i class="fas fa-briefcase"></i> مستشار
+          </button>
+        </div>
+
+        <form id="registerForm" enctype="multipart/form-data">
+          <input type="hidden" id="userRole" value="مستشير">
+          
+          <!-- ===== المعلومات الأساسية (مشتركة) ===== -->
+          <div class="section-divider"><i class="fas fa-id-card"></i> المعلومات الأساسية</div>
+          
+          <div class="form-group full-width">
+            <input type="text" id="fullname" placeholder="الاسم الكامل (ثلاثي)" required>
+          </div>
+          <div class="form-group full-width">
+            <input type="email" id="emailReg" placeholder="البريد الإلكتروني" required>
+          </div>
+          <div class="form-group full-width">
+            <input type="tel" id="phone" placeholder="رقم الهاتف (05/06/07...)" required>
+          </div>
+          <div class="form-group full-width">
+            <input type="password" id="passwordReg" placeholder="كلمة المرور (8 أحرف على الأقل)" required minlength="8">
+          </div>
+
+          <!-- ===== معلومات إضافية للمستشير ===== -->
+          <div id="citizenFields" style="margin-top: 10px;">
+            <div class="section-divider"><i class="fas fa-user-circle"></i> معلومات إضافية (مستشير)</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>المهنة / المجال</label>
+                <input type="text" id="citizenJob" placeholder="مثال: طالب, مهندس, رجل أعمال...">
+              </div>
+              <div class="form-group">
+                <label>الولاية</label>
+                <select id="citizenWilaya">
+                  <option value="" disabled selected>اختر الولاية...</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label>البلدية</label>
+                <select id="citizenBaladiya" disabled>
+                  <option value="" disabled selected>اختر البلدية...</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label>نبذة مختصرة عنك</label>
+                <textarea id="citizenBio" rows="3" placeholder="اخبرنا عن نفسك، اهتماماتك القانونية، أو أي معلومات ترغب بمشاركتها..." style="resize: vertical;"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== حقول المستشار ===== -->
+          <div id="professionalFields" style="display:none; margin-top: 10px;">
+            <div class="section-divider"><i class="fas fa-briefcase"></i> المعلومات المهنية</div>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label>رقم بطاقة التعريف الوطنية (NIN)</label>
+                <input type="text" id="nin" placeholder="18 رقم" maxlength="18">
+              </div>
+              
+              <div class="form-group">
+                <label>تاريخ الميلاد</label>
+                <input type="date" id="dob">
+              </div>
+
+              <div class="form-group">
+                <label>الصفة المهنية</label>
+                <select id="profType">
+                  <option value="محامي">محامي</option>
+                  <option value="قاضي">قاضي</option>
+                  <option value="موثق">موثق</option>
+                  <option value="مستشار قانوني">مستشار قانوني</option>
+                  <option value="أستاذ قانون">أستاذ قانون</option>
+                  <option value="باحث قانوني">باحث قانوني</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>الولاية</label>
+                <select id="wilayaSelect">
+                  <option value="" disabled selected>اختر الولاية...</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>البلدية</label>
+                <select id="baladiyaSelect" disabled>
+                  <option value="" disabled selected>اختر البلدية...</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>رقم الاعتماد / البطاقة المهنية</label>
+                <input type="text" id="profIdCard" placeholder="رقم التسجيل في النقابة">
+              </div>
+
+              <div class="form-group full-width">
+                <label>السيرة الذاتية (CV) - اختياري</label>
+                <input type="file" id="cvUpload" accept=".pdf,.doc,.docx" style="padding: 10px; background: var(--bg-light); width: 100%;">
+              </div>
+            </div>
+
+            <!-- ===== رفع الملفات الإثباتية ===== -->
+            <div class="section-divider" style="margin-top: 20px;"><i class="fas fa-file-upload"></i> المستندات الإثباتية</div>
+            <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 15px;">
+              <i class="fas fa-info-circle" style="color: var(--gold);"></i> 
+              الحد الأقصى لكل ملف: <strong>2 ميغابايت</strong> (صيغ مدعومة: PDF, JPG, PNG)
+            </p>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label>📄 وثيقة إثبات المهنة</label>
+                <div class="file-upload-wrapper">
+                  <input type="file" id="profDocUpload" accept=".pdf,.jpg,.jpeg,.png">
+                  <span class="file-status" id="profDocStatus"><i class="far fa-file"></i> لم يتم اختيار ملف</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>🪪 بطاقة التعريف الوطنية (NIN)</label>
+                <div class="file-upload-wrapper">
+                  <input type="file" id="ninUpload" accept=".pdf,.jpg,.jpeg,.png">
+                  <span class="file-status" id="ninUploadStatus"><i class="far fa-file"></i> لم يتم اختيار ملف</span>
+                </div>
+              </div>
+            </div>
+            <small class="form-note" style="display: block; margin-top: 5px; text-align: center;">
+              <i class="fas fa-shield-alt" style="color: var(--gold);"></i> 
+              سيتم مراجعة المستندات من قبل الإدارة قبل تفعيل الحساب المهني
+            </small>
+          </div>
+
+          <button type="submit" class="btn-primary btn-block" id="submitBtn" style="margin-top: 25px; width: 100%;">
+            <i class="fas fa-user-plus"></i> تأكيد التسجيل
+          </button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-gray);">
+          <a href="login.html" style="color: var(--gold); font-weight: 600; transition: var(--transition);">
+            <i class="fas fa-sign-in-alt"></i> لديك حساب بالفعل؟ تسجيل الدخول
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== استدعاء ملف بيانات الجزائر ===== -->
+  <script src="js/algeria-data.js"></script>
+
+  <script>
+    // ============================================================
+    // 1. أزرار تغيير اللغة والدارك مود
+    // ============================================================
+    
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      const icon = document.querySelector('.dark-toggle i');
+      if (document.body.classList.contains('dark')) {
+        icon.className = 'fas fa-sun';
+        localStorage.setItem('darkMode', 'enabled');
       } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+        icon.className = 'fas fa-moon';
+        localStorage.setItem('darkMode', 'disabled');
       }
     }
-  });
-}
+
+    // استعادة وضع الدارك مود من التخزين المحلي
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark');
+      document.querySelector('.dark-toggle i').className = 'fas fa-sun';
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark');
+      document.querySelector('.dark-toggle i').className = 'fas fa-sun';
+    }
+
+    // ============================================================
+    // 2. دالة تغيير اللغة المُحسّنة (تعتمد على html.lang بدلاً من النص)
+    // ============================================================
+    
+    function toggleLanguage() {
+      const langLabel = document.getElementById('langLabel');
+      const html = document.documentElement;
+      const currentLang = html.lang;
+      
+      if (currentLang === 'ar') {
+        langLabel.textContent = '🇫🇷 FR';
+        html.lang = 'fr';
+        html.dir = 'ltr';
+        localStorage.setItem('language', 'fr');
+      } else if (currentLang === 'fr') {
+        langLabel.textContent = '🇬🇧 EN';
+        html.lang = 'en';
+        html.dir = 'ltr';
+        localStorage.setItem('language', 'en');
+      } else {
+        langLabel.textContent = '🇩🇿 AR';
+        html.lang = 'ar';
+        html.dir = 'rtl';
+        localStorage.setItem('language', 'ar');
+      }
+    }
+
+    // ============================================================
+    // 3. استعادة اللغة من التخزين المحلي (مُحسّن)
+    // ============================================================
+    
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+      const langLabel = document.getElementById('langLabel');
+      const html = document.documentElement;
+      if (savedLang === 'en') {
+        langLabel.textContent = '🇬🇧 EN';
+        html.lang = 'en';
+        html.dir = 'ltr';
+      } else if (savedLang === 'ar') {
+        langLabel.textContent = '🇩🇿 AR';
+        html.lang = 'ar';
+        html.dir = 'rtl';
+      } else if (savedLang === 'fr') {
+        langLabel.textContent = '🇫🇷 FR';
+        html.lang = 'fr';
+        html.dir = 'ltr';
+      }
+    }
+
+    // ============================================================
+    // 4. تعبئة قوائم الولايات والبلديات من algeria-data.js
+    // ============================================================
+    
+    const wilayaSelects = {
+      citizen: document.getElementById('citizenWilaya'),
+      professional: document.getElementById('wilayaSelect')
+    };
+    const baladiyaSelects = {
+      citizen: document.getElementById('citizenBaladiya'),
+      professional: document.getElementById('baladiyaSelect')
+    };
+
+    function populateWilayas(selectElement) {
+      if (typeof algeriaWilayas !== 'undefined' && Array.isArray(algeriaWilayas)) {
+        selectElement.innerHTML = '<option value="" disabled selected>اختر الولاية...</option>';
+        algeriaWilayas.forEach(w => {
+          let opt = document.createElement('option');
+          opt.value = w.code;
+          opt.textContent = w.name;
+          selectElement.appendChild(opt);
+        });
+        selectElement.disabled = false;
+      } else {
+        console.warn('بيانات الولايات غير موجودة');
+      }
+    }
+
+    function populateBaladiyas(wilayaCode, baladiyaSelect) {
+      baladiyaSelect.innerHTML = '<option value="" disabled selected>اختر البلدية...</option>';
+      baladiyaSelect.disabled = true;
+      
+      if (wilayaCode && typeof algeriaBaladiyat !== 'undefined' && algeriaBaladiyat[wilayaCode]) {
+        const communes = algeriaBaladiyat[wilayaCode];
+        if (communes && communes.length > 0) {
+          communes.forEach(c => {
+            let opt = document.createElement('option');
+            opt.value = c;
+            opt.textContent = c;
+            baladiyaSelect.appendChild(opt);
+          });
+          baladiyaSelect.disabled = false;
+        }
+      }
+    }
+
+    if (typeof algeriaWilayas !== 'undefined') {
+      populateWilayas(wilayaSelects.citizen);
+      populateWilayas(wilayaSelects.professional);
+    }
+
+    wilayaSelects.citizen.addEventListener('change', function() {
+      populateBaladiyas(this.value, baladiyaSelects.citizen);
+    });
+    wilayaSelects.professional.addEventListener('change', function() {
+      populateBaladiyas(this.value, baladiyaSelects.professional);
+    });
+
+    // ============================================================
+    // 5. منطق التبديل بين المستشير والمستشار
+    // ============================================================
+    
+    const roleTabs = document.querySelectorAll('.role-tab');
+    const professionalFields = document.getElementById('professionalFields');
+    const citizenFields = document.getElementById('citizenFields');
+    const userRoleInput = document.getElementById('userRole');
+    const authCard = document.getElementById('authCard');
+    
+    const profRequiredFields = ['nin', 'dob', 'wilayaSelect', 'baladiyaSelect', 'profIdCard'];
+    const citizenRequiredFields = ['citizenWilaya', 'citizenBaladiya'];
+
+    roleTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        roleTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        if (this.dataset.role === 'professional') {
+          professionalFields.style.display = 'block';
+          citizenFields.style.display = 'none';
+          userRoleInput.value = 'مستشار';
+          authCard.classList.add('expanded');
+          
+          profRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = true;
+          });
+          citizenRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = false;
+          });
+          
+        } else {
+          professionalFields.style.display = 'none';
+          citizenFields.style.display = 'block';
+          userRoleInput.value = 'مستشير';
+          authCard.classList.remove('expanded');
+          
+          citizenRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = true;
+          });
+          profRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = false;
+          });
+        }
+      });
+    });
+
+    // ============================================================
+    // 6. مراقبة حالة رفع الملفات (حجم 2MB وامتدادات مسموحة)
+    // ============================================================
+    
+    const MAX_FILE_SIZE = 2 * 1024 * 1024;
+    const ALLOWED_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
+
+    function validateFile(input, statusElementId) {
+      const statusEl = document.getElementById(statusElementId);
+      const file = input.files[0];
+      
+      if (!file) {
+        statusEl.innerHTML = '<i class="far fa-file"></i> لم يتم اختيار ملف';
+        statusEl.style.color = '';
+        return true;
+      }
+      
+      if (file.size > MAX_FILE_SIZE) {
+        statusEl.innerHTML = `<i class="fas fa-exclamation-circle" style="color: #ef4444;"></i> الحجم يتجاوز 2MB (${(file.size / 1024 / 1024).toFixed(2)}MB)`;
+        statusEl.style.color = '#ef4444';
+        input.value = '';
+        return false;
+      }
+      
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (!ALLOWED_EXTENSIONS.includes(ext)) {
+        statusEl.innerHTML = `<i class="fas fa-exclamation-circle" style="color: #ef4444;"></i> صيغة غير مدعومة (PDF, JPG, PNG فقط)`;
+        statusEl.style.color = '#ef4444';
+        input.value = '';
+        return false;
+      }
+      
+      statusEl.innerHTML = `<i class="fas fa-check-circle" style="color: #22c55e;"></i> ${file.name} (${(file.size / 1024).toFixed(1)}KB)`;
+      statusEl.style.color = '#22c55e';
+      return true;
+    }
+
+    document.getElementById('profDocUpload').addEventListener('change', function() {
+      validateFile(this, 'profDocStatus');
+    });
+    document.getElementById('ninUpload').addEventListener('change', function() {
+      validateFile(this, 'ninUploadStatus');
+    });
+
+    // ============================================================
+    // 7. إرسال البيانات + الملفات إلى تلغرام
+    // ============================================================
+    
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+      submitBtn.disabled = true;
+
+      const role = userRoleInput.value;
+      const name = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('emailReg').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!name || !email || !phone) {
+        alert('يرجى ملء جميع الحقول الأساسية (الاسم، البريد، الهاتف)');
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.disabled = false;
+        return;
+      }
+
+      let message = `🆕 *طلب تسجيل جديد | LexTech DZ*\n`;
+      message += `━━━━━━━━━━━━━━━━━━━\n`;
+      message += `👤 *نوع الحساب:* ${role}\n`;
+      message += `📝 *الاسم:* ${name}\n`;
+      message += `📧 *البريد:* ${email}\n`;
+      message += `📱 *الهاتف:* ${phone}\n`;
+
+      if (role === 'مستشير') {
+        const job = document.getElementById('citizenJob').value.trim() || 'غير محدد';
+        const wilaya = wilayaSelects.citizen.options[wilayaSelects.citizen.selectedIndex]?.text || 'غير محدد';
+        const baladiya = baladiyaSelects.citizen.options[baladiyaSelects.citizen.selectedIndex]?.text || 'غير محدد';
+        const bio = document.getElementById('citizenBio').value.trim() || 'لا يوجد';
+        
+        message += `\n━━━ *المعلومات الإضافية* ━━━\n`;
+        message += `💼 *المهنة:* ${job}\n`;
+        message += `📍 *الولاية:* ${wilaya}\n`;
+        message += `🏙️ *البلدية:* ${baladiya}\n`;
+        message += `📝 *نبذة:* ${bio}\n`;
+      }
+
+      if (role === 'مستشار') {
+        const nin = document.getElementById('nin').value.trim() || 'غير محدد';
+        const dob = document.getElementById('dob').value || 'غير محدد';
+        const profType = document.getElementById('profType').value || 'غير محدد';
+        const profIdCard = document.getElementById('profIdCard').value.trim() || 'غير محدد';
+        const wilaya = wilayaSelects.professional.options[wilayaSelects.professional.selectedIndex]?.text || 'غير محدد';
+        const baladiya = baladiyaSelects.professional.options[baladiyaSelects.professional.selectedIndex]?.text || 'غير محدد';
+        
+        message += `\n━━━ *المعلومات المهنية* ━━━\n`;
+        message += `🪪 *رقم التعريف:* \`${nin}\`\n`;
+        message += `📅 *تاريخ الميلاد:* ${dob}\n`;
+        message += `💼 *المهنة:* ${profType}\n`;
+        message += `🔢 *رقم الاعتماد:* \`${profIdCard}\`\n`;
+        message += `📍 *الولاية:* ${wilaya}\n`;
+        message += `🏙️ *البلدية:* ${baladiya}\n`;
+      }
+
+      message += `\n━━━━━━━━━━━━━━━━━━━\n`;
+      message += `⏱️ ${new Date().toLocaleString('ar-DZ')}`;
+
+      const botToken = '8256459512:AAHsjLjpcv2IlkpovydTIkoImyOkirtDWh0';
+      const chatId = '-5482645875';
+      
+      try {
+        const textResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        });
+        
+        const textData = await textResponse.json();
+        if (!textData.ok) throw new Error('فشل إرسال الرسالة النصية');
+
+        if (role === 'مستشار') {
+          const fileInputs = [
+            { id: 'profDocUpload', caption: '📄 وثيقة إثبات المهنة' },
+            { id: 'ninUpload', caption: '🪪 بطاقة التعريف الوطنية' }
+          ];
+
+          for (const fileInput of fileInputs) {
+            const input = document.getElementById(fileInput.id);
+            if (input.files.length > 0) {
+              const file = input.files[0];
+              const formData = new FormData();
+              formData.append('chat_id', chatId);
+              formData.append('document', file);
+              formData.append('caption', `${fileInput.caption}\n👤 ${name}`);
+
+              const fileResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
+                method: 'POST',
+                body: formData
+              });
+              
+              const fileData = await fileResponse.json();
+              if (!fileData.ok) {
+                console.warn(`فشل إرسال الملف: ${fileInput.id}`, fileData);
+              }
+            }
+          }
+        }
+
+        alert('✅ تم التسجيل بنجاح! سيتم مراجعة طلبك من قبل الإدارة.');
+        document.getElementById('registerForm').reset();
+        document.querySelectorAll('.file-status').forEach(el => {
+          el.innerHTML = '<i class="far fa-file"></i> لم يتم اختيار ملف';
+          el.style.color = '';
+        });
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert('❌ حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+      } finally {
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.disabled = false;
+      }
+    });
+
+    // ============================================================
+    // 8. إصلاح فيديو الخلفية - محاولة تشغيله تلقائياً
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.querySelector('.register-hero .hero-video-bg');
+      if (video) {
+        video.play().catch(function(err) {
+          console.log('تشغيل الفيديو التلقائي قد يكون محظوراً:', err);
+          document.addEventListener('click', function playOnce() {
+            video.play().catch(() => {});
+            document.removeEventListener('click', playOnce);
+          }, { once: true });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
