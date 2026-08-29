@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="css/style.css">
   
   <style>
-    /* تنسيقات خاصة بصفحة التسجيل تتكامل مع الستايل الأصلي */
+    /* ========== تنسيقات خاصة بصفحة التسجيل ========== */
     
-    /* خلفية الفيديو لصفحة التسجيل */
+    /* خلفية الفيديو - إصلاح العرض */
     .register-bg-wrapper {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -23,15 +23,23 @@
       overflow: hidden;
     }
     .register-bg-wrapper video {
-      min-width: 100%; min-height: 100%;
+      min-width: 100%; 
+      min-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: cover;
       position: absolute;
-      top: 50%; left: 50%;
+      top: 50%; 
+      left: 50%;
       transform: translate(-50%, -50%);
     }
     .register-bg-wrapper .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(10, 37, 64, 0.9) 0%, rgba(10, 37, 64, 0.7) 100%);
+      position: absolute; 
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 37, 64, 0.92) 0%, rgba(10, 37, 64, 0.75) 100%);
+    }
+    body.dark .register-bg-wrapper .hero-overlay {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.8) 100%);
     }
 
     /* تأثير الزجاج (Glassmorphism) للاستمارة */
@@ -51,75 +59,247 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
       width: 100%;
-      max-width: 500px; /* الحجم الافتراضي للمستشير */
+      max-width: 520px;
       transition: max-width 0.4s ease, padding 0.4s ease;
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius-lg);
+    }
+    body.dark .auth-card {
+      background: rgba(30, 41, 59, 0.95);
+      border-color: rgba(255, 255, 255, 0.05);
     }
     .auth-card.expanded {
-      max-width: 800px; /* يتوسع عند اختيار المستشار */
+      max-width: 820px;
     }
 
     .auth-card h2 {
-      text-align: center; color: var(--primary); margin-bottom: 1.5rem;
+      text-align: center; 
+      color: var(--primary); 
+      margin-bottom: 1.5rem;
       font-size: 2rem;
+      font-weight: 800;
+    }
+    body.dark .auth-card h2 {
+      color: var(--text-dark);
+    }
+    .auth-card h2 i {
+      color: var(--gold);
+      margin-left: 10px;
     }
 
-    /* شبكة الحقول (Grid) للمستشار */
+    /* شبكة الحقول (Grid) */
     .form-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 15px;
     }
-    .form-group.full-width { grid-column: span 2; }
+    .form-group.full-width { 
+      grid-column: span 2; 
+    }
     .form-group label {
-      display: block; font-size: 14px; margin-bottom: 6px;
-      color: var(--text-dark); font-weight: 600;
+      display: block; 
+      font-size: 13px; 
+      margin-bottom: 6px;
+      color: var(--text-dark); 
+      font-weight: 600;
     }
-    .form-note { font-size: 12px; color: var(--accent-dark); margin-top: 5px; display: block; }
-    
+    body.dark .form-group label {
+      color: var(--text-gray);
+    }
+    .form-group .form-note { 
+      font-size: 12px; 
+      color: var(--accent-dark); 
+      margin-top: 5px; 
+      display: block; 
+    }
+    body.dark .form-group .form-note {
+      color: var(--accent-light);
+    }
+
+    /* تخصيص حقول رفع الملفات */
+    .file-upload-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    .file-upload-wrapper input[type="file"] {
+      padding: 10px;
+      background: var(--bg-light);
+      border-radius: var(--radius-md);
+      border: 2px dashed var(--border-light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    body.dark .file-upload-wrapper input[type="file"] {
+      background: var(--bg-light);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text-dark);
+    }
+    .file-upload-wrapper input[type="file"]:hover {
+      border-color: var(--gold);
+    }
+    .file-status {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 4px;
+      display: block;
+    }
+    body.dark .file-status {
+      color: var(--text-light);
+    }
+    .file-status .fa-check-circle {
+      color: #22c55e;
+    }
+    .file-status .fa-exclamation-circle {
+      color: #ef4444;
+    }
+
+    /* تحسين أزرار التبديل */
+    .role-tabs {
+      display: flex;
+      background: var(--bg-light);
+      border-radius: var(--radius-xl);
+      padding: 4px;
+      margin-bottom: 2rem;
+    }
+    body.dark .role-tabs {
+      background: rgba(255,255,255,0.05);
+    }
+    .role-tab {
+      flex: 1; 
+      padding: 12px 10px; 
+      border: none; 
+      background: transparent; 
+      border-radius: var(--radius-xl);
+      font-weight: 600; 
+      color: var(--text-gray); 
+      cursor: pointer; 
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+    .role-tab.active { 
+      background: var(--bg-white); 
+      color: var(--primary); 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    body.dark .role-tab.active { 
+      background: var(--primary); 
+      color: var(--text-dark);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .role-tab:hover:not(.active) {
+      color: var(--primary);
+    }
+    body.dark .role-tab:hover:not(.active) {
+      color: var(--text-dark);
+    }
+
+    /* عنوان القسم */
+    .section-divider {
+      font-size: 1.1rem;
+      color: var(--gold-dark);
+      margin: 20px 0 15px;
+      border-bottom: 2px solid var(--border-light);
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    body.dark .section-divider {
+      color: var(--gold-light);
+      border-color: rgba(255,255,255,0.05);
+    }
+    .section-divider i {
+      color: var(--gold);
+    }
+
     @media (max-width: 768px) {
+      .auth-card { padding: 1.5rem 1rem; }
       .form-grid { grid-template-columns: 1fr; }
       .form-group.full-width { grid-column: span 1; }
+      .auth-card h2 { font-size: 1.6rem; }
+    }
+    @media (max-width: 480px) {
+      .auth-card { padding: 1rem; }
+      .role-tab { font-size: 0.8rem; padding: 8px 6px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- خلفية الفيديو -->
+  <!-- ===== خلفية الفيديو (تم إصلاحها) ===== -->
   <div class="register-bg-wrapper">
-    <video autoplay muted loop playsinline>
-      <!-- تأكد من صحة مسار الفيديو الخاص بك -->
+    <video autoplay muted loop playsinline preload="auto" id="heroVideo">
       <source src="images/hero-video.mp4" type="video/mp4">
+      <!-- مصدر احتياطي إذا تعذر تشغيل MP4 -->
+      <source src="images/hero-video.webm" type="video/webm">
     </video>
     <div class="hero-overlay"></div>
   </div>
 
+  <!-- ===== استمارة التسجيل ===== -->
   <main class="auth-container">
     <div class="auth-card" id="authCard">
-      <h2>إنشاء حساب</h2>
+      <h2><i class="fas fa-gavel"></i> إنشاء حساب</h2>
       
-      <!-- أزرار التبديل -->
+      <!-- أزرار التبديل بين المستشير والمستشار -->
       <div class="role-tabs">
-        <button type="button" class="role-tab active" data-role="citizen">مستشير (مواطن)</button>
-        <button type="button" class="role-tab" data-role="professional">مستشار (مهني)</button>
+        <button type="button" class="role-tab active" data-role="citizen">
+          <i class="fas fa-user"></i> مستشير
+        </button>
+        <button type="button" class="role-tab" data-role="professional">
+          <i class="fas fa-briefcase"></i> مستشار
+        </button>
       </div>
 
-      <form id="registerForm">
+      <form id="registerForm" enctype="multipart/form-data">
         <input type="hidden" id="userRole" value="مستشير">
         
-        <!-- الحقول المشتركة والأساسية -->
+        <!-- ===== المعلومات الأساسية (مشتركة) ===== -->
+        <div class="section-divider"><i class="fas fa-id-card"></i> المعلومات الأساسية</div>
+        
         <div class="form-group full-width">
-          <input type="text" id="fullname" placeholder="الاسم الكامل" required>
+          <input type="text" id="fullname" placeholder="الاسم الكامل (ثلاثي)" required>
         </div>
         <div class="form-group full-width">
           <input type="email" id="emailReg" placeholder="البريد الإلكتروني" required>
         </div>
         <div class="form-group full-width">
-          <input type="password" id="passwordReg" placeholder="كلمة المرور" required>
+          <input type="tel" id="phone" placeholder="رقم الهاتف (05/06/07...)" required>
+        </div>
+        <div class="form-group full-width">
+          <input type="password" id="passwordReg" placeholder="كلمة المرور (8 أحرف على الأقل)" required minlength="8">
         </div>
 
-        <!-- حقول المستشار (مخفية افتراضياً) -->
-        <div id="professionalFields" style="display:none; margin-top: 15px;">
-          <h3 style="font-size: 1.2rem; color: var(--gold-dark); margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-            المعلومات المهنية والشخصية
-          </h3>
+        <!-- ===== معلومات إضافية للمستشير (المواطن) ===== -->
+        <div id="citizenFields" style="margin-top: 10px;">
+          <div class="section-divider"><i class="fas fa-user-circle"></i> معلومات إضافية (مستشير)</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>المهنة / المجال</label>
+              <input type="text" id="citizenJob" placeholder="مثال: طالب, مهندس, رجل أعمال...">
+            </div>
+            <div class="form-group">
+              <label>الولاية</label>
+              <select id="citizenWilaya">
+                <option value="" disabled selected>اختر الولاية...</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>البلدية</label>
+              <select id="citizenBaladiya" disabled>
+                <option value="" disabled selected>اختر البلدية...</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>نبذة مختصرة عنك</label>
+              <textarea id="citizenBio" rows="3" placeholder="اخبرنا عن نفسك، اهتماماتك القانونية، أو أي معلومات ترغب بمشاركتها..." style="resize: vertical;"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== حقول المستشار (مخفية افتراضياً) ===== -->
+        <div id="professionalFields" style="display:none; margin-top: 10px;">
+          <div class="section-divider"><i class="fas fa-briefcase"></i> المعلومات المهنية</div>
           
           <div class="form-grid">
             <div class="form-group">
@@ -133,21 +313,17 @@
             </div>
 
             <div class="form-group">
-              <label>رقم الهاتف</label>
-              <input type="tel" id="phone" placeholder="05/06/07...">
-            </div>
-
-            <div class="form-group">
               <label>الصفة المهنية</label>
               <select id="profType">
                 <option value="محامي">محامي</option>
                 <option value="قاضي">قاضي</option>
                 <option value="موثق">موثق</option>
                 <option value="مستشار قانوني">مستشار قانوني</option>
+                <option value="أستاذ قانون">أستاذ قانون</option>
+                <option value="باحث قانوني">باحث قانوني</option>
               </select>
             </div>
 
-            <!-- قائمة الولايات (تُملأ برمجياً) -->
             <div class="form-group">
               <label>الولاية</label>
               <select id="wilayaSelect">
@@ -155,7 +331,6 @@
               </select>
             </div>
 
-            <!-- قائمة البلديات (تُملأ بناءً على الولاية) -->
             <div class="form-group">
               <label>البلدية</label>
               <select id="baladiyaSelect" disabled>
@@ -163,43 +338,152 @@
               </select>
             </div>
 
-            <div class="form-group full-width">
+            <div class="form-group">
               <label>رقم الاعتماد / البطاقة المهنية</label>
               <input type="text" id="profIdCard" placeholder="رقم التسجيل في النقابة">
             </div>
 
             <div class="form-group full-width">
-              <label>ملف إثبات المهنة (صورة/PDF)</label>
-              <input type="file" id="idUpload" accept="image/*, .pdf" style="padding: 10px; background: #fff;">
-              <small class="form-note"><i class="fas fa-info-circle"></i> سيتم المراجعة من الإدارة قبل تفعيل الحساب المهني.</small>
+              <label>السيرة الذاتية (CV) - اختياري</label>
+              <input type="file" id="cvUpload" accept=".pdf,.doc,.docx" style="padding: 10px; background: var(--bg-light);">
             </div>
           </div>
+
+          <!-- ===== رفع الملفات الإثباتية ===== -->
+          <div class="section-divider" style="margin-top: 20px;"><i class="fas fa-file-upload"></i> المستندات الإثباتية</div>
+          <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 15px;">
+            <i class="fas fa-info-circle" style="color: var(--gold);"></i> 
+            الحد الأقصى لكل ملف: <strong>2 ميغابايت</strong> (صيغ مدعومة: PDF, JPG, PNG)
+          </p>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>📄 وثيقة إثبات المهنة</label>
+              <div class="file-upload-wrapper">
+                <input type="file" id="profDocUpload" accept=".pdf,.jpg,.jpeg,.png">
+                <span class="file-status" id="profDocStatus"><i class="far fa-file"></i> لم يتم اختيار ملف</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>🪪 بطاقة التعريف الوطنية (NIN)</label>
+              <div class="file-upload-wrapper">
+                <input type="file" id="ninUpload" accept=".pdf,.jpg,.jpeg,.png">
+                <span class="file-status" id="ninUploadStatus"><i class="far fa-file"></i> لم يتم اختيار ملف</span>
+              </div>
+            </div>
+          </div>
+          <small class="form-note" style="display: block; margin-top: 5px; text-align: center;">
+            <i class="fas fa-shield-alt" style="color: var(--gold);"></i> 
+            سيتم مراجعة المستندات من قبل الإدارة قبل تفعيل الحساب المهني
+          </small>
         </div>
 
-        <button type="submit" class="btn-primary btn-block" id="submitBtn" style="margin-top: 20px;">
+        <button type="submit" class="btn-primary btn-block" id="submitBtn" style="margin-top: 25px;">
           <i class="fas fa-user-plus"></i> تأكيد التسجيل
         </button>
       </form>
       
-      <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem;">
-        <a href="login.html" style="color: var(--primary); font-weight: 600;">لديك حساب بالفعل؟ تسجيل الدخول</a>
+      <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-gray);">
+        <a href="login.html" style="color: var(--gold); font-weight: 600; transition: var(--transition);">
+          <i class="fas fa-sign-in-alt"></i> لديك حساب بالفعل؟ تسجيل الدخول
+        </a>
       </p>
     </div>
   </main>
 
-  <!-- استدعاء ملف بيانات الجزائر -->
-  <!-- تأكد من أن مسار الملف صحيح (مثلاً: js/algeria-data.js) -->
+  <!-- ===== استدعاء ملف بيانات الجزائر ===== -->
   <script src="js/algeria-data.js"></script>
 
   <script>
-    // 1. منطق التبديل بين المستشير والمستشار (توسيع وتضييق الاستمارة)
+    // ============================================================
+    // 1. تعبئة قوائم الولايات والبلديات من algeria-data.js
+    // ============================================================
+    
+    // قوائم التحديد
+    const wilayaSelects = {
+      citizen: document.getElementById('citizenWilaya'),
+      professional: document.getElementById('wilayaSelect')
+    };
+    const baladiyaSelects = {
+      citizen: document.getElementById('citizenBaladiya'),
+      professional: document.getElementById('baladiyaSelect')
+    };
+
+    // دالة تعبئة الولايات
+    function populateWilayas(selectElement) {
+      if (typeof algeriaWilayas !== 'undefined' && Array.isArray(algeriaWilayas)) {
+        selectElement.innerHTML = '<option value="" disabled selected>اختر الولاية...</option>';
+        algeriaWilayas.forEach(w => {
+          let opt = document.createElement('option');
+          opt.value = w.code;
+          opt.textContent = w.name;
+          selectElement.appendChild(opt);
+        });
+        selectElement.disabled = false;
+      } else {
+        console.warn('بيانات الولايات غير موجودة في algeria-data.js');
+      }
+    }
+
+    // دالة تعبئة البلديات بناءً على الولاية المختارة
+    function populateBaladiyas(wilayaCode, baladiyaSelect) {
+      baladiyaSelect.innerHTML = '<option value="" disabled selected>اختر البلدية...</option>';
+      baladiyaSelect.disabled = true;
+      
+      if (wilayaCode && typeof algeriaBaladiyat !== 'undefined' && algeriaBaladiyat[wilayaCode]) {
+        const communes = algeriaBaladiyat[wilayaCode];
+        if (communes && communes.length > 0) {
+          communes.forEach(c => {
+            let opt = document.createElement('option');
+            opt.value = c;
+            opt.textContent = c;
+            baladiyaSelect.appendChild(opt);
+          });
+          baladiyaSelect.disabled = false;
+        } else {
+          let opt = document.createElement('option');
+          opt.value = '';
+          opt.textContent = 'لا توجد بلديات مسجلة';
+          baladiyaSelect.appendChild(opt);
+        }
+      } else {
+        let opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = 'اختر الولاية أولاً';
+        baladiyaSelect.appendChild(opt);
+      }
+    }
+
+    // تهيئة قوائم الولايات للمستشير والمستشار
+    if (typeof algeriaWilayas !== 'undefined') {
+      populateWilayas(wilayaSelects.citizen);
+      populateWilayas(wilayaSelects.professional);
+    }
+
+    // ربط تغيير الولاية بتحديث البلديات للمستشير
+    wilayaSelects.citizen.addEventListener('change', function() {
+      populateBaladiyas(this.value, baladiyaSelects.citizen);
+    });
+
+    // ربط تغيير الولاية بتحديث البلديات للمستشار
+    wilayaSelects.professional.addEventListener('change', function() {
+      populateBaladiyas(this.value, baladiyaSelects.professional);
+    });
+
+    // ============================================================
+    // 2. منطق التبديل بين المستشير والمستشار
+    // ============================================================
+    
     const roleTabs = document.querySelectorAll('.role-tab');
     const professionalFields = document.getElementById('professionalFields');
+    const citizenFields = document.getElementById('citizenFields');
     const userRoleInput = document.getElementById('userRole');
     const authCard = document.getElementById('authCard');
     
     // الحقول الإجبارية للمستشار
-    const profRequiredFields = ['nin', 'dob', 'phone', 'wilayaSelect', 'baladiyaSelect', 'profIdCard'];
+    const profRequiredFields = ['nin', 'dob', 'wilayaSelect', 'baladiyaSelect', 'profIdCard'];
+    // الحقول الإجبارية للمستشير (بالإضافة إلى الأساسية)
+    const citizenRequiredFields = ['citizenWilaya', 'citizenBaladiya'];
 
     roleTabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -207,62 +491,97 @@
         tab.classList.add('active');
         
         if (tab.dataset.role === 'professional') {
+          // إظهار حقول المستشار وإخفاء حقول المستشير
           professionalFields.style.display = 'block';
+          citizenFields.style.display = 'none';
           userRoleInput.value = 'مستشار';
-          authCard.classList.add('expanded'); // توسيع البطاقة لتعرض الـ Grid براحة
-          profRequiredFields.forEach(id => document.getElementById(id).required = true);
+          authCard.classList.add('expanded');
+          
+          // جعل حقول المستشار إجبارية
+          profRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = true;
+          });
+          // إلغاء إجبارية حقول المستشير
+          citizenRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = false;
+          });
+          
         } else {
+          // إظهار حقول المستشير وإخفاء حقول المستشار
           professionalFields.style.display = 'none';
+          citizenFields.style.display = 'block';
           userRoleInput.value = 'مستشير';
-          authCard.classList.remove('expanded'); // تضييق البطاقة
-          profRequiredFields.forEach(id => document.getElementById(id).required = false);
+          authCard.classList.remove('expanded');
+          
+          // جعل حقول المستشير إجبارية
+          citizenRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = true;
+          });
+          // إلغاء إجبارية حقول المستشار
+          profRequiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.required = false;
+          });
         }
       });
     });
 
-    // 2. منطق ربط الولايات والبلديات (بناءً على ملف algeria-data.js)
-    /* 
-       ملاحظة: هذا الكود يفترض أن ملف algeria-data.js يحتوي على مصفوفة (Array) 
-       باسم `algeriaCities` أو أنك قمت بضبطه مسبقاً.
-       الشكل الافتراضي المتوقع: 
-       [ { wilaya_name: "Adrar", wilaya_code: "01", daira_name: "...", commune_name: "..." }, ... ] 
-       أو كائنات جاهزة. الكود أدناه هو الهيكل الذي يجب مواءمته مع بنية ملفك.
-    */
-    const wilayaSelect = document.getElementById('wilayaSelect');
-    const baladiyaSelect = document.getElementById('baladiyaSelect');
+    // ============================================================
+    // 3. مراقبة حالة رفع الملفات (حجم 2MB وامتدادات مسموحة)
+    // ============================================================
+    
+    const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+    const ALLOWED_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
 
-    // الدالة أدناه تعمل في حال كان لديك متغير عام يسمى algeriaData (من ملفك js)
-    document.addEventListener("DOMContentLoaded", function() {
-      // قم بتفعيل هذا الكود وتعديله حسب هيكل المتغير الموجود في ملف algeria-data.js
-      /*
-      if (typeof algeriaData !== 'undefined') {
-        // تعبئة الولايات الفريدة
-        const wilayas = [...new Set(algeriaData.map(item => item.wilaya_name))];
-        wilayas.forEach(wilaya => {
-          let option = document.createElement('option');
-          option.value = wilaya; option.text = wilaya;
-          wilayaSelect.add(option);
-        });
-
-        // عند تغيير الولاية، نعبئ البلديات التابعة لها
-        wilayaSelect.addEventListener('change', function() {
-          baladiyaSelect.innerHTML = '<option value="" disabled selected>اختر البلدية...</option>';
-          baladiyaSelect.disabled = false;
-          const selectedWilaya = this.value;
-          
-          const baladiyas = algeriaData.filter(item => item.wilaya_name === selectedWilaya);
-          baladiyas.forEach(b => {
-            let option = document.createElement('option');
-            option.value = b.commune_name; option.text = b.commune_name;
-            baladiyaSelect.add(option);
-          });
-        });
+    function validateFile(input, statusElementId) {
+      const statusEl = document.getElementById(statusElementId);
+      const file = input.files[0];
+      
+      if (!file) {
+        statusEl.innerHTML = '<i class="far fa-file"></i> لم يتم اختيار ملف';
+        statusEl.style.color = '';
+        return true; // لا يوجد ملف، يعتبر صحيح (اختياري)
       }
-      */
+      
+      // التحقق من الحجم
+      if (file.size > MAX_FILE_SIZE) {
+        statusEl.innerHTML = `<i class="fas fa-exclamation-circle" style="color: #ef4444;"></i> الحجم يتجاوز 2MB (${(file.size / 1024 / 1024).toFixed(2)}MB)`;
+        statusEl.style.color = '#ef4444';
+        input.value = ''; // إفراغ الحقل
+        return false;
+      }
+      
+      // التحقق من الامتداد
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (!ALLOWED_EXTENSIONS.includes(ext)) {
+        statusEl.innerHTML = `<i class="fas fa-exclamation-circle" style="color: #ef4444;"></i> صيغة غير مدعومة (PDF, JPG, PNG فقط)`;
+        statusEl.style.color = '#ef4444';
+        input.value = '';
+        return false;
+      }
+      
+      // الملف صحيح
+      statusEl.innerHTML = `<i class="fas fa-check-circle" style="color: #22c55e;"></i> ${file.name} (${(file.size / 1024).toFixed(1)}KB)`;
+      statusEl.style.color = '#22c55e';
+      return true;
+    }
+
+    // ربط المراقبة بحقول رفع الملفات
+    document.getElementById('profDocUpload').addEventListener('change', function() {
+      validateFile(this, 'profDocStatus');
+    });
+    document.getElementById('ninUpload').addEventListener('change', function() {
+      validateFile(this, 'ninUploadStatus');
     });
 
-    // 3. إرسال البيانات لبوت التلغرام (نفس الكود الخاص بك مع تحديث البيانات)
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
+    // ============================================================
+    // 4. إرسال البيانات + الملفات إلى تلغرام
+    // ============================================================
+    
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       
       const submitBtn = document.getElementById('submitBtn');
@@ -271,65 +590,153 @@
       submitBtn.disabled = true;
 
       const role = userRoleInput.value;
-      const name = document.getElementById('fullname').value;
-      const email = document.getElementById('emailReg').value;
-      
-      let message = `🆕 *طلب تسجيل جديد | LexTech DZ*\n\n`;
-      message += `👤 *حساب:* ${role}\n`;
-      message += `📝 *الاسم:* ${name}\n`;
-      message += `📧 *البريد:* ${email}\n\n`;
+      const name = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('emailReg').value.trim();
+      const phone = document.getElementById('phone').value.trim();
 
-      if (role === 'مستشار') {
-        const nin = document.getElementById('nin').value;
-        const phone = document.getElementById('phone').value;
-        const wilaya = wilayaSelect.value;
-        const baladiya = baladiyaSelect.value;
-        const profType = document.getElementById('profType').value;
-        const profIdCard = document.getElementById('profIdCard').value;
-
-        message += `🪪 *رقم التعريف:* \`${nin}\`\n`;
-        message += `📱 *الهاتف:* ${phone}\n`;
-        message += `📍 *الموقع:* ${wilaya} - ${baladiya}\n`;
-        message += `💼 *المهنة:* ${profType}\n`;
-        message += `🔢 *رقم الاعتماد:* \`${profIdCard}\`\n`;
-      }
-
-      const botToken = '8256459512:AAHsjLjpcv2IlkpovydTIkoImyOkirtDWh0'; 
-      const chatId = '-5482645875';
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-      const replyMarkup = role === 'مستشار' ? {
-        inline_keyboard: [[
-          { text: "✅ قبول المهني", callback_data: `accept_${email}` },
-          { text: "❌ رفض", callback_data: `reject_${email}` }
-        ]]
-      } : {}; // المستشير (المواطن) لا يحتاج أزرار قبول بالضرورة لأنه يسجل مباشرة
-
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'Markdown',
-          reply_markup: replyMarkup
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if(data.ok) {
-          alert('تم التسجيل بنجاح!');
-          document.getElementById('registerForm').reset();
-        } else {
-          alert('حدث خطأ أثناء الإرسال.');
-        }
-      })
-      .catch(error => console.error('Error:', error))
-      .finally(() => {
+      // التحقق من الحقول الأساسية
+      if (!name || !email || !phone) {
+        alert('يرجى ملء جميع الحقول الأساسية (الاسم، البريد، الهاتف)');
         submitBtn.innerHTML = originalBtnHtml;
         submitBtn.disabled = false;
-      });
+        return;
+      }
+
+      // ===== بناء الرسالة النصية =====
+      let message = `🆕 *طلب تسجيل جديد | LexTech DZ*\n`;
+      message += `━━━━━━━━━━━━━━━━━━━\n`;
+      message += `👤 *نوع الحساب:* ${role}\n`;
+      message += `📝 *الاسم:* ${name}\n`;
+      message += `📧 *البريد:* ${email}\n`;
+      message += `📱 *الهاتف:* ${phone}\n`;
+
+      // === بيانات المستشير ===
+      if (role === 'مستشير') {
+        const job = document.getElementById('citizenJob').value.trim() || 'غير محدد';
+        const wilaya = wilayaSelects.citizen.options[wilayaSelects.citizen.selectedIndex]?.text || 'غير محدد';
+        const baladiya = baladiyaSelects.citizen.options[baladiyaSelects.citizen.selectedIndex]?.text || 'غير محدد';
+        const bio = document.getElementById('citizenBio').value.trim() || 'لا يوجد';
+        
+        message += `\n━━━ *المعلومات الإضافية* ━━━\n`;
+        message += `💼 *المهنة:* ${job}\n`;
+        message += `📍 *الولاية:* ${wilaya}\n`;
+        message += `🏙️ *البلدية:* ${baladiya}\n`;
+        message += `📝 *نبذة:* ${bio}\n`;
+      }
+
+      // === بيانات المستشار ===
+      if (role === 'مستشار') {
+        const nin = document.getElementById('nin').value.trim() || 'غير محدد';
+        const dob = document.getElementById('dob').value || 'غير محدد';
+        const profType = document.getElementById('profType').value || 'غير محدد';
+        const profIdCard = document.getElementById('profIdCard').value.trim() || 'غير محدد';
+        const wilaya = wilayaSelects.professional.options[wilayaSelects.professional.selectedIndex]?.text || 'غير محدد';
+        const baladiya = baladiyaSelects.professional.options[baladiyaSelects.professional.selectedIndex]?.text || 'غير محدد';
+        
+        message += `\n━━━ *المعلومات المهنية* ━━━\n`;
+        message += `🪪 *رقم التعريف:* \`${nin}\`\n`;
+        message += `📅 *تاريخ الميلاد:* ${dob}\n`;
+        message += `💼 *المهنة:* ${profType}\n`;
+        message += `🔢 *رقم الاعتماد:* \`${profIdCard}\`\n`;
+        message += `📍 *الولاية:* ${wilaya}\n`;
+        message += `🏙️ *البلدية:* ${baladiya}\n`;
+      }
+
+      message += `\n━━━━━━━━━━━━━━━━━━━\n`;
+      message += `⏱️ ${new Date().toLocaleString('ar-DZ')}`;
+
+      // ===== إعداد البيانات للإرسال إلى تلغرام =====
+      const botToken = '8256459512:AAHsjLjpcv2IlkpovydTIkoImyOkirtDWh0';
+      const chatId = '-5482645875';
+      
+      try {
+        // أولاً: إرسال الرسالة النصية
+        const textResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        });
+        
+        const textData = await textResponse.json();
+        if (!textData.ok) throw new Error('فشل إرسال الرسالة النصية');
+
+        // ثانياً: إرسال الملفات (للمستشار فقط)
+        if (role === 'مستشار') {
+          const fileInputs = [
+            { id: 'profDocUpload', caption: '📄 وثيقة إثبات المهنة' },
+            { id: 'ninUpload', caption: '🪪 بطاقة التعريف الوطنية' }
+          ];
+
+          for (const fileInput of fileInputs) {
+            const input = document.getElementById(fileInput.id);
+            if (input.files.length > 0) {
+              const file = input.files[0];
+              const formData = new FormData();
+              formData.append('chat_id', chatId);
+              formData.append('document', file);
+              formData.append('caption', `${fileInput.caption}\n👤 ${name}`);
+
+              const fileResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
+                method: 'POST',
+                body: formData
+              });
+              
+              const fileData = await fileResponse.json();
+              if (!fileData.ok) {
+                console.warn(`فشل إرسال الملف: ${fileInput.id}`, fileData);
+              }
+            }
+          }
+        }
+
+        // نجاح
+        alert('✅ تم التسجيل بنجاح! سيتم مراجعة طلبك من قبل الإدارة.');
+        document.getElementById('registerForm').reset();
+        // إعادة تعيين حالة الملفات
+        document.querySelectorAll('.file-status').forEach(el => {
+          el.innerHTML = '<i class="far fa-file"></i> لم يتم اختيار ملف';
+          el.style.color = '';
+        });
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert('❌ حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+      } finally {
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.disabled = false;
+      }
     });
+
+    // ============================================================
+    // 5. إصلاح فيديو الخلفية - محاولة تشغيله تلقائياً
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('heroVideo');
+      if (video) {
+        // محاولة تشغيل الفيديو
+        video.play().catch(function(err) {
+          console.log('تشغيل الفيديو التلقائي قد يكون محظوراً:', err);
+          // إضافة fallback: محاولة التشغيل عند التفاعل مع الصفحة
+          document.addEventListener('click', function playOnce() {
+            video.play().catch(() => {});
+            document.removeEventListener('click', playOnce);
+          }, { once: true });
+        });
+      }
+    });
+
+    // ============================================================
+    // 6. تفعيل الوضع الليلي التلقائي من ملف style.css
+    // ============================================================
+    // ملاحظة: الـ Dark Mode يتم التعامل معه عبر toggle في ملفات أخرى
+    // لكننا نضيف هنا دعمًا لقراءة تفضيلات النظام
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark');
+    }
   </script>
 </body>
 </html>
