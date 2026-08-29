@@ -181,6 +181,33 @@ if (langToggleBtn) {
 // التطبيق الأولي للغة عند تحميل الصفحة
 applyTranslations(currentLang);
 
+function toggleDarkMode() {
+  document.body.classList.toggle('dark');
+  const icon = document.querySelector('.dark-toggle i');
+  if (document.body.classList.contains('dark')) {
+    icon.className = 'fas fa-sun';
+  } else {
+    icon.className = 'fas fa-moon';
+  }
+}
+
+function toggleLanguage() {
+  const langLabel = document.getElementById('langLabel');
+  if (langLabel.textContent === '🇫🇷 FR') {
+    langLabel.textContent = '🇬🇧 EN';
+    document.documentElement.lang = 'en';
+    document.documentElement.dir = 'ltr';
+  } else if (langLabel.textContent === '🇬🇧 EN') {
+    langLabel.textContent = '🇩🇿 AR';
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+  } else {
+    langLabel.textContent = '🇫🇷 FR';
+    document.documentElement.lang = 'fr';
+    document.documentElement.dir = 'ltr';
+  }
+}
+
 // ========== 6. PREMIUM TERMS MODAL (Fallback) ==========
 // هذه الدالة تعمل إذا لم يكن المودال المخصص موجوداً في الصفحة (مثلاً في صفحات التسجيل)
 function showTermsModal() {
