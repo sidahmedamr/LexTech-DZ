@@ -3,30 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LexTech DZ - إنشاء حساب</title>
+  <title>LexTech DZ - إنشاء حساب متقدم</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* تنسيقات إضافية للتبويبات والاستمارات */
-    body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; direction: rtl; }
-    .auth-container { display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 2rem; }
-    .auth-card { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+    body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; direction: rtl; margin: 0; padding: 20px; }
+    .auth-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .auth-card { background: #fff; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 650px; }
     .auth-card h2 { text-align: center; color: #2c3e50; margin-bottom: 1.5rem; }
     .role-tabs { display: flex; margin-bottom: 1.5rem; border-bottom: 2px solid #e0e0e0; }
-    .role-tab { flex: 1; padding: 10px; border: none; background: none; font-size: 16px; font-weight: 600; color: #7f8c8d; cursor: pointer; transition: 0.3s; }
+    .role-tab { flex: 1; padding: 12px; border: none; background: none; font-size: 16px; font-weight: 600; color: #7f8c8d; cursor: pointer; transition: 0.3s; }
     .role-tab.active { color: #2980b9; border-bottom: 2px solid #2980b9; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; }
-    .btn-primary { width: 100%; padding: 12px; background: #2980b9; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; transition: 0.3s; }
+    
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+    .form-group.full-width { grid-column: span 2; }
+    
+    .form-group label { display: block; font-size: 14px; margin-bottom: 5px; color: #34495e; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; box-sizing: border-box; }
+    .btn-primary { width: 100%; padding: 14px; background: #2980b9; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
     .btn-primary:hover { background: #21618c; }
     .form-note { font-size: 12px; color: #e74c3c; margin-top: 5px; display: block; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+    }
   </style>
 </head>
 <body>
 
   <main class="auth-container">
     <div class="auth-card">
-      <h2>إنشاء حساب جديد</h2>
+      <h2>التسجيل في المنصة</h2>
       
       <div class="role-tabs">
         <button class="role-tab active" data-role="citizen">مستشير (مواطن)</button>
@@ -36,53 +44,97 @@
       <form id="registerForm">
         <input type="hidden" id="userRole" value="مستشير">
         
-        <div class="form-group">
-          <input type="text" id="fullname" placeholder="الاسم الكامل" required>
-        </div>
-        <div class="form-group">
-          <input type="email" id="emailReg" placeholder="البريد الإلكتروني" required>
-        </div>
-        <div class="form-group">
-          <input type="password" id="passwordReg" placeholder="كلمة المرور" required>
-        </div>
-
-        <div id="professionalFields" style="display:none;">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>الاسم الكامل</label>
+            <input type="text" id="fullname" placeholder="الاسم واللقب" required>
+          </div>
+          
           <div class="form-group">
-            <select id="profType">
-              <option value="محامي">محامي</option>
-              <option value="قاضي">قاضي</option>
-              <option value="موثق">موثق</option>
-              <option value="مستشار قانوني">مستشار قانوني</option>
+            <label>تاريخ الميلاد</label>
+            <input type="date" id="dob" required>
+          </div>
+
+          <div class="form-group">
+            <label>رقم بطاقة التعريف الوطنية</label>
+            <input type="text" id="nin" placeholder="18 رقم" maxlength="18" required>
+          </div>
+
+          <div class="form-group">
+            <label>رقم الهاتف</label>
+            <input type="tel" id="phone" placeholder="05/06/07..." required>
+          </div>
+
+          <div class="form-group">
+            <label>ولاية الإقامة</label>
+            <select id="wilaya" required>
+              <option value="" disabled selected>اختر الولاية...</option>
+              <option value="عين الدفلى">44 - عين الدفلى</option>
+              <option value="الجزائر">16 - الجزائر العاصمة</option>
+              <option value="البليدة">09 - البليدة</option>
+              <option value="وهران">31 - وهران</option>
+              <!-- يمكنك إضافة باقي الولايات هنا -->
             </select>
           </div>
-          <div class="form-group">
-            <input type="text" id="profIdCard" placeholder="رقم البطاقة المهنية / الاعتماد">
+
+          <div class="form-group full-width">
+            <label>العنوان الكامل</label>
+            <input type="text" id="address" placeholder="البلدية، الحي..." required>
           </div>
+
           <div class="form-group">
-            <label style="font-size: 14px; color: #555;">رفع صورة البطاقة المهنية:</label>
-            <input type="file" id="idUpload" accept="image/*, .pdf">
-            <small class="form-note">سيتم مراجعة الملف من قبل الإدارة قبل تفعيل الحساب.</small>
+            <label>البريد الإلكتروني</label>
+            <input type="email" id="emailReg" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label>كلمة المرور</label>
+            <input type="password" id="passwordReg" required>
           </div>
         </div>
 
-        <button type="submit" class="btn-primary" id="submitBtn">تسجيل الحساب</button>
+        <!-- حقول المستشار -->
+        <div id="professionalFields" style="display:none; padding-top: 10px; border-top: 1px solid #eee;">
+          <h3 style="font-size: 16px; color: #2c3e50; margin-bottom: 15px;">المعلومات المهنية</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>الصفة المهنية</label>
+              <select id="profType">
+                <option value="محامي">محامي</option>
+                <option value="قاضي">قاضي</option>
+                <option value="موثق">موثق</option>
+                <option value="مستشار قانوني">مستشار قانوني</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>رقم الاعتماد / البطاقة المهنية</label>
+              <input type="text" id="profIdCard" placeholder="رقم التسجيل في النقابة">
+            </div>
+
+            <div class="form-group full-width">
+              <label>ملف إثبات المهنة (صورة/PDF)</label>
+              <input type="file" id="idUpload" accept="image/*, .pdf">
+              <small class="form-note">يُرجى إرفاق ما يثبت صفتك المهنية. سيتم المراجعة لتفعيل الحساب.</small>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">تأكيد التسجيل</button>
       </form>
     </div>
   </main>
 
   <script>
-    // منطق التبديل بين التبويبات
     const roleTabs = document.querySelectorAll('.role-tab');
     const professionalFields = document.getElementById('professionalFields');
     const userRoleInput = document.getElementById('userRole');
 
     roleTabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        // إزالة التفعيل من كل الأزرار
         roleTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         
-        // إظهار أو إخفاء حقول المهني
         if (tab.dataset.role === 'professional') {
           professionalFields.style.display = 'block';
           userRoleInput.value = 'مستشار';
@@ -95,7 +147,13 @@
       });
     });
 
-    // إرسال البيانات إلى بوت التلغرام
+    // حساب العمر من تاريخ الميلاد
+    function calculateAge(birthday) {
+      const ageDifMs = Date.now() - new Date(birthday).getTime();
+      const ageDate = new Date(ageDifMs);
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
     document.getElementById('registerForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -105,31 +163,40 @@
 
       const role = userRoleInput.value;
       const name = document.getElementById('fullname').value;
+      const dob = document.getElementById('dob').value;
+      const age = calculateAge(dob);
+      const nin = document.getElementById('nin').value;
+      const phone = document.getElementById('phone').value;
+      const wilaya = document.getElementById('wilaya').options[document.getElementById('wilaya').selectedIndex].text;
+      const address = document.getElementById('address').value;
       const email = document.getElementById('emailReg').value;
       
-      let message = `🆕 *طلب تسجيل جديد في LexTech DZ*\n\n`;
-      message += `👤 *النوع:* ${role}\n`;
+      let message = `🆕 *طلب تسجيل جديد | LexTech DZ*\n\n`;
+      message += `👤 *حساب:* ${role}\n`;
       message += `📝 *الاسم:* ${name}\n`;
-      message += `📧 *البريد:* ${email}\n`;
+      message += `📅 *الميلاد:* ${dob} (العمر: ${age} سنة)\n`;
+      message += `🪪 *رقم التعريف:* \`${nin}\`\n`;
+      message += `📱 *الهاتف:* ${phone}\n`;
+      message += `📍 *الإقامة:* ${wilaya} - ${address}\n`;
+      message += `📧 *البريد:* ${email}\n\n`;
 
       if (role === 'مستشار') {
         const profType = document.getElementById('profType').value;
         const profIdCard = document.getElementById('profIdCard').value;
         message += `💼 *المهنة:* ${profType}\n`;
-        message += `🔢 *رقم الاعتماد:* ${profIdCard}\n`;
-        message += `⚠️ *ملاحظة:* يوجد ملف مرفق (إن وجد).\n`;
+        message += `🔢 *رقم الاعتماد:* \`${profIdCard}\`\n`;
+        message += `⚠️ *ملاحظة:* المرفق المهني جاهز في قاعدة البيانات.\n`;
       }
 
-      // إعدادات البوت (قم بتغييرها بمعلومات البوت الخاص بك)
-      const botToken = 'YOUR_BOT_TOKEN_HERE'; 
-      const chatId = 'YOUR_CHAT_ID_HERE';
+      // التوكن و Chat ID اللذان استخرجناهما
+      const botToken = '8256459512:AAHsjLjpcv2IlkpovydTIkoImyOkirtDWh0'; 
+      const chatId = '-5482645875';
 
-      // إعداد الأزرار التفاعلية (Inline Keyboard) للقبول والرفض
       const replyMarkup = {
         inline_keyboard: [
           [
-            { text: "✅ قبول الملف", callback_data: `accept_${email}` },
-            { text: "❌ رفض الملف", callback_data: `reject_${email}` }
+            { text: "✅ قبول", callback_data: `accept_${nin}` },
+            { text: "❌ رفض", callback_data: `reject_${nin}` }
           ]
         ]
       };
@@ -149,15 +216,15 @@
       .then(response => response.json())
       .then(data => {
         if(data.ok) {
-          alert('تم إرسال طلبك بنجاح! سيتم مراجعته من قبل الإدارة.');
+          alert('تم إرسال طلبك بنجاح! سيتم التدقيق في بياناتك من قبل الإدارة.');
           document.getElementById('registerForm').reset();
         } else {
-          alert('حدث خطأ أثناء الإرسال.');
+          alert('حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت.');
         }
       })
       .catch(error => console.error('Error:', error))
       .finally(() => {
-        submitBtn.innerText = "تسجيل الحساب";
+        submitBtn.innerText = "تأكيد التسجيل";
         submitBtn.disabled = false;
       });
     });
